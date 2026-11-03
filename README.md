@@ -1,29 +1,20 @@
-#  Carona Solidária Campus
+# 🚗 Carona Solidária 
 
 Um sistema inteligente e seguro para estudantes e servidores universitários organizarem e compartilharem caronas para o campus, reduzindo custos, emissões de carbono e melhorando a mobilidade acadêmica.
 
----
 
-##  Sumário
+## Componentes do Grupo:
+**Álefe Matheus Silva dos Santos.** <br>
+**Fábio Júnio Oliveira da Silva Filho.** <br>
+**Gian Leandro Lopes de Amorim Santos.**
 
-* [Sobre o Projeto](#-sobre-o-projeto)
-* [Entidades do Sistema](#-entidades-do-sistema)
-* [Funcionalidades Principais](#-funcionalidades-principais)
-* [Regras de Negócio](#-regras-de-negócio)
-* [Tecnologias Utilizadas](#-tecnologias-utilizadas)
-* [Instalação e Execução](#-instalação-e-execução)
-* [Estrutura do Banco de Dados](#-estrutura-do-banco-de-dados)
-* [Licença](#-licença)
-
----
-
-## 📖 Sobre o Projeto
+## Sobre o Projeto
 
 O **Carona Solidária** visa conectar a comunidade universitária (alunos, professores e funcionários) facilitando a oferta e o pedido de caronas diárias. O sistema gerencia desde o cadastro dos veículos até o acompanhamento em tempo real dos pedidos de vaga, finalizando com um sistema de avaliações mútuas para promover a segurança e a confiança entre os usuários.
 
 ---
 
-##  Entidades do Sistema
+## 🗂 Entidades do Sistema
 
 O modelo de dados do sistema baseia-se nas seguintes entidades centrais:
 
@@ -51,7 +42,7 @@ O modelo de dados do sistema baseia-se nas seguintes entidades centrais:
 
 ---
 
-##  Regras de Negócio
+## Regras de Negócio
 
 Para garantir a segurança e a consistência dos dados, o sistema aplica estritamente as seguintes validações:
 
@@ -63,25 +54,3 @@ Para garantir a segurança e a consistência dos dados, o sistema aplica estrita
 * **Validação de Avaliações:** Apenas usuários que tiveram solicitação `Aceita` na carona podem avaliar (e ser avaliados), e a avaliação só é liberada após a data e horário de realização do trajeto.
 
 ---
-
-## Tecnologias Utilizadas
-
-* **Linguagem / Framework:** Node.js
-* **Banco de Dados:** MySQL
-  
----
-
-##  Instalação e Execução
-
-### Pré-requisitos
-* Git
-* [Linguagem/Runtime instalado]
-* Banco de dados configurado
-
-### Passo a Passo
-
-1. **Clonar o repositório:**
-   
-```bash
-   git clone [https://github.com/seu-usuario/carona-solidaria.git](https://github.com/Alefe2010/Carona-Solidaria_ProjetoFinal.git)
-   cd carona-solidaria
