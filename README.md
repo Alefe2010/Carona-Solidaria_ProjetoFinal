@@ -1,10 +1,10 @@
-# 🚗 Carona Solidária Campus
+#  Carona Solidária Campus
 
 Um sistema inteligente e seguro para estudantes e servidores universitários organizarem e compartilharem caronas para o campus, reduzindo custos, emissões de carbono e melhorando a mobilidade acadêmica.
 
 ---
 
-## 📌 Sumário
+##  Sumário
 
 * [Sobre o Projeto](#-sobre-o-projeto)
 * [Entidades do Sistema](#-entidades-do-sistema)
@@ -23,7 +23,7 @@ O **Carona Solidária** visa conectar a comunidade universitária (alunos, profe
 
 ---
 
-## 🗂 Entidades do Sistema
+##  Entidades do Sistema
 
 O modelo de dados do sistema baseia-se nas seguintes entidades centrais:
 
@@ -36,7 +36,7 @@ O modelo de dados do sistema baseia-se nas seguintes entidades centrais:
 
 ---
 
-## 🚀 Funcionalidades Principais
+##  Funcionalidades Principais
 
 * **Gestão de Veículos:** Cadastro completo com modelo, cor, placa e capacidade de lugares.
 * **Oferta de Caronas:** Publicação de trajetos definindo origem, destino, data, horário de saída, pontos de encontro e total de vagas disponíveis.
@@ -51,7 +51,7 @@ O modelo de dados do sistema baseia-se nas seguintes entidades centrais:
 
 ---
 
-## ⚠️ Regras de Negócio
+##  Regras de Negócio
 
 Para garantir a segurança e a consistência dos dados, o sistema aplica estritamente as seguintes validações:
 
@@ -64,14 +64,14 @@ Para garantir a segurança e a consistência dos dados, o sistema aplica estrita
 
 ---
 
-## 🛠 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 * **Linguagem / Framework:** Node.js
 * **Banco de Dados:** MySQL
   
 ---
 
-## 🔧 Instalação e Execução
+##  Instalação e Execução
 
 ### Pré-requisitos
 * Git
