@@ -36,5 +36,19 @@ ferramenta: chat-gpt
 ferramenta: chat-gpt
 finalidade: eu não estava lembrando a sintaxe do css e precisava saber por que não estava sofrendo mudança
 
+Uso de ia por fabio junioo dia 12/11/2026:
 
-6. 
+1. "é possível que um service tenha como seus atributos 2 services, como 1 service tem repository como atributo"
+ferramenta: Gemini IA
+
+2. "nao sei se da pra ver, mas eu preciso colocar o id da oferta na solicitacao?"
+ferramenta: Gemini IA
+finalidade: Não lembrava se diagrama uml devo escrever a chave estrangeira quando a classe se relaciona por meio de 1:*.
+
+3. "Quando um service usa um repository, a relação deles não é de agregaçãp? Pois a parte (repository) sobrevive sem service"
+ferramenta: Gemini IA
+finalidade: Dúvida em relação ao tipo de relações de classes (agregração e dependência)
+
+4. "motorista e veiculo seria agregação ou associação?"
+ferramente: Gemini IA
+

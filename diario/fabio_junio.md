@@ -18,3 +18,8 @@ Dia 11/11/2026:
 5. new_oferta
 
 - adicionei estilização em cada página
+
+Dia 12/11/2026:
+
+- Finalizei o diagrama UML de classes, adicionando funções extras, classes extras e reoganizando as relações e dependências.
+
