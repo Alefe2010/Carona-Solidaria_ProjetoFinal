@@ -6,4 +6,6 @@ Após isso reconheci o erro e consertei revisando, ajustando e deixando o básic
 
 ## 2 Semana
 Terminei o DER iniciado pelo outro integrante (Fábio Júnio) e construí o Diagrama de Classes (UML). <br>
-Não encontrei muita dificuldade, mas uma demora para colocar os relacionamentos e as cardinalidades corretas.
+Não encontrei muita dificuldade, mas uma demora para colocar os relacionamentos e as cardinalidades corretas. <br>
+Também iniciei a página de login, a qual eu fiquei responsável. Encontrei um pouco de dificuldade pois havia bastante tempo
+que não fazia um código manualmente em HTML e CSS.
