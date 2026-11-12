@@ -1,0 +1,193 @@
+classDiagram
+direction TB
+
+class Usuario {
+    -Number or String CPF
+    -String nome
+    -Number telefone
+    -String dataNasc
+    -String email
+
+    +toString()
+}
+
+class Veiculo {
+    -String placa
+    -String cor
+    -String modelo
+    -Number qtdAssentos
+
+    +toString()
+}
+
+class Motorista {
+    -Number CNH
+}
+
+class Passageiro {
+}
+
+class Oferta {
+    -String idOferta
+    -Number numeroVagas
+    -String origem
+    -String destino
+    +toString()
+}
+
+class Solicitacao {
+    -String idSolicitacao
+    -String situacao
+    -String horario
+    +toString()
+    +situcaoAceita()
+    +situacaoNegada()
+}
+
+class PontoDeEncontro {
+    -Number idPontoEncontro
+    -String bairro
+    -String rua
+    -String pontoReferencia
+}
+
+class Corrida {
+    -String idCorrida
+    -String situacao
+    -String dataHoraFinal
+    -Solicitacao[] solicitacoes
+    
+    +verificarSituacao()
+    +iniciarCorrida()
+    +finalizarCorrida()
+    adicionarSolicitacao(solicitacao)
+    removerSolicitacao(idSolicitacao)
+}
+
+
+class VeiculoRepository {
+    +cadastrarVeiculo()
+    +buscarPorId(id)
+    +excluirVeiculo(id)
+    +atualizarDados(id, dados)
+}
+
+class UsuarioRepository {
+    +cadastrarUsuario()
+    +buscarPorId(idUsuario)
+    +atualizarDados(idUsuario, dados)
+    +excluirUsuario(idUsuario)
+    +FiltrarMotoristas()
+    +FiltrarPassageiros()
+}
+
+class SolicitacaoRepository {
+    +cadastrarSolicitacao()
+    +buscarPorId(id)
+    +atualizarDados(id, dados)
+    +excluirSolicitacao(id)
+    +FiltrarQntdVaga(regiao)
+    +FiltrarPorHorario(hora)
+}
+
+class OfertaRepository {
+    +cadastrarOferta(numeroVagas, origem, destino, idUsuario)
+    +buscarPorId(idOferta)
+    +atualizarDados(idOferta, dados)
+    +excluirOferta(idOferta)
+    +FiltrarRegiao(regiao)
+    +FiltrarCarro(tipoCarro)
+    +FiltrarDestino(destino)
+}
+
+class CorridaRepository{
+    +cadastrarCorrida(idCorrida, origem, destino, idUsuario)
+    +buscarPorId(idCorrida)
+    +excluirOferta(idOferta)
+    +FiltrarSituacao(situacao)
+    +verificarSituacao(idCorrida)
+    +iniciarCorrida(idCorrida)
+    +finalizarCorrida(idCorrida)
+
+}
+
+
+class OfertaService{
+    +UsuarioRepository
+    +OfertaRepository
+    +VeiculoRepository
+
+    +cadastrarOferta(numeroVagas, origem, destino, idUsuario)
+    +buscarPorId(idOferta)
+    +atualizarDados(idOferta, dados)
+    +excluirOferta(idOferta)
+    +FiltrarRegiao(regiao)
+    +FiltrarCarro(tipoCarro)
+    +FiltrarDestino(destino)
+}
+
+class SolicitacaoService{
+    +UsuarioRepository
+    +SolicitacaoRepository
+
+    +cadastrarSolicitacao(idUsuario, situacao, horario)
+    +buscarPorId(idSolicitacao)
+    +atualizarDados(idSolicitacao, dados)
+    +excluirOferta(id)
+    +FiltrarQntdVaga(regiao)
+    +FiltrarPorHorario(hora)
+    +solicitacaoAceita(idSolicitacao)
+    +solicitacaoNegada(idSolicitacao)
+
+}
+
+class CorridaService {
+    +OfertaRepository 
+    +SolicitacaoRepository 
+    +CorridaRepository
+
+    +CriarOferta()
+    +buscarPorId(idCorrida)
+    +verificarSituacao(idCorrida)
+    +adicionarSolicitacao(id_solicitacao, idCorrida)
+    +removerSolicitacao(id_solicitacao, idCorrida)
+    +finalizarCorrida(idCorrida)
+    +iniciarCorrida(idCorrida)
+}
+
+class Index{
+
+}
+
+
+Usuario <|-- Motorista
+Usuario <|-- Passageiro
+
+Motorista "1" -- "*" Veiculo : Dirige
+Usuario "1" -- "*" Solicitacao : Faz
+Oferta "1" *-- "0..*" Solicitacao : Envia
+Solicitacao "0..*" -- "1" PontoDeEncontro : Possui
+
+Oferta "1" -- "0..1" Corrida : Origina
+Corrida "1" -- "1..*" Solicitacao : Junta
+
+CorridaService ..> CorridaRepository
+CorridaService ..> OfertaRepository
+CorridaService ..> SolicitacaoRepository
+
+UsuarioRepository ..> Usuario       
+VeiculoRepository ..> Veiculo
+OfertaRepository ..> Oferta
+CorridaRepository ..> Corrida
+SolicitacaoRepository ..> Solicitacao
+
+OfertaService ..> UsuarioRepository
+OfertaService ..> OfertaRepository
+OfertaService ..> VeiculoRepository
+
+SolicitacaoService ..> UsuarioRepository
+SolicitacaoService ..> SolicitacaoRepository
+
+Index --> OfertaService
+Index --> CorridaService
+Index --> SolicitacaoService
