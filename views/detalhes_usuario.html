@@ -4,20 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalhes</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #111111;
+        }
+        header {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 18px 24px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        section {
+            max-width: 600px;
+            margin: 50px 20px;
+            padding: 0 16px;
+        }
+        .box-format {
+            background-color: #ffffff;
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+            margin-bottom: 10px;
+        }
+        h4{
+            margin-bottom: 5px;
+        }
+    </style>
 </head>
+<header>
 <body>
-    <header>
         vo fazer o hearder dps
     </header>
     <section>
         <h1>Informações da viagem</h1>
-        <div>
+        <div class="box-format">
+            <div>
+                <h4>Motorista:</h4>
+                <span></span>
+            </div>
             <div>
                 <h4>Ponto de encontro:</h4>
-                <div>
-                    <span>sla o que colocar como exemplo</span>
-                    <span>67:67 pm</span>
-                </div>
+                <span>exemplo - exemplo</span>
+                <span>67:67 pm</span>
             </div>
             <div>
                 <h4>Destino:</h4>
@@ -29,14 +67,16 @@
                 <span>5/5</span>
             </div>
         </div>
-        <h2>Ajuda e segurança</h2>
+    </section>
+    <section>
+        <h1>Ajuda e segurança</h1>
         <div>
-            <div>
+            <div class="box-format">
                 <h4>Reportar</h4>
                 <p>Denunciar qualquer tipo de comportamento ou situação relacionado a sua segurança</p>
                 <button>Denunciar</button>
             </div>
-            <div>
+            <div class="box-format">
                 <h4>Objeto perdido</h4>
                 <p>Entrar em contato com o motorista</p>
                 <button>Entrar em contato</button>
