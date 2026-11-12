@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar oferta</title>
+    <style>
+        h1 {
+            font-size: 40px;
+        }
+        .coluna-div {
+            display: flex;
+            flex-direction: column;
+            margin: 12px 10px;
+        }
+        .linha-div{
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            justify-content: center;
+        }
+        .btn-criar{
+            background-color: green;
+            color: white;
+        }
+        .btn-limpar{
+
+        }
+        form{
+            background-color: gray;
+            
+        }
+        
+
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            as coisas aqui
+        </div>
+    </header>
+    <section>
+        <form action="" method="post" class="coluna">
+
+            <div class="coluna-div">
+                <h1>Criação de oferta</h1>
+                <p>escreva abaixo as informações da sua corrida</p>
+            </div>
+            <div class="coluna-div">
+                <label for="">Local de partida:</label>
+                <input type="text" name="endereco_origem" id="" placeholder="Adicione o endereço">
+            </div>
+            <div class="coluna-div">
+                <label for="">Local de destino</label>
+                <input type="text" name="endereco_destino" id="" placeholder="Adicione o endereço">
+            </div>
+            <div class="coluna-div">
+                <label for="">Data e hora:</label>
+                <input type="datetime-local" name="" id="">
+            </div>
+            <div class="coluna-div">
+                <label for="">Quantidade de vagas:</label>
+                <input type="number">
+            </div>
+
+            <div class="linha-div">
+                <button type="submit" class="btn-criar">Criar Oferta</button>
+                <button type="reset">Limpar tudo</button>
+            </div>
+        </form>
+        
+    </section>
+
+</body>
+</html>
