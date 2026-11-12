@@ -10,4 +10,11 @@ Dia 9/10/2026
 5. Criei as funções de carona
 
 Dia 11/11/2026:
-- Fiz a pagina html com as operações crud e coloquei em uma pasta chamada templates
+- Fiz as paginas html que envolve crud e coloquei-as em uma pasta chamada views.
+1. atualizar_corrida
+2. detalhes_motorista
+3. detalhes_usuario
+4. historico
+5. new_oferta
+
+- adicionei estilização em cada página
