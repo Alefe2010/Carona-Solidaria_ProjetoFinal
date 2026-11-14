@@ -57,3 +57,4 @@ uso de ia dia 14/11/2026:
 2. o que é flex-wrap
 3. quero aprender a fazer a estilização desses cards, pois eu nao sei como fazer em css
 4. como é que move o elemento com position relative
+5. o span tem uma classe e ta dentro de uma div. quando mudo o font-size na div, o span muda, ja com a classe no span nao
