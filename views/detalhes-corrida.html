@@ -31,23 +31,31 @@
             color: #111827;
             margin-bottom: 16px;
         }
-        
-        .box-cinza{
-            border: solid white 1px;
-            width: 42rem;
-            background-color:#ededed73;
-            border-radius: 22px;
-            margin-bottom: 20px;
+
+        .box-cinza {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
-        .box-row{
+        .box-row {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            align-items: flex-end;
-            margin-top: 20px;
-            margin-left: 30px;
-            margin-right: 40px;
-            gap: 20px;
+            align-items: stretch;
+            margin-top: 32px;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .box-avaliacao {
+            flex: 1;
+            min-width: 300px;
+            margin-top: 54px;
         }
         aside{
             border: solid black 5px;
@@ -56,8 +64,11 @@
             margin-right: 40px;
             margin-top: 20px;
         }
-        section{
-            width: 42rem;
+        section {
+            flex: 1.4;
+            min-width: 320px;
+            display: flex;
+            flex-direction: column;
         }
         .conteiner-card{
             display: flex;
