@@ -27,6 +27,7 @@
             justify-content: space-between;
             margin-top: 5px;
             margin-bottom: 10px;
+            flex-wrap: nowrap;
 
         }
 
@@ -75,7 +76,28 @@
         .conteiner-tituto-aval{
             display: flex;
             flex-direction: row;
-            flex
+            justify-content: space-between;
+            width: 270px;
+            border: solid black 1px;
+            height: 100px;
+            flex-wrap: nowrap;
+        }
+        h1{
+            font-size: 40px;
+        }
+        .nota-avaliacao{
+            font-size: 50px;
+            position: relative;
+            bottom: 25px;
+        }
+        .estrelas-avaliacao{
+            font-size: 40px;
+            border: solid black 1px;
+            width: 300px;
+        }
+        .estrelas{
+            margin: 10px;
+            color: yellow;
         }
 
 
@@ -156,10 +178,15 @@
                 <div class="box-shadow">
                     <div id="titulo-nota" class="conteiner-tituto-aval">
                         <h1 class="titulo-avaliacao">Avaliação:</h2>
-                        <p class="nota-avaliacao">5</p>
+                        <p class="nota-avaliacao">5/5</p>
                     </div>
                     <div class="estrelas-avaliacao">
-                        estrelas
+                        <span class="estrela">&#9733;</span> 
+                        <span class="estrela">&#9733;</span>
+                        <span class="estrela">&#9733;</span>
+                        <span class="estrela">&#9733;</span>
+                        <span class="estrela">&#9733;</span>
+                        <span class="estrela">&#9733;</span>
                     </div>
                 </div>
             </section>

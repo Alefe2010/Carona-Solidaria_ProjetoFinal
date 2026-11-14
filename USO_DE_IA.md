@@ -52,3 +52,8 @@ finalidade: Dúvida em relação ao tipo de relações de classes (agregração 
 4. "motorista e veiculo seria agregação ou associação?"
 ferramente: Gemini IA
 
+uso de ia dia 14/11/2026:
+1. como faz icone de estrela no html e css
+2. o que é flex-wrap
+3. quero aprender a fazer a estilização desses cards, pois eu nao sei como fazer em css
+4. como é que move o elemento com position relative
