@@ -70,37 +70,38 @@
             display: flex;
             flex-direction: column;
         }
-        .conteiner-card{
+        .conteiner-card {
             display: flex;
-            gap: 10px; 
+            gap: 16px;
             justify-content: space-between;
-            margin-top: 30px;
-            margin-bottom: 30px;
-            margin-left: 30px;
-            margin-right: 30px;
-            flex-wrap: nowrap;
+            margin-bottom: 16px;
         }
         .card-estilizado {
             display: flex;
             align-items: center;
+            background-color: #f9fafb;
+            border-radius: 14px;
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+            flex: 1;
+            height: 84px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+        .card-estilizado:hover {
             background-color: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.171); 
-            border: 1px solid #f0f0f5;
-            overflow: hidden;   
-            max-width: 300px;
-            width: 100%;
-            height: 97px;
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.12);
+            border-color: #bfdbfe;
         }
         .card-icone {
-            background-color: #eaf1fb;
+            background-color: #eff6ff;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 90px;
+            width: 72px;
             height: 100%;
-            color: #3b82f6; 
-            flex-shrink: 0; 
+            color: #3b82f6;
+            flex-shrink: 0;
         }
         .card-conteudo {
             flex: 1;
@@ -224,7 +225,7 @@
                 </div>
             </section>
 
-            <div class="box-cinza">
+            <div class="box-cinza box-avaliacao">
                 <div id="titulo-nota" class="conteiner-tituto-aval">
                     <h1 class="titulo-avaliacao">Avaliação:</h1>
                     <p class="nota-avaliacao">5/5</p>
