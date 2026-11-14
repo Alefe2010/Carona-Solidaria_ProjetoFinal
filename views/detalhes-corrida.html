@@ -10,7 +10,6 @@
             margin: 0;
             padding: 0;
         }   
-
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #f4f6f9;
@@ -18,10 +17,9 @@
             line-height: 1.5;
             padding-bottom: 60px;
         }
-
         main {
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 0;
             padding: 0 24px;
         }
 
@@ -54,13 +52,11 @@
         }
         .box-avaliacao {
             flex: 1;
-            min-width: 300px;
-            margin-top: 54px;
+            min-width: 300px;;
         }
         aside{
-            border: solid black 5px;
+            /* border: solid black 5px; */
             width: 86rem;
-            margin-left: 30px;
             margin-right: 40px;
             margin-top: 20px;
         }
@@ -93,7 +89,7 @@
             box-shadow: 0 8px 16px rgba(59, 130, 246, 0.12);
             border-color: #bfdbfe;
         }
-        .card-icone {
+            .card-icone {
             background-color: #eff6ff;
             display: flex;
             align-items: center;
@@ -118,38 +114,40 @@
             color: #6b7280; 
             margin: 0;
         }
-        .conteiner-tituto-aval{
+
+        .conteiner-tituto-aval {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             justify-content: space-between;
-            width: 340px;
-            height: 100px;
-            flex-wrap: nowrap;
-            margin-top: 20px;
-            margin-left: 30px;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 24px;
+            height: 70%;
         }
 
-        .nota-avaliacao{
-            font-size: 70px;
-            position: relative;
-            bottom: 60px;
-            right: 30px;
+        .nota-avaliacao {
+            font-size: 60px;
+            font-weight: 800;
+            color: #111827;
         }
         .estrelas-avaliacao{
-            border: solid white 1px;
             width: 90%;
             margin: 10px auto;
-            border-radius: 16px;
-            background-color: white;
             text-align: center;
         }
         span.estrela{
             margin: 10px;
-            font-size: 60px;
+            font-size: 50px;
             margin-right: 20px;
+        }   
+        .titulo-avaliacao {
+            margin-bottom: 0;
         }
-        .titulo-avaliacao{
-            color: black;
+
+        .box-ajuda-seg{
+            background-color: white;
+            border: white;
+            border-radius: 20px;
         }
     </style>
 </head>
@@ -160,8 +158,8 @@
     <main>
         <div class="box-row">
             <section>
-                <h1>Informações da Viagem:</h1>
                 <div class="box-cinza">
+                    <h1>Informações da Viagem:</h1>
                     <div class="conteiner-card">
                         <div id="origem" class="card-estilizado">
                             <div class="card-icone">
@@ -226,34 +224,38 @@
             </section>
 
             <div class="box-cinza box-avaliacao">
-                <div id="titulo-nota" class="conteiner-tituto-aval">
+                <div class="conteiner-tituto-aval">
                     <h1 class="titulo-avaliacao">Avaliação:</h1>
                     <p class="nota-avaliacao">5/5</p>
+                    <div class="estrelas-avaliacao">
+                        <span class="estrela">&#9733;</span> 
+                        <span class="estrela">&#9733;</span>
+                        <span class="estrela">&#9733;</span>
+                        <span class="estrela">&#9733;</span>
+                        <span class="estrela">&#9733;</span>
+                    </div>
+                    <div class="comentario">
+                        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem quaerat officiis fuga tenetur dicta, laboriosam excepturi! Est nam maxime aspernatur nobis accusantium adipisci voluptatem totam exercitationem ipsam quisquam. Et, incidunt."
+                    </div>
                 </div>
-                <div class="estrelas-avaliacao">
-                    <span class="estrela">&#9733;</span> 
-                    <span class="estrela">&#9733;</span>
-                    <span class="estrela">&#9733;</span>
-                    <span class="estrela">&#9733;</span>
-                    <span class="estrela">&#9733;</span>
-                </div>
+                
             </div>
         </div>
-
         <aside>
-            <div></div>
-            <h1>Ajuda e segurança:</h1>
-            <div>
-                <h2>Reportar</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates repellat at eaque nobis recusandae consequatur saepe repellendus debitis consequuntur dolore quisquam, voluptatum ducimus ipsa veniam, minus nisi ratione. Aspernatur, voluptates?</p>
-            </div>
-            <div>
-                <h2>Objeto Perdido</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit a obcaecati earum alias praesentium quo blanditiis mollitia facere non similique! Nemo id magnam ipsa voluptate provident dolorem, et quos similique.</p>
-            </div>
-            <div>
-                <h2>Atendimento ao usuário</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos beatae officia minima at, repellendus dolore inventore harum animi fugiat laborum omnis repudiandae delectus eum repellat incidunt magni pariatur culpa quaerat?</p>
+            <div class="box-ajuda-seg">
+                <h1>Ajuda e segurança:</h1>
+                <div>
+                    <h2>Reportar</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates repellat at eaque nobis recusandae consequatur saepe repellendus debitis consequuntur dolore quisquam, voluptatum ducimus ipsa veniam, minus nisi ratione. Aspernatur, voluptates?</p>
+                </div>
+                <div>
+                    <h2>Objeto Perdido</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit a obcaecati earum alias praesentium quo blanditiis mollitia facere non similique! Nemo id magnam ipsa voluptate provident dolorem, et quos similique.</p>
+                </div>
+                <div>
+                    <h2>Atendimento ao usuário</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos beatae officia minima at, repellendus dolore inventore harum animi fugiat laborum omnis repudiandae delectus eum repellat incidunt magni pariatur culpa quaerat?</p>
+                </div>
             </div>
         </aside>
     </main>
