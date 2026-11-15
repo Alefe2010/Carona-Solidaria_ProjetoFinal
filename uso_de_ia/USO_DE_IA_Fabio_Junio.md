@@ -54,7 +54,19 @@ ferramente: Gemini IA
 
 uso de ia dia 14/11/2026:
 1. como faz icone de estrela no html e css
+ferramente: Gemini IA/pesquisa google
+
 2. o que é flex-wrap
+ferramente: Gemini IA
+
 3. quero aprender a fazer a estilização desses cards, pois eu nao sei como fazer em css
+ferramente: Gemini IA
+
 4. como é que move o elemento com position relative
+ferramente: Gemini IA
+
 5. o span tem uma classe e ta dentro de uma div. quando mudo o font-size na div, o span muda, ja com a classe no span nao
+ferramente: Gemini IA
+
+6. me ensina como usar scale e transformation. quero saber a diferença e como usar. Nao use o meu codigo, coloque outro exemplo pra eu desenrolar ai
+ferramenta: Gemini IA
