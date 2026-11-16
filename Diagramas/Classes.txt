@@ -32,6 +32,7 @@ class Oferta {
     -Number numeroVagas
     -String origem
     -String destino
+    -Horario
     +toString()
 }
 
@@ -55,7 +56,6 @@ class Corrida {
     -String idCorrida
     -String situacao
     -String dataHoraFinal
-    -Solicitacao[] solicitacoes
     
     +verificarSituacao()
     +iniciarCorrida()
@@ -86,7 +86,7 @@ class SolicitacaoRepository {
     +buscarPorId(id)
     +atualizarDados(id, dados)
     +excluirSolicitacao(id)
-    +FiltrarQntdVaga(regiao)
+    +FiltrarQntdVaga(qntdVaga)
     +FiltrarPorHorario(hora)
 }
 
@@ -121,6 +121,7 @@ class OfertaService{
     +buscarPorId(idOferta)
     +atualizarDados(idOferta, dados)
     +excluirOferta(idOferta)
+    +FiltrarPorHorario(hora)
     +FiltrarRegiao(regiao)
     +FiltrarCarro(tipoCarro)
     +FiltrarDestino(destino)
@@ -134,8 +135,7 @@ class SolicitacaoService{
     +buscarPorId(idSolicitacao)
     +atualizarDados(idSolicitacao, dados)
     +excluirOferta(id)
-    +FiltrarQntdVaga(regiao)
-    +FiltrarPorHorario(hora)
+    +FiltrarQntdVaga(qntdVaga)
     +solicitacaoAceita(idSolicitacao)
     +solicitacaoNegada(idSolicitacao)
 
@@ -146,17 +146,13 @@ class CorridaService {
     +SolicitacaoRepository 
     +CorridaRepository
 
-    +CriarOferta()
+    +CriarCorrida(situacao, dataHorafinal)
     +buscarPorId(idCorrida)
     +verificarSituacao(idCorrida)
-    +adicionarSolicitacao(id_solicitacao, idCorrida)
-    +removerSolicitacao(id_solicitacao, idCorrida)
+    +registrarParticipante(id_solicitacao, idCorrida)
+    +removerPartcipante(id_solicitacao, idCorrida)
     +finalizarCorrida(idCorrida)
     +iniciarCorrida(idCorrida)
-}
-
-class Index{
-
 }
 
 
@@ -188,6 +184,4 @@ OfertaService ..> VeiculoRepository
 SolicitacaoService ..> UsuarioRepository
 SolicitacaoService ..> SolicitacaoRepository
 
-Index --> OfertaService
-Index --> CorridaService
-Index --> SolicitacaoService
+
