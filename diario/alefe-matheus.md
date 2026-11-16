@@ -9,3 +9,6 @@ Terminei o DER iniciado pelo outro integrante (Fábio Júnio) e construí o Diag
 Não encontrei muita dificuldade, mas uma demora para colocar os relacionamentos e as cardinalidades corretas. <br>
 Também iniciei a página de login, a qual eu fiquei responsável. Encontrei um pouco de dificuldade pois havia bastante tempo
 que não fazia um código manualmente em HTML e CSS.
+
+## 3 Semana
+Terminei a parte front-end da página de login, com email, senha e telefone. 
