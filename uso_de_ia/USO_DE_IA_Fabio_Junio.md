@@ -70,3 +70,11 @@ ferramente: Gemini IA
 
 6. me ensina como usar scale e transformation. quero saber a diferença e como usar. Nao use o meu codigo, coloque outro exemplo pra eu desenrolar ai
 ferramenta: Gemini IA
+
+Uso de ia dia 16/11/2026:
+
+1. "Preciso relembrar como funciona a arquitetura mvc e como se combina com a arquitetura de poo (entities, services e repository)"
+ferramenta: chatgpt
+
+2. "e no caso de login e logout, eu faço um controller pra ele? O que exatamente faço"
+ferramenta: chatgpt

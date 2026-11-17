@@ -30,5 +30,8 @@ Dia 14/11/2026:
 Dia 15/11/2026:
 
 -Construi todas as entidades da pagina entities
--Conclui o design do historico de corridas
--
+
+Dia 16/11/2026:
+-fiz as tabelas em sql
+-Atualizei o diagrama uml
+-fiz o logout do usuario
