@@ -1,0 +1,98 @@
+* {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+body{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: oklch(28.2% 0.091 267.935);
+    background: oklch(25.7% 0.09 281.288);
+}
+.header {
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+}
+.container {
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0.2,0,0.25);
+    width:400px;
+    position: relative;
+    background: white;
+}
+.container h1{
+    text-align: center;
+    margin-left: 2rem;
+}
+.enter{
+    display: flex;
+    justify-content: end;
+}
+img {
+    border-radius: 10%;
+    width: 90px;
+    height: 70px;
+}
+form {
+    border-top: solid 1px oklch(25.7% 0.09 281.288);
+    padding-top: 1rem;
+}
+form{ display:flex; flex-direction:column; margin-bottom: 2rem; font-weight: bold ;}
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 3rem;
+}
+.form-group input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-top: 5px;
+    background: rgba(255, 255, 255, 0.8);
+}
+.form-group label {
+    font-size: 14px;
+    color: #444;
+}
+.enter{
+    display: flex;
+    justify-content: end;
+}
+button{
+    width:40%;
+    border:none;
+    cursor:pointer;
+    margin-top: 1rem;
+}
+#enterbtn{
+    background: oklch(66.6% 0.179 58.318);
+    color: white;
+    padding:10px;
+    box-shadow:0 0 10px rgba(0,0.1,0,0.25);
+    font-weight: 700;
+    border-radius:5px;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1) 150ms;
+}
+#forget{
+    background-color: transparent;
+    color: #444;
+    margin-top: 0;
+    font-weight: 200;
+}
+#enterbtn:hover{
+    transform: translateY(-0.25rem) scale(1.02);
+    background: oklch(64.6% 0.222 41.116);
+}
+input {
+    border: 1px solid #ccc;
+    outline: none;
+   
+}
+input:focus {
+    border-color: oklch(64.6% 0.222 41.116);
+    border-width: 2px;
+} 
