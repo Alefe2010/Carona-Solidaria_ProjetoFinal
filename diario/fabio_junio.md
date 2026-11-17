@@ -18,3 +18,17 @@ Dia 11/11/2026:
 5. new_oferta
 
 - adicionei estilização em cada página
+
+Dia 12/11/2026:
+
+- Finalizei o diagrama UML de classes, adicionando funções extras, classes extras e reoganizando as relações e dependências.
+
+Dia 14/11/2026:
+
+- Aprimorei o design do historico de corridas
+
+Dia 15/11/2026:
+
+-Construi todas as entidades da pagina entities
+-Conclui o design do historico de corridas
+-
