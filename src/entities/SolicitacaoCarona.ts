@@ -8,7 +8,7 @@ export class SolicitacaoCarona{
     private _ofertaCarona: OfertaCarona;
     private _pontoEncontro: PontoEncontro
     
-    constructor(idSolicitacao: number, situacao:string = "EM ANDAMENTO", horario: string, ofertaCarona: OfertaCarona, pontoEncontro: PontoEncontro){
+    constructor(idSolicitacao: number, situacao:string = "PENDENTE", horario: string, ofertaCarona: OfertaCarona, pontoEncontro: PontoEncontro){
         this._idSolicitacao = idSolicitacao
         this._situacao = situacao
         this._horario = horario
@@ -22,7 +22,7 @@ export class SolicitacaoCarona{
     public get ofertaCarona(){return this._ofertaCarona}
     public get pontoEncontro(){return this._pontoEncontro}
     
-    public situacaoAceita(){this._situacao = "SOLICITAÇÃO ACEITA"}
-    public situacaoNegada(){this._situacao = "SOLICITAÇÃO NEGADA"}
+    public situacaoAceita(){this._situacao = "ACEITA"}
+    public situacaoNegada(){this._situacao = "NEGADA"}
 
 }
