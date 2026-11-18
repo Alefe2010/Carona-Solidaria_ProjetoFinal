@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-        }   
+        }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #f4f6f9;
@@ -18,15 +18,14 @@
             padding-bottom: 60px;
         }
         main {
-            max-width: 1200px;
-            margin: 0;
+            max-width: 1100px;
+            margin: 0 auto;
             padding: 0 24px;
         }
-
         h1 {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
-            color: #111827;
+            color: #162556;
             margin-bottom: 16px;
         }
 
@@ -52,13 +51,10 @@
         }
         .box-avaliacao {
             flex: 1;
-            min-width: 300px;;
+            min-width: 300px;
         }
-        aside{
-            /* border: solid black 5px; */
-            width: 86rem;
-            margin-right: 40px;
-            margin-top: 20px;
+        aside {
+            margin-top: 24px;
         }
         section {
             flex: 1.4;
@@ -68,9 +64,13 @@
         }
         .conteiner-card {
             display: flex;
+            flex-wrap: wrap;
             gap: 16px;
             justify-content: space-between;
             margin-bottom: 16px;
+        }
+        .conteiner-card:last-child {
+            margin-bottom: 0;
         }
         .card-estilizado {
             display: flex;
@@ -80,74 +80,113 @@
             border: 1px solid #e5e7eb;
             overflow: hidden;
             flex: 1;
-            height: 84px;
+            min-width: 220px;
+            min-height: 84px;
             transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
         }
         .card-estilizado:hover {
             background-color: #ffffff;
             transform: translateY(-3px) scale(1.01);
-            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.12);
-            border-color: #bfdbfe;
+            box-shadow: 0 8px 16px rgba(22, 37, 86, 0.12);
+            border-color: #e17100;
         }
-            .card-icone {
-            background-color: #eff6ff;
+        .card-icone {
+            background-color: #162556;
             display: flex;
             align-items: center;
             justify-content: center;
+            align-self: stretch;
             width: 72px;
-            height: 100%;
-            color: #3b82f6;
+            color: #ffffff;
             flex-shrink: 0;
         }
         .card-conteudo {
             flex: 1;
-            padding: 0 20px;
+            padding: 12px 20px;
         }
         .card-titulo {
-            font-size: 16px;
-            font-weight: 700;
-            color: #111827;
-            margin: 0 0 4px 0;
+            font-size: 14px;
+            font-weight: 400;
+            color: #6b7280;
+            margin: 0 0 2px 0;
         }
         .card-subtitulo {
-            font-size: 14px;
-            color: #6b7280; 
+            font-size: 16px;
+            font-weight: 700;
+            color: #162556;
             margin: 0;
         }
 
         .conteiner-tituto-aval {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             align-items: center;
             width: 100%;
-            margin-bottom: 24px;
-            height: 70%;
-        }
-
-        .nota-avaliacao {
-            font-size: 60px;
-            font-weight: 800;
-            color: #111827;
-        }
-        .estrelas-avaliacao{
-            width: 90%;
-            margin: 10px auto;
             text-align: center;
         }
-        span.estrela{
-            margin: 10px;
-            font-size: 50px;
-            margin-right: 20px;
-        }   
         .titulo-avaliacao {
-            margin-bottom: 0;
+            align-self: flex-start;
+        }
+        .nota-avaliacao {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1.1;
+            color: #162556;
+        }
+        .estrelas-avaliacao {
+            width: 90%;
+            margin: 10px auto 20px;
+            text-align: center;
+            color: #e17100;
+        }
+        span.estrela {
+            margin: 0 4px;
+            font-size: 36px;
+        }
+        .comentario {
+            width: 100%;
+            padding: 16px;
+            background-color: #f9fafb;
+            border-left: 4px solid #e17100;
+            border-radius: 8px;
+            font-size: 15px;
+            font-style: italic;
+            text-align: left;
         }
 
-        .box-ajuda-seg{
-            background-color: white;
-            border: white;
+        .box-ajuda-seg {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
             border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+        .box-ajuda-seg h1 {
+            grid-column: 1 / -1;
+            margin-bottom: 0;
+        }
+        .box-ajuda-seg div {
+            padding: 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+        }
+        .box-ajuda-seg h2 {
+            font-size: 16px;
+            color: #162556;
+            margin-bottom: 6px;
+        }
+        .box-ajuda-seg p {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        @media (max-width: 800px) {
+            .box-ajuda-seg {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -167,7 +206,7 @@
                             </div>
                             <div class="card-conteudo">
                                 <h3 class="card-titulo">Origem</h3>
-                                <p class="card-subtitulo">examplo</p>
+                                <p class="card-subtitulo">Exemplo</p>
                             </div>
                         </div>
                         <div id="destino" class="card-estilizado">
@@ -176,7 +215,7 @@
                             </div>
                             <div class="card-conteudo">
                                 <h3 class="card-titulo">Destino</h3>
-                                <p class="card-subtitulo">exemplo</p>
+                                <p class="card-subtitulo">Exemplo</p>
                             </div>
                         </div>
                     </div>
@@ -187,7 +226,7 @@
                             </div>
                             <div class="card-conteudo">
                                 <h3 class="card-titulo">Ponto de encontro</h3>
-                                <p class="card-subtitulo">exemplo</p>
+                                <p class="card-subtitulo">Exemplo</p>
                             </div>
                         </div>
                         <div class="card-estilizado">
@@ -196,7 +235,27 @@
                             </div>
                             <div class="card-conteudo">
                                 <h3 class="card-titulo">Quantidade de vagas</h3>
-                                <p class="card-subtitulo">exemplo</p>
+                                <p class="card-subtitulo">Exemplo</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conteiner-card">
+                        <div id="horario-inicio" class="card-estilizado">
+                            <div class="card-icone">
+                                <img src="" alt="">
+                            </div>
+                            <div class="card-conteudo">
+                                <h3 class="card-titulo">Horário de início</h3>
+                                <p class="card-subtitulo">Exemplo</p>
+                            </div>
+                        </div>
+                        <div id="horario-fim" class="card-estilizado">
+                            <div class="card-icone">
+                                <img src="" alt="">
+                            </div>
+                            <div class="card-conteudo">
+                                <h3 class="card-titulo">Horário de término</h3>
+                                <p class="card-subtitulo">Exemplo</p>
                             </div>
                         </div>
                     </div>
@@ -216,7 +275,7 @@
                             </div>
                             <div class="card-conteudo">
                                 <h3 class="card-titulo">Situação</h3>
-                                <p class="card-subtitulo">exemplo</p>
+                                <p class="card-subtitulo">Exemplo</p>
                             </div>
                         </div>
                     </div>
@@ -228,7 +287,7 @@
                     <h1 class="titulo-avaliacao">Avaliação:</h1>
                     <p class="nota-avaliacao">5/5</p>
                     <div class="estrelas-avaliacao">
-                        <span class="estrela">&#9733;</span> 
+                        <span class="estrela">&#9733;</span>
                         <span class="estrela">&#9733;</span>
                         <span class="estrela">&#9733;</span>
                         <span class="estrela">&#9733;</span>
@@ -238,7 +297,6 @@
                         "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem quaerat officiis fuga tenetur dicta, laboriosam excepturi! Est nam maxime aspernatur nobis accusantium adipisci voluptatem totam exercitationem ipsam quisquam. Et, incidunt."
                     </div>
                 </div>
-                
             </div>
         </div>
         <aside>
