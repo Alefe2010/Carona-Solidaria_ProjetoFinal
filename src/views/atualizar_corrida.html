@@ -1,48 +1,174 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criar oferta</title>
+    <title>Atualizar oferta</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #333333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #162556;
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 700;
+            padding: 16px 32px;
+            border-bottom: 4px solid #e17100;
+            margin-bottom: 30px;
+        }
+
+        section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 16px 40px;
+            flex: 1;
+        }
+
+        form.coluna {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 480px;
+            padding: 32px;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #162556;
+            margin-bottom: 6px;
+        }
+
+        p {
+            font-size: 15px;
+            color: #6b7280;
+            margin-bottom: 12px;
+        }
+
+        .coluna-div {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 18px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #162556;
+        }
+
+        input {
+            padding: 12px;
+            border-radius: 10px;
+            border: 1.5px solid #d1d5db;
+            background-color: #f9fafb;
+            font-family: inherit;
+            font-size: 15px;
+            transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            background-color: #ffffff;
+            border-color: #e17100;
+            box-shadow: 0 0 0 3px rgba(225, 113, 0, 0.18);
+        }
+
+        .linha-div {
+            display: flex;
+            flex-direction: row;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 24px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px 20px;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .btn-atualizar {
+            background-color: #162556;
+            color: #ffffff;
+        }
+
+        .btn-atualizar:hover {
+            background-color: #0f1a3d;
+        }
+
+        button[type="reset"] {
+            background-color: #e5e7eb;
+            color: #162556;
+        }
+
+        button[type="reset"]:hover {
+            background-color: #d1d5db;
+        }
     </style>
 </head>
 <body>
     <header>
         <div>
-            as coisas aqui
+            Carona Solidária
         </div>
     </header>
     <section>
-        <form action="" method="post">
+        <form action="" method="post" class="coluna">
 
-            <div>
-                <h2>Atualizar dados</h2>
-                <p>Edite abaixo as informações</p>
+            <div class="coluna-div">
+                <h1>Atualizar dados</h1>
+                <p>Edite abaixo as informações da sua corrida.</p>
             </div>
-            <div>
-                <label for="">Local de partida:</label>
-                <input type="text" name="endereco_origem" id="" value="Dados anteriores do cliente">
+            <div class="coluna-div">
+                <label for="endereco_origem">Local de partida:</label>
+                <input type="text" name="endereco_origem" id="endereco_origem" value="Dados anteriores do cliente" placeholder="Adicione o endereço" required>
             </div>
-            <div>
-                <label for="">Local de destino</label>
-                <input type="text" name="endereco_destino" id="" value="Dados anteriores do cliente">
+            <div class="coluna-div">
+                <label for="endereco_destino">Local de destino:</label>
+                <input type="text" name="endereco_destino" id="endereco_destino" value="Dados anteriores do cliente" placeholder="Adicione o endereço" required>
             </div>
-            <div>
-                <label for="">Data e hora:</label>
-                <input type="datetime-local" name="" id="" value="2026-11-11 20:20">
+            <div class="coluna-div">
+                <label for="data_hora">Data e hora:</label>
+                <input type="datetime-local" name="data_hora" id="data_hora" value="2026-11-11T20:20" required>
             </div>
-            <div>
-                <label for="">Quantidade de vagas:</label>
-                <input type="number" value="4">
+            <div class="coluna-div">
+                <label for="vagas">Quantidade de vagas:</label>
+                <input type="number" name="vagas" id="vagas" value="4" min="1" required>
             </div>
 
-            <div>
-                <button type="submit">Atualizar</button>
+            <div class="linha-div">
+                <button type="submit" class="btn-atualizar">Atualizar</button>
                 <button type="reset">Limpar tudo</button>
             </div>
         </form>
-        
+
     </section>
 
 </body>
