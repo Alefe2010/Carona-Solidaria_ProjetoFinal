@@ -51,24 +51,22 @@ class PontoDeEncontro {
     -String rua
     -String pontoReferencia
 }
-class Avaliacao{
+
+class Avaliacao {
     -String idAvaliacao
     -String Comentario
     -Number Nota
     -String tipoAvaliador
 }
+
 class Corrida {
     -String idCorrida
     -String situacao
     -String dataHoraFinal
     
-    +verificarSituacao()
-    +iniciarCorrida()
     +finalizarCorrida()
-    adicionarSolicitacao(solicitacao)
-    removerSolicitacao(idSolicitacao)
-}
 
+}
 
 class VeiculoRepository {
     +cadastrarVeiculo()
@@ -88,11 +86,11 @@ class UsuarioRepository {
 
 class SolicitacaoRepository {
     +cadastrarSolicitacao()
-    +buscarPorId(id)
-    +atualizarDados(id, dados)
-    +excluirSolicitacao(id)
+    +buscarPorId(idSolicitacao)
+    +atualizarDados(idSolicitacao, dados)
+    +excluirSolicitacao(idSolicitacao)
+    +FiltrarSolicAceitas(idCorrida)
     +FiltrarQntdVaga(qntdVaga)
-    +FiltrarPorHorario(hora)
 }
 
 class OfertaRepository {
@@ -105,24 +103,19 @@ class OfertaRepository {
     +FiltrarDestino(destino)
 }
 
-class CorridaRepository{
+class CorridaRepository {
     +cadastrarCorrida(idCorrida, origem, destino, idUsuario)
     +buscarPorId(idCorrida)
-    +excluirOferta(idOferta)
-    +FiltrarSituacao(situacao)
-    +verificarSituacao(idCorrida)
-    +iniciarCorrida(idCorrida)
     +finalizarCorrida(idCorrida)
-
 }
 
-class AvaliacaoRepository{
+class AvaliacaoRepository {
     +criarAvaliacao(idUsuario, idCorrida, nota, comentario, tipoAvaliador)
     +buscarPorId(idAvaliacao)
     +filtrarAvaliacoesUsuario(idUsuario)
 }
 
-class OfertaService{
+class OfertaService {
     +UsuarioRepository
     +OfertaRepository
     +VeiculoRepository
@@ -137,7 +130,7 @@ class OfertaService{
     +FiltrarDestino(destino)
 }
 
-class SolicitacaoService{
+class SolicitacaoService {
     +UsuarioRepository
     +SolicitacaoRepository
 
@@ -148,32 +141,28 @@ class SolicitacaoService{
     +FiltrarQntdVaga(qntdVaga)
     +solicitacaoAceita(idSolicitacao)
     +solicitacaoNegada(idSolicitacao)
-
 }
 
-class CorridaService {
-    +OfertaRepository 
+class CorridaService { 
     +SolicitacaoRepository 
     +CorridaRepository
 
     +CriarCorrida(situacao, dataHorafinal)
     +buscarPorId(idCorrida)
-    +verificarSituacao(idCorrida)
-    +registrarParticipante(id_solicitacao, idCorrida)
-    +removerPartcipante(id_solicitacao, idCorrida)
+    +ListarParticipantesCorrida(idCorrida)
     +finalizarCorrida(idCorrida)
-    +iniciarCorrida(idCorrida)
+    
 }
 
-class AvaliacaoService{
+class AvaliacaoService {
     +AvaliacaoRepository
     +UsuarioRepository
+    +CorridaRepository
 
     +FazerAvaliacao(idUsuario, idCorrida, nota, comentario, tipoAvaliador)
     +FiltrarAvaliacoesUsuario(idUsuario)
     +MediaAvaliacaoUsuario(idUsuario)
 }
-
 
 Usuario <|-- Motorista
 Usuario <|-- Passageiro
@@ -183,15 +172,12 @@ Usuario "1" -- "*" Solicitacao : Faz
 Oferta "1" *-- "0..*" Solicitacao : Envia
 Solicitacao "0..*" -- "1" PontoDeEncontro : Possui
 Avaliacao "0..*" -- "1" Usuario : Faz
-Avaliacao "0..*" -- "1" Corrida: Avalia
+Avaliacao "0..*" -- "1" Corrida : Avalia
 
 Oferta "1" -- "0..1" Corrida : Origina
-Corrida "1" -- "1..*" Solicitacao : Junta
 
 CorridaService ..> CorridaRepository
-CorridaService ..> OfertaRepository
 CorridaService ..> SolicitacaoRepository
-CorridaService ..> AvaliacaoRepository
 
 UsuarioRepository ..> Usuario       
 VeiculoRepository ..> Veiculo
@@ -199,8 +185,6 @@ OfertaRepository ..> Oferta
 CorridaRepository ..> Corrida
 SolicitacaoRepository ..> Solicitacao
 AvaliacaoRepository ..> Avaliacao
-
-
 
 OfertaService ..> UsuarioRepository
 OfertaService ..> OfertaRepository
@@ -211,3 +195,5 @@ SolicitacaoService ..> SolicitacaoRepository
 
 AvaliacaoService ..> UsuarioRepository
 AvaliacaoService ..> AvaliacaoRepository
+AvaliacaoService ..> CorridaRepository
+
