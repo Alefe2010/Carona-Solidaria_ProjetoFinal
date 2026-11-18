@@ -5,6 +5,12 @@ import cookieParser from "cookie-parser"
 import verifyJWT from "./src/middleware/auth.js"
 import dotenv from "dotenv-safe";
 import authRouter from "./src/routes/authRoutes.js"
+import { fileURLToPath } from "url";
+import path from "path"
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 dotenv.config()
 app.use(express.static('public'));
@@ -15,7 +21,7 @@ app.use(express.urlencoded({extended: true}))
 app.use("/auth", authRouter)
 
 app.get("/", verifyJWT, (req, res) => {
-    res.send("Bem-vindo ao sistema! Você está logado!"); 
+    res.sendFile(path.join(__dirname, "src", "views", "historico.html"))
 });
 
 app.listen(PORT, () => {

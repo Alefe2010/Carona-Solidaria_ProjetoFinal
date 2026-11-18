@@ -16,14 +16,14 @@ const login = (req, res) => {
                 email: "alfagi@email.com"
             },
             process.env.jwt_secret,
-            {expiresIn: '60m'}
+            {expiresIn: '3m'}
         );
 
         res.cookie('token', token, {
             httpOnly: true,
             secure: false,
             sameSite: 'strict',
-            maxAge: 15 * 60 * 1000
+            maxAge: 3 * 60 * 1000
         });
         console.log("Token ativo:" + token)
         return res.redirect("/")

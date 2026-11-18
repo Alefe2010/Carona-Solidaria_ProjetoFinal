@@ -7,7 +7,8 @@ import path from "path"
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-router.get("/", (req, res) => {
+
+router.get("/",  (req, res) => {
     res.sendFile(path.join(__dirname,"..", "views", "login.html"))
 })
 router.post("/login", authController)
