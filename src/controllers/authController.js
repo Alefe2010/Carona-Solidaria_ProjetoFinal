@@ -1,4 +1,4 @@
-const UsuarioRepository = require("../repositories/UsuarioRepository")
+import UsuarioRepository from "../repository/UsuarioRepository.ts"
 
 function logout(req, res){
     res.clearCookie("token")
@@ -7,17 +7,17 @@ function logout(req, res){
 
 async function signUp (req, res){
     const {nome, telefone, email, data_nasc, cpf} = req.body;
-    const usuarioRepo = new UsuarioRepository()
     try{
-        await usuarioRepo.cadastrarUsuario(nome, telefone, email, data_nasc, cpf)
+        const user = await UsuarioRepository.cadastrarUsuario(nome, telefone, email, data_nasc, cpf)
     }catch(error){
-        res.status(500).send("Problema interno do servidor")
+        return res.status(500).send("Problema interno do servidor")
     }
-    const payload = {nome: nome, telefone: telefone, email: email, data_nasc: data_nasc, cpf: cpf}
+
+    const payload = {id: user.cpf, email: user.email}
     const token = jwt.sign(payload, process.env.SECRET_KEY, {expiresIn: "1d"})
-    res.cookies("token", token, {
+    res.cookie("token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "development",
+        secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
     })
     res.status(200).json({message: "Cadastro concluído", token: token})
