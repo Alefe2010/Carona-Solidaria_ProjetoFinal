@@ -1,28 +1,33 @@
-  {
+{
     "name": "carona-solidaria_projetofinal",
     "version": "1.0.0",
     "description": "Um sistema inteligente e seguro para estudantes e servidores universitários organizarem e compartilharem caronas para o campus, reduzindo custos, emissões de carbono e melhorando a mobilidade acadêmica.",
     "main": "index.js",
     "type": "module",
     "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "start": "tsx src/index",
-      "build": "tsc",
-      "check": "tsc --noEmit"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "tsx src/index",
+        "build": "tsc",
+        "check": "tsc --noEmit"
     },
     "repository": {
-      "type": "git",
-      "url": "git+https://github.com/Alefe2010/Carona-Solidaria_ProjetoFinal.git"
+        "type": "git",
+        "url": "git+https://github.com/Alefe2010/Carona-Solidaria_ProjetoFinal.git"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "bugs": {
-      "url": "https://github.com/Alefe2010/Carona-Solidaria_ProjetoFinal/issues"
+        "url": "https://github.com/Alefe2010/Carona-Solidaria_ProjetoFinal/issues"
     },
     "homepage": "https://github.com/Alefe2010/Carona-Solidaria_ProjetoFinal#readme",
     "devDependencies": {
-      "tsx": "^4.23.15",
-      "typescript": "^7.0.2"
+        "tsx": "^4.23.15",
+        "typescript": "^7.0.2"
+    },
+    "dependencies": {
+        "cookie-parser": "^1.4.7",
+        "dotenv-safe": "^9.1.0",
+        "jsonwebtoken": "^9.0.3"
     }
-  }
+}
