@@ -15,18 +15,18 @@
             box-sizing: border-box;
         }
 
-        body {
+               body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: oklch(25.023% 0.09438 266.648);
+            background-color: oklch(100% 0.00011 271.152);
             color: #222222;
             display: flex;
         }
-
+        
         .lateral {
             width: 240px;
             height: 100vh;
-            background-color: #000000e8;
+            background-color: #16171be8;
             padding: 30px 20px;
             position: fixed;
             left: 0;
@@ -40,6 +40,8 @@
             margin-bottom: 45px;
             padding-left: 10px;
             font-family: "Anton", sans-serif;
+            margin-left: center ;
+            margin-left: 45px;
         }
 
         .logo span {
@@ -59,7 +61,9 @@
             padding: 15px 12px;
             margin-bottom: 8px;
             border-radius: 7px;
+            
             font-size: 14px;
+        
         }
 
         .menu a:hover {
@@ -68,12 +72,12 @@
         }
 
         .menu .verde {
-            background-color: oklch(66.6% 0.179 58.318);
+   
             color: white;
         }
 
         .menu .vermelho {
-            background-color: #292929;
+             color: oklch(25.7% 0.09 281.288);
             color: white;
         }
 
@@ -106,7 +110,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 35px;
-            color: #444;
+            color: #352a2a;
         }
 
         .topo h1 {
@@ -115,13 +119,14 @@
         }
 
         .topo p {
-            color: #777777;
+            color: #251f1f;
             font-size: 14px;
             margin-top: 8px;
+
         }
 
         .destaque {
-            background-color: #111111;
+      background-color: #162556;
             color: white;
             padding: 30px;
             border-radius: 12px;
@@ -134,20 +139,22 @@
         }
 
         .destaque p {
-            color: #cccccc;
+            color: #c94508;
             font-size: 14px;
             margin-bottom: 25px;
-        }
+                }
 
         .destaque a {
             display: inline-block;
-            background: oklch(66.6% 0.179 58.318);
-            color: white;
+        
+            color: white;   
             padding: 13px 22px;
             border-radius: 7px;
             text-decoration: none;
             font-weight: bold;
             font-size: 14px;
+             background: transparent;
+          background-color: #e17100;;
         }
 
         .titulo {
@@ -203,23 +210,25 @@
 <body>
 
     <div class="lateral">
+
         <div class="logo">
             VaiJunto!
         </div>
 
         <div class="menu">
             <h2>menu</h2>
-            <a href="new_oferta.html" class="verde">Publicar Oferta</a>
+
+            <a href="new_oferta.html" class="verde">publicar oferta</a>
             <a href="veiculos.html" class="branco">veiculos</a>
             <a href="pontos_encontro.html" class="branco">pontos de encontro</a>
             <a href="solicitacoes_recebidas.html" class="branco">solicitacoes recebidas</a>
-            <a href="corridas.html" class="branco">minhas corridas</a>
+            <a href="detalhes-corrida.html" class="branco">minhas corridas</a>
             <a href="avaliacoes.html" class="branco">avaliacoes</a>
-            <a href="usuario.html" class="branco">meu perfil</a>
+            <a href="detalhe_usuario.html" class="branco">meu perfil</a>
         </div>
 
         <div class="sair">
-            <a href="/auth/logout">sair da conta</a>
+            <a href="login.html">sair da conta</a>
         </div>
 
     </div>
@@ -235,7 +244,7 @@
 
         <div class="destaque">
             <h2>qual seu proximo destino?</h2>
-            <a href="/oferta" class="verde">publicar Oferta</a>
+            <a href="new_oferta.html">publicar oferta</a>
         </div>
 
     </div>
