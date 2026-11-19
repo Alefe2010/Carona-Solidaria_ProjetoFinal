@@ -10,3 +10,6 @@ fiz o commit do modelo logico  em pdf
 17/11 
 fiz as tabelas "ponto de encontro" e "veiculo" no codigo sql na pasta banco.
 fiz tambem os respositories.
+
+18/11
+oi hoje fiz o avaliacao service foi mt legal!
