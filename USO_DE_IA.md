@@ -37,4 +37,14 @@ ferramenta: chat-gpt
 finalidade: eu não estava lembrando a sintaxe do css e precisava saber por que não estava sofrendo mudança
 
 
-6. 
+uso de ia alefe dia 18/11/2026
+
+1. "como deixar o border-radius só em um lado da div"
+ferramenta: gemini
+
+2. "qual a diferença de expiresIn e maxAge"
+ferramenta: gemini
+
+3. "se o tempo do token durar mais que o cookie pode acontecer de usarem o mesmo token para invadir a conta"
+ferramenta: gemini
+

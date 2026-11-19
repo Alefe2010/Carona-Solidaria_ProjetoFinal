@@ -28,5 +28,8 @@ const login = (req, res) => {
         console.log("Token ativo:" + token)
         return res.redirect("/")
     }
+    else {
+        res.send("Ocorreu algum erro! Preencha todos os campos e tente novamente!")
+    }
 }
 export default login;

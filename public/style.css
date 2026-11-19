@@ -60,7 +60,8 @@ form{ display:flex; flex-direction:column; margin-bottom: 2rem; font-weight: bol
 }
 .enter{
     display: flex;
-    justify-content: end;
+    margin-top: 2rem;
+    justify-content: center;
 }
 button{
     width:40%;
@@ -83,16 +84,17 @@ button{
     margin-top: 0;
     font-weight: 200;
 }
-#enterbtn:hover{
-    transform: translateY(-0.25rem) scale(1.02);
-    background: oklch(64.6% 0.222 41.116);
-}
+#enterbtn:hover{  transform: translateY(-0.25rem) scale(1.02); background: oklch(64.6% 0.222 41.116);}
 input {
     border: 1px solid #ccc;
     outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+    font-family: inherit;
+    font-size: 15px;
    
 }
 input:focus {
     border-color: oklch(64.6% 0.222 41.116);
     border-width: 2px;
+    box-shadow: 0 0 0 3px rgba(225, 113, 0, 0.18);
 } 
