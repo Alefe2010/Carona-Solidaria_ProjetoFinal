@@ -1,6 +1,6 @@
 import { OfertaCarona } from "../entities/OfertaCarona.ts"; 
+import {db} from "../database/db.js"
 
-import { db } from "../database/database.ts"
 export class OfertaCaronaRepository {
 
     async cadastrarOferta(numeroVaga: number, origem: string, destino: string, id_usuario: number): Promise<void> {

@@ -1,5 +1,5 @@
 export class Usuario{
-    private _CPF: string
+    private readonly _CPF: string
     private _nome: string
     private _telefone: string
     private _dataNasc: string

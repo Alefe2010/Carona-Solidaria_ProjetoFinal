@@ -4,15 +4,15 @@ import { db } from "../database/database.ts"
 export class SolicitacaoRepository {
 
     async cadastrarSolicitacao(qtdVaga: number, horario: string, id_usuario: number): Promise<void> {
-        const oi = `INSERT INTO SOLICITACAO (qtdVaga, horario, id_usuario) VALUES (?, ?, ?)`;
+        const queryCadastro = `INSERT INTO SOLICITACAO (qtdVaga, horario, id_usuario) VALUES (?, ?, ?)`;
         const valores = [qtdVaga, horario, id_usuario];
 
-        await db.execute(oi, valores);
+        await db.execute(queryCadastro, valores);
     }
 
     async buscarPorId(id_solicitacao: number): Promise<Solicitacao | null> {
-        const busca = `SELECT * FROM SOLICITACAO WHERE id_solicitacao = ?`;
-        const resultado = await db.execute(busca, [id_solicitacao]);
+        const queryBusca = `SELECT * FROM SOLICITACAO WHERE id_solicitacao = ?`;
+        const resultado = await db.execute(queryBusca, [id_solicitacao]);
 
         const solicitacao = resultado[0] as Solicitacao;
         return solicitacao ?? null;

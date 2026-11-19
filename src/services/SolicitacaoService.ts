@@ -1,5 +1,6 @@
-import { Solicitacao } from "../entities/SolicitacaoCarona.ts"
-
+import { SolicitacaoCarona } from "../entities/SolicitacaoCarona.ts"
+import { UsuarioRepository } from "../repositories/UsuarioRepository.ts"
+import { SolicitacaoRepository } from "../repositories/SolicitacaoRepository.ts"
 
 export class SolicitacaoService {
     constructor(
@@ -7,7 +8,7 @@ export class SolicitacaoService {
         private solicitacaoRepo: SolicitacaoRepository
     ) {}
     public async cadastrarSolicitacao(idUsuario: number, situacao: string, horario: string): Promise<void> {}
-    public async buscarPorId(idSolicitacao: number): Promise<Solicitacao> {}
+    public async buscarPorId(idSolicitacao: number): Promise<SolicitacaoCarona> {}
     public async atualizarDados(idSolicitacao: number, dados: JSON): Promise<void> {}
     public async excluirOferta(idOferta: number): Promise<void> {}
     public async filtrarQntdVaga(qntdVaga: number): Promise<void> {}

@@ -1,5 +1,5 @@
 export class PontoEncontro{
-    private _idPontoEncontro: number;
+    private readonly _idPontoEncontro: number;
     private _bairro: string;
     private _rua: string;
     private _pontoReferencia: string;

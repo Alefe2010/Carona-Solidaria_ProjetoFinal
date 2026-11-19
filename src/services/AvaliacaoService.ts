@@ -1,17 +1,7 @@
 
-<<<<<<< HEAD
-export class AvaliacaoService {
-    constructor(
-        private avaliacaoRepo: AvaliacaoRepository,
-        private usuarioRepo: UsuarioRepository
-    ) {}
-    public async fazerAvaliacao(idUsuario: number, idCorrida: number, nota: number, comentario: string, tipoAvaliador: string): Promise<void> {}
-    public async filtrarAvaliacoes(idUsuario: number): Promise<void> {}
-    public async mediAvaliacoes(idUsuario: number): Promise<void> {}
-}
-=======
 import { AvaliacaoRepository } from "../repositories/AvaliacaoRepository.ts";
 import { UsuarioRepository } from "../repositories/UsuarioRepository.ts";
+
 export class AvaliacaoService {
     
     constructor(
@@ -38,4 +28,3 @@ export class AvaliacaoService {
 }
        
     }
->>>>>>> 4fc2e642ea647f27f4bcd29521c03d0f5ea0b283
