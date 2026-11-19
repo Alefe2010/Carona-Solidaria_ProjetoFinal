@@ -6,7 +6,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    color: oklch(28.2% 0.091 267.935);
+    color: #162556;
     background: oklch(25.7% 0.09 281.288);
 }
 .header {
@@ -69,7 +69,7 @@ button{
     margin-top: 1rem;
 }
 #enterbtn{
-    background: oklch(66.6% 0.179 58.318);
+    background: #e17100;
     color: white;
     padding:10px;
     box-shadow:0 0 10px rgba(0,0.1,0,0.25);

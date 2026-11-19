@@ -3,8 +3,8 @@ use caronaSolidaria;
 
 create table usuario(
 	CPF char(11),
-	telefone char(13),
-	email varchar(100),
+	telefone char(13) constraint,
+	email varchar(100) constraint,
 	data_nasc date,
 	nome varchar(60),
 	primary key(CPF)
