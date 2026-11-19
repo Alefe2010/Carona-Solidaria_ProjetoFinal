@@ -18,3 +18,30 @@ Dia 11/11/2026:
 5. new_oferta
 
 - adicionei estilização em cada página
+
+Dia 12/11/2026:
+
+- Finalizei o diagrama UML de classes, adicionando funções extras, classes extras e reoganizando as relações e dependências.
+
+Dia 14/11/2026:
+
+- Aprimorei o design do historico de corridas
+
+Dia 15/11/2026:
+
+-Construi todas as entidades da pagina entities
+
+Dia 16/11/2026:
+-fiz as tabelas em sql
+-Atualizei o diagrama uml
+
+Dia 17/11/2026:
+-Aprimorando o design das views
+-Criei corridaService
+-Atualizei a entitie corrida
+
+Dia 18/11/2026:
+-fiz o logout do usuario
+-Terminei a view detalhe-corrida e atualizaçao de corrida e newOferta
+-Criei a maioria dos controllers
+-Criei OfertaService

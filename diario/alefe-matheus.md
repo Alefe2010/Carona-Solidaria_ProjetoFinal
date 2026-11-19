@@ -11,4 +11,6 @@ Também iniciei a página de login, a qual eu fiquei responsável. Encontrei um 
 que não fazia um código manualmente em HTML e CSS.
 
 ## 3 Semana
-Terminei a parte front-end da página de login, com email, senha e telefone. 
+Terminei a parte front-end da página de login, com email, senha e telefone. <br>
+Criei os services para coordenar as entities, mas esperando os repositories ficarem prontos, para aí sim 
+finalizar os métodos.

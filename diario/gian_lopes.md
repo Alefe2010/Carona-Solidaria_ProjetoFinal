@@ -5,4 +5,8 @@ dia 12\11
 fiz a tela do usuario e do motorista (aquela que vem depois que voce faz o login). 
 
 dia 16/11
-commit do modelo logico  em pdf
+fiz o commit do modelo logico  em pdf
+
+17/11 
+fiz as tabelas "ponto de encontro" e "veiculo" no codigo sql na pasta banco.
+fiz tambem os respositories.

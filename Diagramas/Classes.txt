@@ -196,3 +196,7 @@ SolicitacaoService ..> SolicitacaoRepository
 AvaliacaoService ..> UsuarioRepository
 AvaliacaoService ..> AvaliacaoRepository
 AvaliacaoService ..> CorridaRepository
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4fc2e642ea647f27f4bcd29521c03d0f5ea0b283

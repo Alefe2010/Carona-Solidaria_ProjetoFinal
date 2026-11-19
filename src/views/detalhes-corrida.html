@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #1f2937;
+            line-height: 1.5;
+            padding-bottom: 60px;
+        }
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #162556;
+            margin-bottom: 16px;
+        }
+
+        .box-cinza {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .box-row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: stretch;
+            margin-top: 32px;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .box-avaliacao {
+            flex: 1;
+            min-width: 300px;
+        }
+        aside {
+            margin-top: 24px;
+        }
+        section {
+            flex: 1.4;
+            min-width: 320px;
+            display: flex;
+            flex-direction: column;
+        }
+        .conteiner-card {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        .conteiner-card:last-child {
+            margin-bottom: 0;
+        }
+        .card-estilizado {
+            display: flex;
+            align-items: center;
+            background-color: #f9fafb;
+            border-radius: 14px;
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+            flex: 1;
+            min-width: 220px;
+            min-height: 84px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+        .card-estilizado:hover {
+            background-color: #ffffff;
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 8px 16px rgba(22, 37, 86, 0.12);
+            border-color: #e17100;
+        }
+        .card-icone {
+            background-color: #162556;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            align-self: stretch;
+            width: 72px;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+        .card-conteudo {
+            flex: 1;
+            padding: 12px 20px;
+        }
+        .card-titulo {
+            font-size: 14px;
+            font-weight: 400;
+            color: #6b7280;
+            margin: 0 0 2px 0;
+        }
+        .card-subtitulo {
+            font-size: 16px;
+            font-weight: 700;
+            color: #162556;
+            margin: 0;
+        }
+
+        .conteiner-tituto-aval {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            text-align: center;
+        }
+        .titulo-avaliacao {
+            align-self: flex-start;
+        }
+        .nota-avaliacao {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1.1;
+            color: #162556;
+        }
+        .estrelas-avaliacao {
+            width: 90%;
+            margin: 10px auto 20px;
+            text-align: center;
+            color: #e17100;
+        }
+        span.estrela {
+            margin: 0 4px;
+            font-size: 36px;
+        }
+        .comentario {
+            width: 100%;
+            padding: 16px;
+            background-color: #f9fafb;
+            border-left: 4px solid #e17100;
+            border-radius: 8px;
+            font-size: 15px;
+            font-style: italic;
+            text-align: left;
+        }
+
+        .box-ajuda-seg {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+        .box-ajuda-seg h1 {
+            grid-column: 1 / -1;
+            margin-bottom: 0;
+        }
+        .box-ajuda-seg div {
+            padding: 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+        }
+        .box-ajuda-seg h2 {
+            font-size: 16px;
+            color: #162556;
+            margin-bottom: 6px;
+        }
+        .box-ajuda-seg p {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        @media (max-width: 800px) {
+            .box-ajuda-seg {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        vo fazer o hearder dps
+    </header>
+    <main>
+        <div class="box-row">
+            <section>
+                <div class="box-cinza">
+                    <h1>Informações da Viagem:</h1>
+                    <div class="conteiner-card">
+                        <div id="origem" class="card-estilizado">
+                            <div class="card-icone">
+                                <img src="" alt="">
+                            </div>
+                            <div class="card-conteudo">
+                                <h3 class="card-titulo">Origem</h3>
+                                <p class="card-subtitulo">Exemplo</p>
+                            </div>
+                        </div>
+                        <div id="destino" class="card-estilizado">
+                            <div class="card-icone">
+                                <img src="" alt="">
+                            </div>
+                            <div class="card-conteudo">
+                                <h3 class="card-titulo">Destino</h3>
+                                <p class="card-subtitulo">Exemplo</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conteiner-card">
+                        <div id="pontos-encontro" class="card-estilizado">
+                            <div class="card-icone">
+                                <img src="" alt="">
+                            </div>
+                            <div class="card-conteudo">
+                                <h3 class="card-titulo">Ponto de encontro</h3>
+                                <p class="card-subtitulo">Exemplo</p>
+                            </div>
+                        </div>
+                        <div class="card-estilizado">
+                            <div class="card-icone">
+                                <img src="" alt="">
+                            </div>
+                            <div class="card-conteudo">
+                                <h3 class="card-titulo">Quantidade de vagas</h3>
+                                <p class="card-subtitulo">Exemplo</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conteiner-card">
+                        <div id="horario-inicio" class="card-estilizado">
+                            <div class="card-icone">
+                                <img src="" alt="">
+                            </div>
+                            <div class="card-conteudo">
+                                <h3 class="card-titulo">Horário de início</h3>
+                                <p class="card-subtitulo">Exemplo</p>
+                            </div>
+                        </div>
+                        <div id="horario-fim" class="card-estilizado">
+                            <div class="card-icone">
+                                <img src="" alt="">
+                            </div>
+                            <div class="card-conteudo">
+                                <h3 class="card-titulo">Horário de término</h3>
+                                <p class="card-subtitulo">Exemplo</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conteiner-card">
+                        <div id="veiculo" class="card-estilizado">
+                            <div class="card-icone">
+                                <img src="" alt="">
+                            </div>
+                            <div class="card-conteudo">
+                                <h3 class="card-titulo">Veículo</h3>
+                                <p class="card-subtitulo">Exemplo</p>
+                            </div>
+                        </div>
+                        <div id="situacao" class="card-estilizado">
+                            <div class="card-icone">
+                                <img src="" alt="">
+                            </div>
+                            <div class="card-conteudo">
+                                <h3 class="card-titulo">Situação</h3>
+                                <p class="card-subtitulo">Exemplo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="box-cinza box-avaliacao">
+                <div class="conteiner-tituto-aval">
+                    <h1 class="titulo-avaliacao">Avaliação:</h1>
+                    <p class="nota-avaliacao">5/5</p>
+                    <div class="estrelas-avaliacao">
+                        <span class="estrela">&#9733;</span>
+                        <span class="estrela">&#9733;</span>
+                        <span class="estrela">&#9733;</span>
+                        <span class="estrela">&#9733;</span>
+                        <span class="estrela">&#9733;</span>
+                    </div>
+                    <div class="comentario">
+                        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem quaerat officiis fuga tenetur dicta, laboriosam excepturi! Est nam maxime aspernatur nobis accusantium adipisci voluptatem totam exercitationem ipsam quisquam. Et, incidunt."
+                    </div>
+                </div>
+            </div>
+        </div>
+        <aside>
+            <div class="box-ajuda-seg">
+                <h1>Ajuda e segurança:</h1>
+                <div>
+                    <h2>Reportar</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates repellat at eaque nobis recusandae consequatur saepe repellendus debitis consequuntur dolore quisquam, voluptatum ducimus ipsa veniam, minus nisi ratione. Aspernatur, voluptates?</p>
+                </div>
+                <div>
+                    <h2>Objeto Perdido</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit a obcaecati earum alias praesentium quo blanditiis mollitia facere non similique! Nemo id magnam ipsa voluptate provident dolorem, et quos similique.</p>
+                </div>
+                <div>
+                    <h2>Atendimento ao usuário</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos beatae officia minima at, repellendus dolore inventore harum animi fugiat laborum omnis repudiandae delectus eum repellat incidunt magni pariatur culpa quaerat?</p>
+                </div>
+            </div>
+        </aside>
+    </main>
+</body>
+</html>

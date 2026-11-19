@@ -8,7 +8,11 @@
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
+<<<<<<< HEAD
     "target": "esnext",
+=======
+    "target": "es2022",
+>>>>>>> 4fc2e642ea647f27f4bcd29521c03d0f5ea0b283
     "types": [],
     // For nodejs:
     // "lib": ["esnext"],
@@ -33,8 +37,13 @@
     // "noFallthroughCasesInSwitch": true,
     // "noPropertyAccessFromIndexSignature": true,
 
+<<<<<<< HEAD
     // Recommended Options
     "strict": true,
+=======
+      // Recommended Options
+      "strict": true,
+>>>>>>> 4fc2e642ea647f27f4bcd29521c03d0f5ea0b283
     "jsx": "react-jsx",
     "verbatimModuleSyntax": true,
     "isolatedModules": true,

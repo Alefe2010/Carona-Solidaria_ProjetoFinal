@@ -22,13 +22,23 @@
     },
     "homepage": "https://github.com/Alefe2010/Carona-Solidaria_ProjetoFinal#readme",
     "devDependencies": {
+<<<<<<< HEAD
+=======
+        "@types/express": "^5.0.6",
+        "@types/node": "^26.6.6",
+        "express": "^5.3.0",
+>>>>>>> 4fc2e642ea647f27f4bcd29521c03d0f5ea0b283
         "tsx": "^4.23.15",
         "typescript": "^7.0.2"
     },
     "dependencies": {
+<<<<<<< HEAD
         "cookie-parser": "^1.4.7",
         "dotenv-safe": "^9.1.0",
         "express": "^5.3.0",
         "jsonwebtoken": "^9.0.3"
+=======
+        "mysql2": "^3.24.6"
+>>>>>>> 4fc2e642ea647f27f4bcd29521c03d0f5ea0b283
     }
 }
