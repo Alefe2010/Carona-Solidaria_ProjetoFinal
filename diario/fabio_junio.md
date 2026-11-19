@@ -34,4 +34,14 @@ Dia 15/11/2026:
 Dia 16/11/2026:
 -fiz as tabelas em sql
 -Atualizei o diagrama uml
+
+Dia 17/11/2026:
+-Aprimorando o design das views
+-Criei corridaService
+-Atualizei a entitie corrida
+
+Dia 18/11/2026:
 -fiz o logout do usuario
+-Terminei a view detalhe-corrida e atualizaçao de corrida e newOferta
+-Criei a maioria dos controllers
+-Criei OfertaService
