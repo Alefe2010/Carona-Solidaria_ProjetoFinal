@@ -1,7 +1,7 @@
-<<<<<<< HEAD
 import express from "express"
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv-safe"
+//import UsuarioRepository from "../repository/UsuarioRepository.ts"
 
 dotenv.config()
 
@@ -34,10 +34,8 @@ const login = (req, res) => {
     }
 }
 export default login;
-=======
-import UsuarioRepository from "../repository/UsuarioRepository.ts"
 
-function logout(req, res){
+/**function logout(req, res){
     res.clearCookie("token")
     res.status(200).json({message: "Logout realizado!"})
 }
@@ -61,4 +59,4 @@ async function signUp (req, res){
 
 
 }
->>>>>>> 4fc2e642ea647f27f4bcd29521c03d0f5ea0b283
+ */

@@ -21,7 +21,11 @@ app.use(express.urlencoded({extended: true}))
 app.use("/auth", authRouter)
 
 app.get("/", verifyJWT, (req, res) => {
-    res.sendFile(path.join(__dirname, "src", "views", "historico.html"))
+    res.sendFile(path.join(__dirname, "src", "views", "tela_motorista.html"))
+});
+
+app.get("/oferta", verifyJWT, (req, res) => {
+    res.sendFile(path.join(__dirname, "src", "views", "new_oferta.html"));
 });
 
 app.listen(PORT, () => {

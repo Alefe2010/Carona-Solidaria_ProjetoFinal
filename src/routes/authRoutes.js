@@ -16,4 +16,10 @@ router.get("/login", (req, res) => {
 })
 router.post("/login", authController)
 
+router.get("/logout", (req, res) => {
+    res.clearCookie("token");
+    res.redirect("/auth");
+});
+
+
 export default router;
