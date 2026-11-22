@@ -1,4 +1,6 @@
 import { Solicitacao } from "../entities/SolicitacaoCarona.ts"
+import { UsuarioRepository } from "../repositories/UsuarioRepository.ts"
+import { SolicitacaoRepository } from "../repositories/SolicitacaoRepository.ts"
 
 
 export class SolicitacaoService {

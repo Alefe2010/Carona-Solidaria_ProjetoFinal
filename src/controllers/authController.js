@@ -1,7 +1,6 @@
-import express from "express"
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv-safe"
-//import UsuarioRepository from "../repository/UsuarioRepository.ts"
+import UsuarioRepository from "../repositories/UsuarioRepository.ts"
 
 dotenv.config()
 
@@ -33,9 +32,8 @@ const login = (req, res) => {
         res.send("Ocorreu algum erro! Preencha todos os campos e tente novamente!")
     }
 }
-export default login;
 
-/**function logout(req, res){
+const logout = (req, res) => {
     res.clearCookie("token")
     res.status(200).json({message: "Logout realizado!"})
 }
@@ -43,7 +41,7 @@ export default login;
 async function signUp (req, res){
     const {nome, telefone, email, data_nasc, cpf} = req.body;
     try{
-        const user = await UsuarioRepository.cadastrarUsuario(nome, telefone, email, data_nasc, cpf)
+        await UsuarioRepository.cadastrarUsuario(nome, telefone, email, data_nasc, cpf)
     }catch(error){
         return res.status(500).send("Problema interno do servidor")
     }
@@ -55,8 +53,7 @@ async function signUp (req, res){
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
     })
-    res.status(200).json({message: "Cadastro concluído", token: token})
-
-
+    return res.status(200).json({message: "Cadastro concluído", token: token})
 }
- */
+
+export default {login, logout, signUp};

@@ -1,7 +1,7 @@
 import {OfertaCarona} from "./OfertaCarona.ts"
 import { PontoEncontro } from "./PontoEncontro.ts";
 
-export class SolicitacaoCarona{
+class SolicitacaoCarona{
     private _idSolicitacao: number;
     private _situacao: string;
     private _horario: string;
@@ -26,3 +26,5 @@ export class SolicitacaoCarona{
     public situacaoNegada(){this._situacao = "NEGADA"}
 
 }
+
+export default SolicitacaoCarona;

@@ -1,6 +1,6 @@
 import { OfertaCarona } from "../entities/OfertaCarona.ts"; 
+import db  from "../database/db.js"
 
-import { db } from "../database/database.ts"
 export class OfertaCaronaRepository {
 
     async cadastrarOferta(numeroVaga: number, origem: string, destino: string, id_usuario: number): Promise<void> {
@@ -12,15 +12,16 @@ export class OfertaCaronaRepository {
 
     async buscarPorId(idOferta: number): Promise<OfertaCarona | null> {
         const busca = 'SELECT * FROM OfertaCarona WHERE id_oferta = ?';
-        const resultado = await db.execute(busca, [idOferta]);
+        const [resultado] = await db.execute(busca, [idOferta]);
 
         const oferta = resultado[0] as OfertaCarona;
-        return oferta | null;
+
+        return oferta || null;
     }
 
     async atualizarDados(id_oferta: number, dados: OfertaCarona): Promise<void> {
         const busca = 'UPDATE OfertaCarona SET numeroVaga = ?, origem = ?, destino = ? WHERE id_oferta = ?';
-        const valores = [dados.numeroVaga, dados.origem, dados.destino, id_oferta];
+        const valores = [dados.numeroVagas, dados.origem, dados.destino, id_oferta];
 
         await db.execute(busca, valores);
     }
@@ -32,12 +33,11 @@ export class OfertaCaronaRepository {
 
     async filtrarPorRegiao(regiao: string): Promise<OfertaCarona[]> {
         const busca = 'SELECT * FROM OfertaCarona WHERE origem LIKE ? OR destino LIKE ?';
-        
         const a = [regiao, regiao]
     
-        const resultado = await db.execute(busca, a);
+        const [resultado] = await db.execute(busca, a);
 
-        return resultado as OfertaCarona;
+        return resultado as OfertaCarona[];
     }
 
     async filtrarPorCarro(id_carro: number): Promise<OfertaCarona[]> {
