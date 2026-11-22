@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalhes</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -11,6 +15,7 @@
             padding: 0;
         }
         body {
+            padding-left: 240px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #f4f6f9;
             color: #1f2937;
@@ -188,9 +193,100 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .lateral {
+            width: 240px;
+            height: 100vh;
+            background-color: #162556;
+            padding: 30px 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            margin-bottom: 45px;
+            font-family: "Anton", sans-serif;
+            text-align: center;
+        }
+
+        .menu h2 {
+            color: white;
+            font-size: 17px;
+            margin: 0 0 15px;
+        }
+
+        .menu a {
+            display: block;
+            color: #cccccc;
+            text-decoration: none;
+            padding: 15px 12px;
+            margin-bottom: 8px;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .menu a:hover { background-color: #223574; color: white; }
+
+        .menu a.ativo {
+            background-color: #223574;
+            color: white;
+            box-shadow: inset 3px 0 0 #e17100;
+        }
+
+        .sair {
+            position: absolute;
+            bottom: 25px;
+            left: 20px;
+            right: 20px;
+        }
+
+        .sair a {
+            display: block;
+            padding: 14px;
+            text-align: center;
+            background-color: #223574;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 760px) {
+            body { padding-left: 0; }
+            .lateral { position: static; width: 100%; height: auto; padding: 20px; }
+            .logo { margin-bottom: 20px; }
+            .sair { position: static; margin-top: 12px; }
+            main { padding: 0 16px; }
+        }
     </style>
 </head>
 <body>
+    <div class="lateral">
+
+        <div class="logo">VaiJunto!</div>
+
+        <nav class="menu">
+            <h2>menu</h2>
+
+            <a href="ofertas.html">ofertas</a>
+            <a href="new_oferta.html">publicar oferta</a>
+            <a href="veiculos.html">veículos</a>
+            <a href="pontos_encontro.html">pontos de encontro</a>
+            <a href="solicitacoes_recebidas.html">solicitações recebidas</a>
+            <a href="detalhes-corrida.html" class="ativo" aria-current="page">minhas corridas</a>
+            <a href="avaliacoes.html">avaliações</a>
+            <a href="detalhe_usuario.html">meu perfil</a>
+        </nav>
+
+        <div class="sair">
+            <a href="login.html">sair da conta</a>
+        </div>
+
+    </div>
+
     <header>
         vo fazer o hearder dps
     </header>

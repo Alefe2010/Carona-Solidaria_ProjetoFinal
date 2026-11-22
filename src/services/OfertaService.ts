@@ -1,13 +1,13 @@
-import type { OfertaCarona } from "../entities/OfertaCarona.ts"
-import { OfertaRepository } from "../repositories/OfertaRepository.ts"
+import { OfertaCarona } from "../entities/OfertaCarona.ts"
+import { OfertaCaronaRepository } from "../repositories/OfertaRepository.ts"
 import { UsuarioRepository} from "../repositories/UsuarioRepository.ts"
 
 
 export class OfertaService{
-    private ofertaRepo: OfertaRepository
+    private ofertaRepo: OfertaCaronaRepository
     private usuarioRepo: UsuarioRepository
     constructor(
-        ofertaRepo: OfertaRepository, 
+        ofertaRepo: OfertaCaronaRepository, 
         usuarioRepo: UsuarioRepository
     ){
         this.ofertaRepo = ofertaRepo
@@ -24,14 +24,14 @@ export class OfertaService{
         if(!numeroVagas || !origem || !destino || !horario || !cpf || !placa){
             throw new Error("Campos inválidos ou faltando")
         }
-        await this.usuarioRepo.criarOferta(numeroVagas, origem, destino, horario, cpf, placa)
+        await this.ofertaRepo.cadastrarOferta(numeroVagas, origem, destino, horario, cpf)
 
     }
     public async buscarPorId(idOferta:number): Promise<OfertaCarona>{
         if(!idOferta){
             throw new Error("Nenhum identificador fornecido!")
         }
-        return await this.usuarioRepo.buscarPorId(idOferta)
+        return await this.ofertaRepo.buscarPorId(idOferta)
 
     }
 

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ofertas de carona</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --fundo: #f3f4f6;
+            --superficie: #ffffff;
+            --borda: #e5e7eb;
+            --texto: #111a38;
+            --texto-suave: #5f677a;
+            --laranja: #e17100;
+            --laranja-escuro: #b85c00;
+            --laranja-claro: #fdf0e0;
+            --azul: #162556;
+            --azul-hover: #223574;
+            --azul-claro: #e4e8f5;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--fundo);
+            color: var(--texto);
+            display: flex;
+        }
+
+        a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+            outline: 2px solid var(--laranja);
+            outline-offset: 2px;
+        }
+
+        .lateral {
+            width: 240px;
+            height: 100vh;
+            background-color: var(--azul);
+            padding: 30px 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            margin-bottom: 45px;
+            font-family: "Anton", sans-serif;
+            text-align: center;
+        }
+        .menu h2 {
+            color: white;
+            font-size: 17px;
+            margin: 0 0 15px;
+        }
+
+        .menu a {
+            display: block;
+            color: #cccccc;
+            text-decoration: none;
+            padding: 15px 12px;
+            margin-bottom: 8px;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .menu a:hover { background-color: var(--azul-hover); color: white; }
+
+        .menu a.ativo {
+            background-color: var(--azul-hover);
+            color: white;
+            box-shadow: inset 3px 0 0 var(--laranja);
+        }
+
+
+        .sair {
+            position: absolute;
+            bottom: 25px;
+            left: 20px;
+            right: 20px;
+        }
+
+        .sair a {
+            display: block;
+            padding: 14px;
+            text-align: center;
+            background-color: var(--azul-hover);
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .conteudo {
+            margin-left: 240px;
+            padding: 35px;
+            width: calc(100% - 240px);
+            max-width: 1100px;
+        }
+
+        .topo h1 { font-size: 25px; margin: 0; }
+        .topo p { color: var(--texto-suave); font-size: 14px; margin: 8px 0 28px; }
+
+        .filtros {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr) auto;
+            gap: 14px;
+            align-items: end;
+            background: var(--superficie);
+            border: 1px solid var(--borda);
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 28px;
+        }
+
+        .campo label {
+            display: block;
+            font-size: 12px;
+            color: var(--texto-suave);
+            margin-bottom: 6px;
+        }
+
+        .campo input, .campo select {
+            width: 100%;
+            height: 42px;
+            padding: 0 12px;
+            border: 1px solid var(--borda);
+            border-radius: 7px;
+            font-size: 14px;
+            font-family: inherit;
+            color: var(--texto);
+            background: white;
+        }
+
+        .btn-buscar {
+            height: 42px;
+            padding: 0 26px;
+            border: 0;
+            border-radius: 7px;
+            background: var(--laranja);
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .btn-buscar:hover { background: var(--laranja-escuro); color: white; }
+
+        .lista-topo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .lista-topo h2 { font-size: 19px; margin: 0; }
+        .lista-topo span { color: var(--texto-suave); font-size: 14px; }
+
+        .ordenar { display: flex; align-items: center; gap: 8px; }
+        .ordenar select {
+            height: 36px;
+            padding: 0 10px;
+            border: 1px solid var(--borda);
+            border-radius: 7px;
+            font-size: 13px;
+            font-family: inherit;
+            background: white;
+        }
+
+        .sr {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(0 0 0 0);
+        }
+
+        .oferta {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr auto;
+            gap: 28px;
+            align-items: center;
+            background: var(--superficie);
+            border: 1px solid var(--borda);
+            border-radius: 10px;
+            padding: 22px;
+            margin-bottom: 14px;
+        }
+
+        .oferta:hover { border-color: #cfd3da; }
+
+        .trajeto { position: relative; padding-left: 26px; }
+
+        .trajeto::before {
+            content: "";
+            position: absolute;
+            left: 5px;
+            top: 9px;
+            bottom: 9px;
+            width: 2px;
+            background: var(--borda);
+        }
+
+        .parada { position: relative; font-size: 15px; font-weight: bold; }
+        .parada + .parada { margin-top: 18px; }
+
+        .parada::before {
+            content: "";
+            position: absolute;
+            left: -26px;
+            top: 3px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid var(--laranja);
+            background: white;
+        }
+
+        .parada.destino::before { background: var(--laranja); }
+
+        .parada small {
+            display: block;
+            font-weight: normal;
+            font-size: 13px;
+            color: var(--texto-suave);
+            margin-top: 3px;
+        }
+
+        .motorista { display: flex; align-items: center; gap: 12px; }
+
+        .avatar {
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+        }
+
+        .motorista strong { display: block; font-size: 14px; }
+        .motorista span { display: block; font-size: 13px; color: var(--texto-suave); margin-top: 3px; }
+
+        .reserva { text-align: right; }
+
+        .vagas {
+            display: inline-block;
+            margin: 0 0 14px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: var(--azul-claro);
+            color: var(--azul);
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .vagas.ultima { background: var(--laranja-claro); color: #9a4f00; }
+
+        .btn-solicitar {
+            display: block;
+            padding: 12px 22px;
+            border-radius: 7px;
+            background: var(--azul);
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .btn-solicitar:hover { background: var(--laranja); }
+    </style>
+</head>
+
+<body>
+
+    <div class="lateral">
+
+        <div class="logo">VaiJunto!</div>
+
+        <nav class="menu">
+            <h2>menu</h2>
+
+            <a href="ofertas_corrida.html" class="ativo" aria-current="page">ofertas</a>
+            <a href="criacao_oferta.html">publicar oferta</a>
+            <a href="veiculos.html">veículos</a>
+            <a href="pontos_encontro.html">pontos de encontro</a>
+            <a href="solicitacoes_recebidas.html">solicitações recebidas</a>
+            <a href="historico.html">minhas corridas</a>
+            <a href="minhas_ofertas.html">minhas ofertas</a>
+            <a href="avaliacoes.html">avaliações</a>
+            <a href="detalhe_usuario.html">meu perfil</a>
+        </nav>
+
+        <div class="sair">
+            <a href="login.html">sair da conta</a>
+        </div>
+
+    </div>
+
+
+    <main class="conteudo">
+
+        <div class="topo">
+            <h1>Ofertas de carona</h1>
+            <p>Encontre uma carona para o seu trajeto e solicite uma vaga.</p>
+        </div>
+
+        <form class="filtros">
+            <div class="campo">
+                <label for="origem">Origem</label>
+                <input id="origem" type="text" placeholder="Ex.: Marechal Deodoro">
+            </div>
+            <div class="campo">
+                <label for="destino">Destino</label>
+                <input id="destino" type="text" placeholder="Ex.: Maceió">
+            </div>
+            <div class="campo">
+                <label for="data">Data</label>
+                <input type="date" name="" id="data">
+            </div>
+
+            <button type="submit" class="btn-buscar" id="btn-buscar">Buscar</button>
+        </form>
+
+        <div class="lista-topo">
+            <div>
+                <h2>Ofertas disponíveis</h2>
+            </div>  
+        </div>
+
+        <div id="ofertas"></div>
+    </main>
+    <script>
+        const btnBuscar = document.getElementById("btn-buscar")
+        const listaOfertas = document.getElementById("ofertas")
+        function renderizar(ofertas){
+
+            if(ofertas.length === 0){
+                listaOfertas.innerHTML = "<p>Nenhuma oferta foi encontrada.</p>"
+            }
+
+            else{
+                listaOfertas.innerHTML = ofertas.map(oferta =>
+                    `<article class="oferta">
+                        <div class="trajeto">
+                            <div class="parada">${oferta.endereco_origem}
+                                <small>${oferta.data_hora}</small>
+                            </div>
+                            <div class="parada destino">${oferta.endereco_destino}</div>
+                        </div>
+                        <div class="motorista">
+                            <img class="avatar" src="../../public/assets/person-circle.svg" alt="">
+                            <div>
+                                <strong>${oferta.motorista}</strong>
+                                <span>${oferta.veiculo}</span>
+                            </div>
+                        </div>
+                        <div class="reserva">
+                            <span class="vagas${ultimaVaga ? " ultima" : ""}">${ultimaVaga ? "Última vaga" : oferta.vagas + " vagas"}</span>
+                            <a href="#" class="btn-solicitar" data-id="${oferta.id}">Solicitar vaga</a>
+                        </div>
+                    </article>`
+                    ).join("")
+            }
+        }
+
+        async function buscarOferta(){
+            const origem = document.getElementById("origem").value
+            const destino = document.getElementById("destino").value
+            const data = document.getElementById("data").value
+            const params = new URLSearchParams()
+
+            if(origem){params.append("origem", origem)}
+            if(destino){params.append("destino", destino)}
+            if(data){params.append("data", data)}
+
+            try {
+                const resposta = await fetch("/ofertas?" + params.toString())
+                if (!resposta.ok) throw new Error()
+                const ofertas = await resposta.json()
+                renderizar(ofertas)
+            }catch{
+                listaOfertas.innerHTML = "<p>Não foi possível carregar as ofertas.</p>"
+            };
+        }
+        buscarOferta()
+    </script>
+</body>
+</html>

@@ -11,7 +11,6 @@ export class SolicitacaoService {
     public async buscarPorId(idSolicitacao: number): Promise<SolicitacaoCarona> {}
     public async atualizarDados(idSolicitacao: number, dados: JSON): Promise<void> {}
     public async excluirOferta(idOferta: number): Promise<void> {}
-    public async filtrarQntdVaga(qntdVaga: number): Promise<void> {}
     public async solicitacaoAceita(idSolicitacao: number): Promise<void> {}
     public async solicitacaoNegada(idSolicitacao: number): Promise<void> {}
 

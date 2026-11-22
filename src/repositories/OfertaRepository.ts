@@ -1,21 +1,24 @@
-import { OfertaCarona } from "../entities/OfertaCarona.ts"; 
-import {db} from "../database/db.js"
+import { OfertaCarona } from "../entities/OfertaCarona.ts";
+import db from "../database/db.js";
+
 
 export class OfertaCaronaRepository {
 
-    async cadastrarOferta(numeroVaga: number, origem: string, destino: string, id_usuario: number): Promise<void> {
-        const a = 'INSERT INTO OfertaCarona (numeroVaga, origem, destino, id_usuario) VALUES (?, ?, ?, ?)';
-        const valores = [numeroVaga, origem, destino, id_usuario];
+    async cadastrarOferta(numeroVaga: number, origem: string, destino: string, horario: string, cpf: string): Promise<void> {
+        const queryCadOferta = 'INSERT INTO OfertaCarona (numeroVaga, origem, destino, cpf) VALUES (?, ?, ?, ?, ?)';
+        const valores = [numeroVaga, origem, destino, horario,cpf];
 
-        await db.execute(a, valores);
+        await db.execute(queryCadOferta, valores);
     }
 
-    async buscarPorId(idOferta: number): Promise<OfertaCarona | null> {
+    async buscarPorId(idOferta: number): Promise<OfertaCarona> {
         const busca = 'SELECT * FROM OfertaCarona WHERE id_oferta = ?';
-        const resultado = await db.execute(busca, [idOferta]);
+        const [rows] = await db.execute<RowDataPacket[]>(busca, [idOferta]);
 
-        const oferta = resultado[0] as OfertaCarona;
-        return oferta | null;
+        if(rows.length === 0 ){
+            throw new Error("sla")
+        }
+        return rows;
     }
 
     async atualizarDados(id_oferta: number, dados: OfertaCarona): Promise<void> {
