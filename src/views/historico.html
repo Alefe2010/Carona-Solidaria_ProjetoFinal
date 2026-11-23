@@ -255,7 +255,7 @@
             <h2>Corridas recentes</h2>
         </div>
 
-        <div id="historico_get">
+        <div id="historico">
 
             <a href="detalhes-corrida.html" class="oferta">
                 <div class="trajeto">
@@ -391,6 +391,34 @@
 
         </div>
     </main>
+    <script>
+        const historicoDiv = document.getElementById("historico")
+        function render(corridas){
+            historicoDiv.innerHTML = corridas.map(corrida => `
+            <a href="" class="oferta">
+                <div class="trajeto">
+                    <div class="parada">${corrida.oferta.origem}
+                        <small>10/11 · 06:30 · Praça Central</small>
+                    </div>
+                    <div class="parada destino">Maceió
+                        <small>${corrida.dataHoraFinal} - Campus A. C. Simões</small>
+                    </div>
+                </div>
+                <div class="motorista">
+                    <img class="avatar" src="../../public/assets/person-circle.svg" alt="">
+                    <div>
+                        <strong>Carla Ribeiro</strong>
+                        <span>Toyota Etios cinza</span>
+                    </div>
+                </div>
+                <div class="reserva">
+                    <span class="vagas">Concluída</span>
+                    <strong>Ver detalhes ›</strong>
+                </div>
+            </a>
 
+            `).join("")
+        }
+    </script>
 </body>
 </html>
