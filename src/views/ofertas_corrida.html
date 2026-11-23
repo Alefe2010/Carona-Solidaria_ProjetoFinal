@@ -337,9 +337,60 @@
 
         <div id="ofertas"></div>
     </main>
+        <dialog id="dialog-form">
+            <form action="" method="dialog" id="formSolicitacao">
+                <label for="">Horário</label>
+                <input type="time" id="horario">
+                <label for="">Ponto de encontro</label>
+                <select name="" id="pontos_encontro"></select>
+                <button class="btn-enviar" id="btn-enviar" type="submit">Enviar</button>
+                <button class="btn-cancelar">cancelar</button>
+            </form>
+        </dialog>
     <script>
         const btnBuscar = document.getElementById("btn-buscar")
         const listaOfertas = document.getElementById("ofertas")
+        const btnSolicitar = document.getElementById("btn-soliticar")
+        const dialogForm = document.getElementById("dialog-form")
+        const formSolicitacao = document.getElementById("formSolicitacao")
+        let idOfertaSelecionada = null
+
+        listaOfertas.addEventListener("click", (evento) => {
+            const botao = evento.target.closest(".btn-solicitar")
+            if (!botao) return
+            evento.preventDefault()
+
+            idOfertaSelecionada = Number(botao.dataset.id)
+            dialogSolicitar.showModal()
+        })
+
+        formSolicitacao.addEventListener("submit", async (event)=>{
+            event.preventDefault()
+            const pontoEncontro = document.getElementById("ponto_encontro").value
+            const horario = document.getElementById("horario").value
+            const dados = {idPontoEncontro: pontoEncontro, horario: horario}
+            try{
+
+                const response = await fetch(`/ofertas/${idOfertaSelecionada}/solicitacao`, {
+                    method: "POST",
+                    body: JSON.stringify(dados),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+
+                if(!response.ok){
+                    throw new Error()
+                }
+                dialogForm.close()
+                alert("Solicitação Enviada")
+            }
+            catch(err){
+                alert("Deu ruim:" + err)
+            }
+
+        })
+
         function renderizar(ofertas){
 
             if(ofertas.length === 0){
@@ -391,6 +442,8 @@
             };
         }
         buscarOferta()
+
+        
     </script>
 </body>
 </html>
