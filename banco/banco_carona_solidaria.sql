@@ -2,12 +2,11 @@ create database if not exists caronaSolidaria;
 use caronaSolidaria;
 
 create table usuario(
-	CPF char(11),
+	CPF char(11) constraint primary key,
 	telefone char(13) constraint,
 	email varchar(100) constraint,
 	data_nasc date,
 	nome varchar(60),
-	primary key(CPF)
 );
 
 create table veiculo(
@@ -19,10 +18,11 @@ create table veiculo(
 
 
 create table ofertaCarona(
-	idOferta int primary key,
+	idOferta int auto_increment primary key,
     numeroVagas int not null,
     origem varchar(50) not null,
     destino varchar(50) not null,
+    dataHorario datetime not null,
     placa char(7) not null,
     foreign key(placa) references veiculo(placa)
 );

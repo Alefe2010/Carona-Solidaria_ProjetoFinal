@@ -1,9 +1,9 @@
-import { db } from "../database/database.ts"
+import db  from "../database/db.js"
 import { Usuario } from "../entities/Usuario.ts";
 
 
 export class UsuarioRepository {
-
+    constructor(){}
     async cadastrarUsuario(usuario: Usuario): Promise<void> {
 
         const oi = `INSERT INTO USUARIO(CPF, nome, telefone, dataNasc, email) VALUES (?, ?, ?, ?, ?)`;

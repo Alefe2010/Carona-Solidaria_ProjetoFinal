@@ -52,3 +52,6 @@ Dia 22/11/2026:
 -Coloquei a barra de menu em algumas páginas
 -Criei ofertas_corrida, integrei a api
 -Melhorei o design de historico
+
+Dia 23/11/2026:
+-criei o index.ts, implementei as regras de negocio

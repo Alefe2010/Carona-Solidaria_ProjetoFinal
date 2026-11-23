@@ -1,8 +1,8 @@
-import { Solicitacao } from "../entities/Solicitacao.ts";
-import { db } from "../database/database.ts"
+import {SolicitacaoCarona} from "../entities/SolicitacaoCarona.ts"
+import db from "../database/db.js"
 
 export class SolicitacaoRepository {
-
+    constructor(){}
     async cadastrarSolicitacao(qtdVaga: number, horario: string, id_usuario: number): Promise<void> {
         const queryCadastro = `INSERT INTO SOLICITACAO (qtdVaga, horario, id_usuario) VALUES (?, ?, ?)`;
         const valores = [qtdVaga, horario, id_usuario];
@@ -10,11 +10,11 @@ export class SolicitacaoRepository {
         await db.execute(queryCadastro, valores);
     }
 
-    async buscarPorId(id_solicitacao: number): Promise<Solicitacao | null> {
+    async buscarPorId(id_solicitacao: number): Promise<SolicitacaoCarona | null> {
         const queryBusca = `SELECT * FROM SOLICITACAO WHERE id_solicitacao = ?`;
         const resultado = await db.execute(queryBusca, [id_solicitacao]);
 
-        const solicitacao = resultado[0] as Solicitacao;
+        const solicitacao = resultado[0] as SolicitacaoCarona;
         return solicitacao ?? null;
     }
 

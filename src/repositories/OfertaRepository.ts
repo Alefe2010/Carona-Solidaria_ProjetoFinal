@@ -3,33 +3,30 @@ import db from "../database/db.js";
 
 
 export class OfertaCaronaRepository {
+    constructor(){}
 
-    async cadastrarOferta(numeroVaga: number, origem: string, destino: string, horario: string, cpf: string): Promise<void> {
+    async cadastrarOferta(numeroVaga: number, origem: string, destino: string, dataHora: Date , cpf: string): Promise<void> {
         const queryCadOferta = 'INSERT INTO OfertaCarona (numeroVaga, origem, destino, cpf) VALUES (?, ?, ?, ?, ?)';
-        const valores = [numeroVaga, origem, destino, horario,cpf];
+        const valores = [numeroVaga, origem, destino, dataHora,cpf];
 
         await db.execute(queryCadOferta, valores);
     }
 
     async buscarPorId(idOferta: number): Promise<OfertaCarona> {
-        const busca = 'SELECT * FROM OfertaCarona WHERE id_oferta = ?';
-        const [rows] = await db.execute<RowDataPacket[]>(busca, [idOferta]);
-
-        if(rows.length === 0 ){
-            throw new Error("sla")
-        }
+        const busca = 'SELECT * FROM OfertaCarona WHERE idOferta = ?';
+        const [rows] = await db.execute(busca, [idOferta]);
         return rows;
     }
 
     async atualizarDados(id_oferta: number, dados: OfertaCarona): Promise<void> {
-        const busca = 'UPDATE OfertaCarona SET numeroVaga = ?, origem = ?, destino = ? WHERE id_oferta = ?';
-        const valores = [dados.numeroVaga, dados.origem, dados.destino, id_oferta];
+        const busca = 'UPDATE OfertaCarona SET numeroVaga = ?, origem = ?, destino = ? WHERE idOferta = ?';
+        const valores = [dados.numeroVagas, dados.origem, dados.destino, id_oferta];
 
         await db.execute(busca, valores);
     }
 
     async excluirOferta(id_oferta: number): Promise<void> {
-        const busca = 'DELETE FROM OfertaCarona WHERE id_oferta = ?';
+        const busca = 'DELETE FROM OfertaCarona WHERE idOferta = ?';
         await db.execute(busca, [id_oferta]);
     }
 

@@ -2,6 +2,7 @@ import { db } from "../database/database.ts"
 import { Avaliacao } from "../entities/Avaliacao.ts"; 
 
 export class AvaliacaoRepository{
+    constructor(){}
 
     async criarAvaliacao(id_corrida: number, nota: number, comentario: string, tipoAvaliador: string, id_usuario: number): Promise<void> {
         const oi = `INSERT INTO AVALIACAO (id_corrida, nota, comentario, tipoAvaliador, id_usuario) VALUES (?, ?, ?, ?, ?)`;
