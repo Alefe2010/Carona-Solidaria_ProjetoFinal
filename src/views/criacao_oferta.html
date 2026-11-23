@@ -230,7 +230,7 @@
 
     </div>
     <section>
-        <form action="" method="post" class="coluna">
+        <form action="" method="post" class="coluna" id="criacao">
 
             <div class="coluna-div">
                 <h1>Criação de oferta</h1>
@@ -254,12 +254,37 @@
             </div>
 
             <div class="linha-div">
-                <button type="submit" class="btn-criar">Criar Oferta</button>
+                <button type="submit" class="btn-criar" id="criar">Criar Oferta</button>
                 <button type="reset">Limpar tudo</button>
             </div>
         </form>
         
     </section>
+    <script>
+        const formCriacao = document.getElementById("criacao")
+        formCriacao.addEventListener("submit", async (event)=>{
+            event.preventDefault()
+            const dados = {
+                origem: document.getElementById("endereco_origem").value,
+                destino: document.getElementById("endereco_destino").value,
+                dataHora: document.getElementById("data_hora").value,
+                qntdVagas: Number(document.getElementById("vagas").value)
+            }
+            const response = await fetch("/ofertas", {
+                headers: {
+                    "Content-Type":"application/json"
+                },
+                method: "POST",
+                body: JSON.stringify(dados)
+            })
+            if(!response.ok){
+                console.log("oxi tropa")
+                throw new Error("deu alguma coisa errada")
 
+            }
+            alert("Criação feita!")
+        })   
+        
+    </script>
 </body>
 </html>
