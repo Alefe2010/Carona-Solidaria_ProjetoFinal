@@ -1,5 +1,4 @@
-drop database caronaSolidaria;
-create database caronaSolidaria;
+create database if not exists caronaSolidaria;
 use caronaSolidaria;
 
 create table usuario(
