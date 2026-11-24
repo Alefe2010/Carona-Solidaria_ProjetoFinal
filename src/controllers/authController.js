@@ -34,8 +34,6 @@ async function login(req, res){
             secure: process.env.NODE_ENV === "production",
             maxAge: 15 * 60 * 1000 
         });
-
-<<<<<<< HEAD
 function logout(req, res) {
   res.clearCookie("token", {
     httpOnly: true,
@@ -48,55 +46,23 @@ function logout(req, res) {
 }
 
 async function signUp(req, res) {
-  const { nome, telefone, email, data_nasc, cpf } = req.body;
+  const {cpf, nome, telefone, email, data_nasc} = req.body;
 
   try {
-    await UsuarioRepository.cadastrarUsuario(nome, telefone, email, data_nasc, cpf);
+    await UsuarioRepository.cadastrarUsuario(cpf,nome, telefone, data_nasc, email,);
 
     const payload = { id: cpf, email: email };
     const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: "1d" });
-=======
-        return res.status(200).json({ mensagem: "Login realizado com sucesso!" });
-
-    } catch (error) {
-        return res.status(500).json({ erro: "Erro interno ao tentar fazer login." });
-    }
-     
-}
-
-function logout (req, res){
-    res.clearCookie("token")
-    res.status(200).json({message: "Logout realizado!"})
-}
-
-async function signUp (req, res){
-    const {cpf, nome, telefone, email, data_nasc, } = req.body;
-    try{
-        await UsuarioService.cadastrarUsuario(cpf, nome, telefone, email, data_nasc)
-    }catch(error){
-        return res.status(500).send("Problema interno do servidor")
-    }
->>>>>>> origin/main
-
     res.cookie("token", token, {
-<<<<<<< HEAD
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
     });
-
     return res.status(201).json({ message: "Cadastro concluído" });
-  } catch (error) {
-    return res.status(500).json({ message: "Problema interno do servidor" });
-  }
-}
-=======
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-    })
-    return res.status(200).json({message: "Cadastro concluído", token: token})
+    } catch (error) {
+        return res.status(500).json({ message: "Problema interno do servidor" });
+    }
+     
 }
 
 export default {login, logout, signUp};
->>>>>>> origin/main
