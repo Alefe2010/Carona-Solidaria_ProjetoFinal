@@ -1,40 +1,41 @@
-import express from "express"
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv-safe"
-//import UsuarioRepository from "../repository/UsuarioRepository.ts"
+import { UsuarioService } from "../services/UsuarioService.ts"
 
 dotenv.config()
 
-const login = (req, res) => {
-    const {email, senha, fone} = req.body
+async function login(req, res){
+    try {
+        const {email, senha, fone} = req.body
 
-    console.log(`Email: ${email} | Senha: ${senha} | Telefone: ${fone}`)
-    if(email === 'alfagi@gmail.com' && senha === '123456' && fone === '40028922'){
-        console.log('logado!')
+        if (!email || !senha || !fone) {
+            return res.status(400).json({ erro: "E-mail e senha são obrigatórios!" });
+        }
+        const usuario = await this.usuarioService.buscarPorEmail(email);
+
+        if (!usuario) {
+            return res.status(401).json({ erro: "E-mail ou senha inválidos!" });
+        }
+
+        const senhaValida = await bcrypt.compare(senha, usuario.senha);
+
+        if (!senhaValida) {
+            return res.status(401).json({ erro: "E-mail ou senha inválidos!" });
+        }
+
         const token = jwt.sign(
-            {
-                id: 10,
-                email: "alfagi@email.com"
-            },
+            { id: usuario.id, email: usuario.email, fone: usuario.telefone },
             process.env.jwt_secret,
-            {expiresIn: '3m'}
+            { expiresIn: "10m" }
         );
 
-        res.cookie('token', token, {
+        res.cookie("token", token, {
             httpOnly: true,
-            secure: false,
-            sameSite: 'strict',
-            maxAge: 3 * 60 * 1000
+            secure: process.env.NODE_ENV === "production",
+            maxAge: 15 * 60 * 1000 
         });
-        console.log("Token ativo:" + token)
-        return res.redirect("/")
-    }
-    else {
-        res.send("Ocorreu algum erro! Preencha todos os campos e tente novamente!")
-    }
-}
-export default login;
 
+<<<<<<< HEAD
 function logout(req, res) {
   res.clearCookie("token", {
     httpOnly: true,
@@ -54,8 +55,31 @@ async function signUp(req, res) {
 
     const payload = { id: cpf, email: email };
     const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: "1d" });
+=======
+        return res.status(200).json({ mensagem: "Login realizado com sucesso!" });
+
+    } catch (error) {
+        return res.status(500).json({ erro: "Erro interno ao tentar fazer login." });
+    }
+     
+}
+
+function logout (req, res){
+    res.clearCookie("token")
+    res.status(200).json({message: "Logout realizado!"})
+}
+
+async function signUp (req, res){
+    const {cpf, nome, telefone, email, data_nasc, } = req.body;
+    try{
+        await UsuarioService.cadastrarUsuario(cpf, nome, telefone, email, data_nasc)
+    }catch(error){
+        return res.status(500).send("Problema interno do servidor")
+    }
+>>>>>>> origin/main
 
     res.cookie("token", token, {
+<<<<<<< HEAD
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
@@ -66,3 +90,13 @@ async function signUp(req, res) {
     return res.status(500).json({ message: "Problema interno do servidor" });
   }
 }
+=======
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+    })
+    return res.status(200).json({message: "Cadastro concluído", token: token})
+}
+
+export default {login, logout, signUp};
+>>>>>>> origin/main

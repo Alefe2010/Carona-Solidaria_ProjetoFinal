@@ -1,10 +1,9 @@
-import { exportBuffer } from "node:ffi"
 import SolicitacaoService from "../services/SolicitacaoService.ts"
 
-export async function criarSolicitacao(req, res){
+export async function cadastrarSolicitacao(req, res){
     const {idUsuario, idOferta, situacao, horario} = req.body
     await SolicitacaoService.criarSolicitacao(idUsuario, idOferta, situacao, horario)
-    return res.status(200).json({message: "Criação de solicitação feita!"})
+    return res.status(200).json({message: "Solicitação cadastrada no sistema!"})
 }
 export async function buscarPorId(req, res) {
     const solicitacao = await SolicitacaoService.buscarPorId(req.params.id)

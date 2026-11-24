@@ -1,11 +1,10 @@
 import type { Corrida } from "../entities/Corrida.ts";
 import type { Usuario } from "../entities/Usuario.ts";
-import type { SolicitacaoRepository } from "../repository/SolicitacaoRepository.ts"
-import type { CorridaRepository } from "../repository/CorridaRepository.ts"
+import type { SolicitacaoRepository } from "../repositories/SolicitacaoRepository.ts"
+import type { CorridaRepository } from "../repositories/CorridaRepository.ts"
 
 
 export class CorridaService {
-
     private solicitacaoRepo: SolicitacaoRepository
     private corridaRepo: CorridaRepository
 
@@ -13,7 +12,10 @@ export class CorridaService {
         this.corridaRepo = corridaRepo
         this.solicitacaoRepo = solicitacaoRepo
     }
+<<<<<<< HEAD
     
+=======
+>>>>>>> origin/main
     public async criarCorrida(situacao: string): Promise<void> {
         await this.corridaRepo.cadastrarCorrida(situacao)
     }
@@ -32,5 +34,9 @@ export class CorridaService {
     public async finalizarCorrida(idCorrida: number): Promise<void> { 
         await this.corridaRepo.finalizarCorrida(idCorrida)
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
 
 }

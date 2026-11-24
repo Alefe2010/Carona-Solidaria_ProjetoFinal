@@ -35,27 +35,20 @@ export class UsuarioRepository {
         await db.execute(queryAtualizaDadosUser, valores);
     }
 
-    async excluiUsuario(cpf: string): Promise<void> {
+    async excluiUsuario(CPF: string): Promise<void> {
+        const oi = ` DELETE FROM USUARIO WHERE CPF = ? `;
+        await db.execute(oi, [CPF]);
+    }
 
-        const queryExcluirUsuario = ` DELETE FROM USUARIO WHERE id = ? `;
+    async filtrarMotoristas():Promise<Usuario[]>{
+        const [motoristas] = await db.query(`SELECT * FROM USUARIO WHERE CNH IS NOT NULL`)
+        const filtrados = motoristas as Usuario[] 
+        return filtrados
+    }
 
-        await db.execute(queryExcluirUsuario, [cpf]);
-    }
-    async filtrarMotoristas(): Promise<Usuario[]>{
-        const queryFiltrarMotorista = "SELECT * FROM USUARIO WHERE cnh IS NOT NULL"
-        const [row] = await db.execute(queryFiltrarMotorista)
-        return row as Usuario[]
-    }
-    async filtrarPassageiros(): Promise<Usuario[]>{
-        const queryFiltrarPassgeiros = "SELECT * FROM USUARIO WHERE cnh IS NULL"
-        const [row] = await db.execute(queryFiltrarPassgeiros)
-        return row as Usuario[]
-    }
-    async buscarPorEmail(email:string){
-        if(!email){throw new Error("Dado inválido! Forneça um emial")}
-        const queryFiltroEmail = "SELECT * FROM USUARIO WHERE email = ?"
-        const [row]= await db.execute(queryFiltroEmail, [email])
-        const usuarios = row as Usuario[]
-        return usuarios[0] ?? null
+    async filtrarPassageiros():Promise<Usuario[]>{
+        const [passageiros]= await db.query(`SELECT * FROM USUARIO WHERE CNH IS NULL`)
+        const filtrados = passageiros as Usuario[] 
+        return filtrados
     }
 }

@@ -26,3 +26,5 @@ export class SolicitacaoCarona{
     public situacaoNegada(){this._situacao = "NEGADA"}
 
 }
+
+export default SolicitacaoCarona;

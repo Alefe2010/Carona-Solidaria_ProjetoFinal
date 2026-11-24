@@ -112,13 +112,13 @@ await ofertaService.excluirOferta(0).catch(mostrarErro) // sem identificador
 
 // Solicitações: cadastro (a assinatura atual não recebe o id da oferta)
 await solicitacaoService.cadastrarSolicitacao(cpfPassageiroA, "07:30", idOfertaA) // oferta A, passageiro A
-await solicitacaoService.cadastrarSolicitacao(cpfPassageiroB, "07:30") // oferta A, passageiro B
-await solicitacaoService.cadastrarSolicitacao(cpfPassageiroC, "07:30") // oferta A, passageiro C
-await solicitacaoService.cadastrarSolicitacao(cpfPassageiroD, "07:30") // oferta A, passageiro D negado
-await solicitacaoService.cadastrarSolicitacao(cpfPassageiroC, "18:00") // oferta B, passageiro C
-await solicitacaoService.cadastrarSolicitacao(cpfPassageiroB, "18:00") // oferta B, passageiro B
-await solicitacaoService.cadastrarSolicitacao(cpfPassageiroD, "18:00") // oferta B, passageiro D
-await solicitacaoService.cadastrarSolicitacao(cpfPassageiroA, "18:00") // oferta B, passageiro A (esse daqui só pode ter 3 vagas)
+await solicitacaoService.cadastrarSolicitacao(cpfPassageiroB, "07:30", idOfertaA) // oferta A, passageiro B
+await solicitacaoService.cadastrarSolicitacao(cpfPassageiroC, "07:30", idOfertaA) // oferta A, passageiro C
+await solicitacaoService.cadastrarSolicitacao(cpfPassageiroD, "07:30", idOfertaA) // oferta A, passageiro D negado
+await solicitacaoService.cadastrarSolicitacao(cpfPassageiroC, "18:00", idOfertaB) // oferta B, passageiro C
+await solicitacaoService.cadastrarSolicitacao(cpfPassageiroB, "18:00", idOfertaB) // oferta B, passageiro B
+await solicitacaoService.cadastrarSolicitacao(cpfPassageiroD, "18:00", idOfertaB) // oferta B, passageiro D
+await solicitacaoService.cadastrarSolicitacao(cpfPassageiroA, "18:00", idOfertaB) // oferta B, passageiro A (esse daqui só pode ter 3 vagas)
 
 // Solicitações: consulta e atualização
 console.log(await solicitacaoService.buscarPorId(1)) // retornará solicitação do passageiro A

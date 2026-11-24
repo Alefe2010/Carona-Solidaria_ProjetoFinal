@@ -27,7 +27,7 @@ export class OfertaCaronaRepository {
         await db.execute(busca, valores);
     }
 
-    async excluirOferta(idOferta: number): Promise<void> {
+    public async excluirOferta(idOferta: number): Promise<void> {
         const busca = 'DELETE FROM OfertaCarona WHERE idOferta = ?';
         await db.execute(busca, [idOferta]);
     }

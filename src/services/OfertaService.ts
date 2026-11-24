@@ -1,7 +1,12 @@
-import { OfertaCarona } from "../entities/OfertaCarona.ts"
+import type { OfertaCarona } from "../entities/OfertaCarona.ts"
 import { OfertaCaronaRepository } from "../repositories/OfertaRepository.ts"
-import { UsuarioRepository} from "../repositories/UsuarioRepository.ts"
+import { UsuarioRepository } from "../repositories/UsuarioRepository.ts";
+import type { Motorista } from "../entities/Motorista.ts"
 
+interface FiltroOferta {
+    origem?: string;
+    destino?: string;
+}
 
 export class OfertaService{
     private ofertaRepo: OfertaCaronaRepository
@@ -15,7 +20,7 @@ export class OfertaService{
     }
     public async criarOferta(
         numeroVagas:number, 
-        origem:string, 
+        origem:string,
         destino: string, 
         dataHora: Date, 
         cpf: string, 
@@ -52,8 +57,7 @@ export class OfertaService{
         if(Object.keys(dadosValidos).length === 0){
             throw new Error("Sem nenhum dado válido!")
         }
-
-        await this.ofertaRepo.atualizarDados(idOferta, dadosValidos)
+        await this.ofertaRepo.atualizarDados(idOferta, dadosValidos as OfertaCarona)
     }
 
     public async excluirOferta(idOferta:number): Promise<void>{
@@ -72,6 +76,5 @@ export class OfertaService{
         }
         return await this.ofertaRepo.filtroOfertas(filtroValido) 
 
-    }
-
+    } 
 }

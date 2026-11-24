@@ -1,30 +1,34 @@
-
 import { AvaliacaoRepository } from "../repositories/AvaliacaoRepository.ts";
 import { UsuarioRepository } from "../repositories/UsuarioRepository.ts";
+import type { Avaliacao } from "../entities/Avaliacao.ts"
 
 export class AvaliacaoService {
-    
     constructor(
         private AvaliacaoRepo: AvaliacaoRepository,
-        private UsuarioRepo: UsuarioRepository,
+        private UsuarioRepo: UsuarioRepository
     ) {}
-    public async fazerAvaliacao(idUsuario: number, idCorrida: number, nota: number, comentario: string, tipoAvaliador: string): Promise<any> {
-    return this.AvaliacaoRepo.criarAvaliacao(idUsuario, idCorrida, nota, comentario, tipoAvaliador)
+    public async fazerAvaliacao(idCorrida: number, nota: number, 
+    comentario: string, tipoAvaliador: string, idUsuario: number): Promise<void> {
+        await this.AvaliacaoRepo.criarAvaliacao(idCorrida, nota, comentario, tipoAvaliador, idUsuario)
     }
+    public async filtrarAvaliacoes(idUsuario: number): Promise<Avaliacao[]> {
+        const avaliacoes = await this.AvaliacaoRepo.filtrarAvaliacaoUsuario(idUsuario)
+        return avaliacoes
+    }
+    public async mediaAvaliacoes(idUsuario: number): Promise<Number> {
+        const avaliacoes = await this.filtrarAvaliacoes(idUsuario);      
+        let soma = 0
+        let quantidadeValida = 0
 
-    public async filtrarAvaliacoes(idUsuario: number): Promise<any> {
-    return this.AvaliacaoRepo.filtrarAvaliacaoUsuario(idUsuario);
+        for (let i = 0; i < avaliacoes.length; i++) {
+            const avaliacao = avaliacoes[i]?.nota
+            if (avaliacao !== undefined) {
+                soma += avaliacao
+                quantidadeValida++
+            }
+        }
+
+        const media = quantidadeValida > 0 ? soma / quantidadeValida : 0
+        return media
     }
-    public async mediaAvaliacoes(idUsuario: number): Promise<any> {
-     const avaliacoes = await this.filtrarAvaliacoes(idUsuario);      
-    let soma = 0;
-    for (let i = 0; i < avaliacoes.length; i++) {
-        soma += avaliacoes[i].nota;
-    }
-    if (avaliacoes.length === 0) {
-        return 0;
-    }
-    return soma / avaliacoes.length;
 }
-       
-    }
