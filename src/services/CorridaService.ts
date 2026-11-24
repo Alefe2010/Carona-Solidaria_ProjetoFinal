@@ -12,6 +12,10 @@ export class CorridaService {
         this.corridaRepo = corridaRepo
         this.solicitacaoRepo = solicitacaoRepo
     }
+<<<<<<< HEAD
+    
+=======
+>>>>>>> origin/main
     public async criarCorrida(situacao: string): Promise<void> {
         await this.corridaRepo.cadastrarCorrida(situacao)
     }
@@ -30,6 +34,9 @@ export class CorridaService {
     public async finalizarCorrida(idCorrida: number): Promise<void> { 
         await this.corridaRepo.finalizarCorrida(idCorrida)
     }
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/main
 
 }

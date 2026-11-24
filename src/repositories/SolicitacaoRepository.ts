@@ -1,23 +1,24 @@
-import  Solicitacao  from "../entities/SolicitacaoCarona.ts";
-import  db  from "../database/db.js"
+import {SolicitacaoCarona} from "../entities/SolicitacaoCarona.ts"
+import db from "../database/db.js"
 
 export class SolicitacaoRepository {
-    public async cadastrarSolicitacao(qtdVaga: number, horario: string, id_usuario: number): Promise<void> {
-        const oi = `INSERT INTO SOLICITACAO (qtdVaga, horario, id_usuario) VALUES (?, ?, ?)`;
+    constructor(){}
+    async cadastrarSolicitacao(qtdVaga: number, horario: string, id_usuario: number): Promise<void> {
+        const queryCadastro = `INSERT INTO SOLICITACAO (qtdVaga, horario, id_usuario) VALUES (?, ?, ?)`;
         const valores = [qtdVaga, horario, id_usuario];
 
-        await db.execute(oi, valores);
+        await db.execute(queryCadastro, valores);
     }
 
-    public async buscarPorId(id_solicitacao: number): Promise<Solicitacao | null> {
-        const busca = `SELECT * FROM SOLICITACAO WHERE id_solicitacao = ?`;
-        const [resultado] = await db.execute(busca, [id_solicitacao]);
-        const linhas = resultado as Solicitacao[];
+    async buscarPorId(id_solicitacao: number): Promise<SolicitacaoCarona | null> {
+        const queryBusca = `SELECT * FROM SOLICITACAO WHERE id_solicitacao = ?`;
+        const [resultado] = await db.execute(queryBusca, [id_solicitacao]);
 
-        return linhas[0] || null;
+        const solicitacao = resultado as SolicitacaoCarona[];
+        return solicitacao[0] ?? null;
     }
 
-    public async atualizarDados(id_solicitacao: number, dados: Solicitacao): Promise<void> {
+    public async atualizarDados(id_solicitacao: number, dados: Record<string, any>): Promise<void> {
         const oi = `UPDATE SOLICITACAO SET qtdVaga = ?, horario = ? WHERE id_solicitacao = ?`;
         const valores = [dados.qtdVaga, dados.horario, id_solicitacao];
 
@@ -30,17 +31,10 @@ export class SolicitacaoRepository {
         await db.execute(oi, [id_solicitacao]);
     }
 
-    public async filtrarQuantidadeVaga(qtdVaga: number): Promise<Solicitacao[]> {
-        const busca = `SELECT * FROM SOLICITACAO WHERE qtdVaga = ?`;
-        const [resultado] = await db.execute(busca, [qtdVaga]);
-
-        return resultado as Solicitacao[];
-    }
-
-    public async filtrarPorHorario(horario: string): Promise<Solicitacao[]> {
+    public async filtrarPorHorario(horario: string): Promise<SolicitacaoCarona[]> {
         const busca = `SELECT * FROM SOLICITACAO WHERE horario = ?`;
-        const [resultado] = await db.execute(busca, [horario]);
-
-        return resultado as Solicitacao[];
+        const [rows] = await db.execute(busca, [horario]);
+        const resultado = rows as SolicitacaoCarona[]
+        return resultado;
     }
 }

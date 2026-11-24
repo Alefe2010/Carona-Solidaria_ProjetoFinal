@@ -2,44 +2,25 @@ import { OfertaCarona } from "./OfertaCarona.ts";
 import { SolicitacaoCarona } from "./SolicitacaoCarona.ts";
 
 export class Corrida{
-
-    private _idCarona : number
+    private readonly _idCorrida : number
     private _dataHoraFinal : string
     private _situacaoCorrida: string
-    private _solicitacoes: SolicitacaoCarona[]
+    private readonly _idOferta: number
 
-    constructor(idCarona: number, dataHoraFinal: string, situacaoCorrida: string = "EM PROCESSO"){
-        this._idCarona = idCarona;
+    constructor(idCorrida: number, dataHoraFinal: string, situacaoCorrida: string = "EM PROCESSO", idOferta:number){
+        this._idCorrida = idCorrida;
         this._dataHoraFinal = dataHoraFinal;
         this._situacaoCorrida  = situacaoCorrida;
-        this._solicitacoes = []
+        this._idOferta = idOferta
     }
 
-    public get idCarona(){return this._idCarona}
+    public get idCorrida(){return this._idCorrida}
     public get situacaoCorrida(){return this._situacaoCorrida}
     public get dataHoraFinal(){return this._dataHoraFinal}
-    public get solicitacoes(){return this._solicitacoes}
+    public get idOferta(){return this._idOferta}
     
-    public iniciarCorrida(): void{this._situacaoCorrida = "INICIADA"}
-    public finalizarCorrida(horaFinal: string): void{
+    public finalizarCorrida(horaFinal:string){
         this._situacaoCorrida = "FINALIZADA"
         this._dataHoraFinal = horaFinal
-    }
-    public adicionarSolicitacao(solicitacao: SolicitacaoCarona): void{
-        if (!solicitacao){
-            throw new Error("Não há solicitação para adicionar")
-        }
-        this._solicitacoes.push(solicitacao)
-    }
-    public removerSolicitacao(idSolicitacao: number){
-        if(!idSolicitacao){throw new Error("Não há nenhum id para remover")}
-        
-        let indexSolicitacao: number = this._solicitacoes.findIndex(solicitacao => solicitacao.idSolicitacao == idSolicitacao)
-
-        if(indexSolicitacao === -1){
-            throw new Error("Não existe essa solicitacao")
-        }
-
-        this._solicitacoes.splice(indexSolicitacao, 1)
     }
 }

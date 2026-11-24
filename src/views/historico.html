@@ -1,116 +1,424 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>histórico</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Minhas corridas</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        :root {
+            --fundo: #f3f4f6;
+            --superficie: #ffffff;
+            --borda: #e5e7eb;
+            --texto: #111a38;
+            --texto-suave: #5f677a;
+            --laranja: #e17100;
+            --laranja-escuro: #b85c00;
+            --laranja-claro: #fdf0e0;
+            --azul: #162556;
+            --azul-hover: #223574;
+            --azul-claro: #e4e8f5;
         }
+
+        * { box-sizing: border-box; }
 
         body {
-            background-color: #f4f4f6;
-            color: #1a1a1a;
-            min-height: 100vh;
-        }
-
-        header {
-            background-color: #000000;
-            color: #ffffff;
-            padding: 18px 24px;
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        section {
-            max-width: 600px;
-            margin: 32px auto;
-            padding: 0 16px;
-        }
-
-        section > div {
-            background-color: #ffffff;
-            border-radius: 14px;
-            padding: 24px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-        }
-
-        h1 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #111111;
-        }
-
-        #historico_get {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--fundo);
+            color: var(--texto);
             display: flex;
-            flex-direction: column;
-            gap: 14px;
+        }
+
+        a:focus-visible {
+            outline: 2px solid var(--laranja);
+            outline-offset: 2px;
+        }
+
+        .lateral {
+            width: 240px;
+            height: 100vh;
+            background-color: var(--azul);
+            padding: 30px 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            margin-bottom: 45px;
+            font-family: "Anton", sans-serif;
+            text-align: center;
+        }
+
+        .menu h2 {
+            color: white;
+            font-size: 17px;
+            margin: 0 0 15px;
+        }
+
+        .menu a {
+            display: block;
+            color: #cccccc;
+            text-decoration: none;
+            padding: 15px 12px;
+            margin-bottom: 8px;
+            border-radius: 7px;
             font-size: 14px;
-            color: #666666;
         }
 
-        #historico_get > div {
-            display: flex;
+        .menu a:hover { background-color: var(--azul-hover); color: white; }
+
+        .menu a.ativo {
+            background-color: var(--azul-hover);
+            color: white;
+            box-shadow: inset 3px 0 0 var(--laranja);
+        }
+
+        .sair {
+            position: absolute;
+            bottom: 25px;
+            left: 20px;
+            right: 20px;
+        }
+
+        .sair a {
+            display: block;
+            padding: 14px;
+            text-align: center;
+            background-color: var(--azul-hover);
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .conteudo {
+            margin-left: 240px;
+            padding: 35px;
+            width: calc(100% - 240px);
+            max-width: 1100px;
+        }
+
+        .topo h1 { font-size: 25px; margin: 0; }
+        .topo p { color: var(--texto-suave); font-size: 14px; margin: 8px 0 28px; }
+
+        .lista-topo h2 { font-size: 19px; margin: 0 0 16px; }
+
+        .oferta {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr auto;
+            gap: 28px;
             align-items: center;
-            gap: 16px;
-            padding: 16px;
-            background-color: #f9f9fb;
-            border: 1px solid #ececef;
+            background: var(--superficie);
+            border: 1px solid var(--borda);
             border-radius: 10px;
-            transition: transform 0.2s ease, background-color 0.2s ease;
-            cursor: pointer;
+            padding: 22px;
+            margin-bottom: 14px;
+            color: inherit;
+            text-decoration: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
-        #historico_get > div:hover {
-            background-color: #f0f0f4;
-            transform: translateY(-2px);
+        .oferta:hover {
+            border-color: var(--laranja);
+            box-shadow: 0 4px 14px rgba(22, 37, 86, 0.08);
         }
 
-        #historico_get img {
-            width: 48px;
-            height: 48px;
-            border-radius: 8px;
-            background-color: #e2e2e6;
-            object-fit: cover;
-            flex-shrink: 0;
+        .trajeto { position: relative; padding-left: 26px; }
+
+        .trajeto::before {
+            content: "";
+            position: absolute;
+            left: 5px;
+            top: 9px;
+            bottom: 9px;
+            width: 2px;
+            background: var(--borda);
         }
 
-        #historico_get h3 {
-            font-size: 16px;
-            font-weight: 600;
-            color: #111111;
-            margin-bottom: 4px;
+        .parada { position: relative; font-size: 15px; font-weight: bold; }
+        .parada + .parada { margin-top: 18px; }
+
+        .parada::before {
+            content: "";
+            position: absolute;
+            left: -26px;
+            top: 3px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid var(--laranja);
+            background: white;
         }
 
-        #historico_get p {
+        .parada.destino::before { background: var(--laranja); }
+
+        .parada small {
+            display: block;
+            font-weight: normal;
             font-size: 13px;
-            color: #777777;
+            color: var(--texto-suave);
+            margin-top: 3px;
+        }
+
+        .motorista { display: flex; align-items: center; gap: 12px; }
+
+        .avatar {
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+        }
+
+        .motorista strong { display: block; font-size: 14px; }
+        .motorista span { display: block; font-size: 13px; color: var(--texto-suave); margin-top: 3px; }
+
+        .reserva { text-align: right; }
+
+        .vagas {
+            display: inline-block;
+            margin: 0 0 14px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: var(--azul-claro);
+            color: var(--azul);
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .vagas.ultima { background: var(--laranja-claro); color: #9a4f00; }
+
+        .reserva strong {
+            display: block;
+            font-size: 14px;
+            color: var(--azul);
+        }
+
+        .oferta:hover .reserva strong { color: var(--laranja); }
+
+        @media (max-width: 960px) {
+            .oferta { grid-template-columns: 1fr; gap: 18px; }
+            .reserva { text-align: left; }
+        }
+
+        @media (max-width: 760px) {
+            body { display: block; }
+            .lateral { position: static; width: 100%; height: auto; padding: 20px; }
+            .logo { margin-bottom: 20px; }
+            .sair { position: static; margin-top: 12px; }
+            .conteudo { margin-left: 0; width: 100%; padding: 22px 16px; }
         }
     </style>
 </head>
+
 <body>
-    <header>vo fazer essa coisa dps</header>
-    <section>
-        <div>
-            <form action="get"></form>
-            <h1>Seu histórico de viagens</h1>
-            <div id="historico_get">
-                aqui ficará as corridas. ex:
-                <div>
-                    <img src="" alt="">
-                    <div>
-                        <h3>Residencial Sla</h3>
-                        <p>67 de out</p>
+
+    <div class="lateral">
+
+        <div class="logo">VaiJunto!</div>
+
+        <nav class="menu">
+            <h2>menu</h2>
+
+            <a href="ofertas_corrida.html">ofertas</a>
+            <a href="criacao_oferta.html">publicar oferta</a>
+            <a href="veiculos.html">veículos</a>
+            <a href="pontos_encontro.html">pontos de encontro</a>
+            <a href="solicitacoes_recebidas.html">solicitações recebidas</a>
+            <a href="historico.html" class="ativo" aria-current="page">minhas corridas</a>
+            <a href="minhas_ofertas.html">minhas ofertas</a>
+            <a href="avaliacoes.html">avaliações</a>
+            <a href="detalhe_usuario.html">meu perfil</a>
+        </nav>
+
+        <div class="sair">
+            <a href="login.html">sair da conta</a>
+        </div>
+
+    </div>
+
+    <main class="conteudo">
+
+        <div class="topo">
+            <h1>Minhas corridas</h1>
+            <p>Acompanhe as suas viagens e toque em uma corrida para ver todos os detalhes.</p>
+        </div>
+
+        <div class="lista-topo">
+            <h2>Corridas recentes</h2>
+        </div>
+
+        <div id="historico">
+
+            <a href="detalhes-corrida.html" class="oferta">
+                <div class="trajeto">
+                    <div class="parada">Marechal Deodoro
+                        <small>25/11 · 06:30 · Praça Central</small>
+                    </div>
+                    <div class="parada destino">Maceió
+                        <small>Ponta Verde</small>
                     </div>
                 </div>
-            </div>
+                <div class="motorista">
+                    <img class="avatar" src="../../public/assets/person-circle.svg" alt="">
+                    <div>
+                        <strong>Marcos Silva</strong>
+                        <span>Honda Fit prata</span>
+                    </div>
+                </div>
+                <div class="reserva">
+                    <span class="vagas ultima">Agendada</span>
+                    <strong>Ver detalhes ›</strong>
+                </div>
+            </a>
+
+            <a href="detalhes-corrida.html" class="oferta">
+                <div class="trajeto">
+                    <div class="parada">Maceió
+                        <small>27/11 · 17:30 · Shopping Pátio</small>
+                    </div>
+                    <div class="parada destino">Marechal Deodoro
+                        <small>Praça Central</small>
+                    </div>
+                </div>
+                <div class="motorista">
+                    <img class="avatar" src="../../public/assets/person-circle.svg" alt="">
+                    <div>
+                        <strong>Carla Ribeiro</strong>
+                        <span>Toyota Etios cinza</span>
+                    </div>
+                </div>
+                <div class="reserva">
+                    <span class="vagas ultima">Agendada</span>
+                    <strong>Ver detalhes ›</strong>
+                </div>
+            </a>
+
+            <a href="detalhes-corrida.html" class="oferta">
+                <div class="trajeto">
+                    <div class="parada">Rio Largo
+                        <small>20/11 · 06:45 · Terminal</small>
+                    </div>
+                    <div class="parada destino">Maceió
+                        <small>Farol</small>
+                    </div>
+                </div>
+                <div class="motorista">
+                    <img class="avatar" src="../../public/assets/person-circle.svg" alt="">
+                    <div>
+                        <strong>João Pedro Lima</strong>
+                        <span>Chevrolet Onix preto</span>
+                    </div>
+                </div>
+                <div class="reserva">
+                    <span class="vagas">Concluída</span>
+                    <strong>Ver detalhes ›</strong>
+                </div>
+            </a>
+
+            <a href="detalhes-corrida.html" class="oferta">
+                <div class="trajeto">
+                    <div class="parada">Barra de São Miguel
+                        <small>18/11 · 07:00 · Posto Ipiranga</small>
+                    </div>
+                    <div class="parada destino">Maceió
+                        <small>Centro</small>
+                    </div>
+                </div>
+                <div class="motorista">
+                    <img class="avatar" src="../../public/assets/person-circle.svg" alt="">
+                    <div>
+                        <strong>Ana Lúcia Costa</strong>
+                        <span>Fiat Argo branco</span>
+                    </div>
+                </div>
+                <div class="reserva">
+                    <span class="vagas">Concluída</span>
+                    <strong>Ver detalhes ›</strong>
+                </div>
+            </a>
+
+            <a href="detalhes-corrida.html" class="oferta">
+                <div class="trajeto">
+                    <div class="parada">Maceió
+                        <small>14/11 · 18:00 · Jaraguá</small>
+                    </div>
+                    <div class="parada destino">Pilar
+                        <small>Praça da Matriz</small>
+                    </div>
+                </div>
+                <div class="motorista">
+                    <img class="avatar" src="../../public/assets/person-circle.svg" alt="">
+                    <div>
+                        <strong>Marcos Silva</strong>
+                        <span>Honda Fit prata</span>
+                    </div>
+                </div>
+                <div class="reserva">
+                    <span class="vagas">Concluída</span>
+                    <strong>Ver detalhes ›</strong>
+                </div>
+            </a>
+
+            <a href="detalhes-corrida.html" class="oferta">
+                <div class="trajeto">
+                    <div class="parada">Marechal Deodoro
+                        <small>10/11 · 06:30 · Praça Central</small>
+                    </div>
+                    <div class="parada destino">Maceió
+                        <small>Campus A. C. Simões</small>
+                    </div>
+                </div>
+                <div class="motorista">
+                    <img class="avatar" src="../../public/assets/person-circle.svg" alt="">
+                    <div>
+                        <strong>Carla Ribeiro</strong>
+                        <span>Toyota Etios cinza</span>
+                    </div>
+                </div>
+                <div class="reserva">
+                    <span class="vagas">Concluída</span>
+                    <strong>Ver detalhes ›</strong>
+                </div>
+            </a>
+
         </div>
-    </section>
-    
+    </main>
+    <script>
+        const historicoDiv = document.getElementById("historico")
+        function render(corridas){
+            historicoDiv.innerHTML = corridas.map(corrida => `
+            <a href="" class="oferta">
+                <div class="trajeto">
+                    <div class="parada">${corrida.oferta.origem}
+                        <small>10/11 · 06:30 · Praça Central</small>
+                    </div>
+                    <div class="parada destino">Maceió
+                        <small>${corrida.dataHoraFinal} - Campus A. C. Simões</small>
+                    </div>
+                </div>
+                <div class="motorista">
+                    <img class="avatar" src="../../public/assets/person-circle.svg" alt="">
+                    <div>
+                        <strong>Carla Ribeiro</strong>
+                        <span>Toyota Etios cinza</span>
+                    </div>
+                </div>
+                <div class="reserva">
+                    <span class="vagas">Concluída</span>
+                    <strong>Ver detalhes ›</strong>
+                </div>
+            </a>
+
+            `).join("")
+        }
+    </script>
 </body>
 </html>

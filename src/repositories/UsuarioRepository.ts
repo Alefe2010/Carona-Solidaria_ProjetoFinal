@@ -1,35 +1,38 @@
-import db from "../database/db.js"
+import type { promises } from "node:dns";
+import db  from "../database/db.js"
 import { Usuario } from "../entities/Usuario.ts";
+import type { RowDataPacket } from "mysql2";
 
 
 export class UsuarioRepository {
+    constructor(){}
     async cadastrarUsuario(CPF: string, nome: string, telefone: string, dataNasc: string, email: string): Promise<void> {
-        const oi = `INSERT INTO USUARIO(CPF, nome, telefone, dataNasc, email) VALUES (?, ?, ?, ?, ?, ?)`;
+
+        const cadastroUsuarioQuery = `INSERT INTO USUARIO(CPF, nome, telefone, dataNasc, email) VALUES (?, ?, ?, ?, ?)`;
+
         const valores = [CPF, nome, telefone, dataNasc, email];
 
-        await db.execute(oi, valores);
+        await db.execute(cadastroUsuarioQuery, valores);
     }
 
-    async buscarPorCPF(CPF: string): Promise<Usuario | null> {
-        const oi = `SELECT * FROM USUARIO WHERE CPF = ?`;
-        const [usuario] = await db.execute(oi, [CPF]);
-        const ola = usuario as Usuario[];
+    async buscarPorCPF(cpf: string): Promise<Usuario | null> {
 
-        return ola[0] || null
-    }   
-    async buscarPorEmail(email: string): Promise<Usuario | null> {
-    const oi = `SELECT * FROM USUARIO WHERE email = ?`;
-    const [usuario] = await db.execute(oi, [email]);
-    const ola = usuario as Usuario[];
+        const queryBuscaUsuario = `SELECT * FROM USUARIO WHERE CPF = ?`;
 
-    return ola[0] || null
+        const [row] = await db.execute(queryBuscaUsuario, [cpf]);
+        const usuarios = row as Usuario[]
+        
+        return usuarios[0] ?? null
+
     }   
 
-    async atualizarDados(CPF: string, dados: Usuario): Promise<void> {
-        const oi = `UPDATE USUARIO SET nome = ?, telefone = ?, dataNasc = ?, email = ? WHERE CPF = ?`;
-        const valores = [dados.nome, dados.telefone, dados.dataNasc, dados.email, CPF];
+    async atualizarDados(cpf: string, dados: Record<string, any>): Promise<void> {
 
-        await db.execute(oi, valores);
+        const queryAtualizaDadosUser = `UPDATE USUARIO SET nome = ?, telefone = ?, dataNasc = ?, email = ? WHERE CPF = ?`;
+
+        const valores = [dados.nome, dados.telefone, dados.dataNasc, dados.email, cpf];
+
+        await db.execute(queryAtualizaDadosUser, valores);
     }
 
     async excluiUsuario(CPF: string): Promise<void> {

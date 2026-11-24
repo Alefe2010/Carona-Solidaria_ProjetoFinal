@@ -45,3 +45,13 @@ Dia 18/11/2026:
 -Terminei a view detalhe-corrida e atualizaçao de corrida e newOferta
 -Criei a maioria dos controllers
 -Criei OfertaService
+
+
+Dia 22/11/2026:
+-Modifiquei o nome de new_oferta para criacao_oferta
+-Coloquei a barra de menu em algumas páginas
+-Criei ofertas_corrida, integrei a api
+-Melhorei o design de historico
+
+Dia 23/11/2026:
+-criei o index.ts, implementei as regras de negocio

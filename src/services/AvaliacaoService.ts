@@ -5,10 +5,11 @@ import type { Avaliacao } from "../entities/Avaliacao.ts"
 export class AvaliacaoService {
     constructor(
         private AvaliacaoRepo: AvaliacaoRepository,
+        private UsuarioRepo: UsuarioRepository
     ) {}
-    public async fazerAvaliacao(idUsuario: number, idCorrida: number, nota: number, 
-    comentario: string, tipoAvaliador: string): Promise<void> {
-        await this.AvaliacaoRepo.criarAvaliacao(idUsuario, idCorrida, nota, comentario, tipoAvaliador)
+    public async fazerAvaliacao(idCorrida: number, nota: number, 
+    comentario: string, tipoAvaliador: string, idUsuario: number): Promise<void> {
+        await this.AvaliacaoRepo.criarAvaliacao(idCorrida, nota, comentario, tipoAvaliador, idUsuario)
     }
     public async filtrarAvaliacoes(idUsuario: number): Promise<Avaliacao[]> {
         const avaliacoes = await this.AvaliacaoRepo.filtrarAvaliacaoUsuario(idUsuario)
@@ -31,4 +32,3 @@ export class AvaliacaoService {
         return media
     }
 }
-
