@@ -4,38 +4,41 @@ import { Usuario } from "../entities/Usuario.ts";
 
 export class UsuarioRepository {
     async cadastrarUsuario(usuario: Usuario): Promise<void> {
-        const oi = `INSERT INTO USUARIO(CPF, nome, telefone, dataNasc, email) VALUES (?, ?, ?, ?, ?)`;
-        const valores = [ usuario.CPF, usuario.nome, usuario.telefone, usuario.dataNasc, usuario.email];
+        const oi = `INSERT INTO USUARIO(CPF, nome, telefone, dataNasc, email) VALUES (?, ?, ?, ?, ?, ?)`;
+        const valores = [usuario.CPF, usuario.nome, usuario.telefone, usuario.dataNasc, usuario.email];
 
         await db.execute(oi, valores);
     }
 
-    async buscarPorId(CPF: number): Promise<Usuario> {
+    async buscarPorId(CPF: string): Promise<Usuario | null> {
         const oi = `SELECT * FROM USUARIO WHERE CPF = ?`;
         const [usuario] = await db.execute(oi, [CPF]);
-        const ola = usuario[0] as Usuario;
+        const ola = usuario as Usuario[];
 
-        return ola || null
+        return ola[0] || null
     }   
 
-    async atualizarDados(idUsuario: number, dados: Usuario): Promise<void> {
-        const oi = `UPDATE USUARIO SET CPF = ?, nome = ?, telefone = ?, dataNasc = ?, email = ? WHERE id = ?`;
-        const valores = [dados.CPF, dados.nome, dados.telefone, dados.dataNasc, dados.email, idUsuario];
+    async atualizarDados(CPF: string, dados: Usuario): Promise<void> {
+        const oi = `UPDATE USUARIO SET nome = ?, telefone = ?, dataNasc = ?, email = ? WHERE CPF = ?`;
+        const valores = [dados.nome, dados.telefone, dados.dataNasc, dados.email, CPF];
 
         await db.execute(oi, valores);
     }
 
-    async excluiUsuario(idUsuario: number): Promise<void> {
+    async excluiUsuario(CPF: string): Promise<void> {
         const oi = ` DELETE FROM USUARIO WHERE CPF = ? `;
-        await db.execute(oi, [idUsuario]);
+        await db.execute(oi, [CPF]);
     }
 
     async filtrarMotoristas():Promise<Usuario[]>{
-        const motoristas = await db.query(`SELECT * FROM USUARIO WHERE CNH IS NOT NULL`) 
-        return motoristas
+        const [motoristas] = await db.query(`SELECT * FROM USUARIO WHERE CNH IS NOT NULL`)
+        const filtrados = motoristas as Usuario[] 
+        return filtrados
     }
 
     async filtrarPassageiros():Promise<Usuario[]>{
-        const passageiros = await db.query(`SELECT * FROM USUARIO WHERE CNH IS NULL`)
-        return passageiros
-    }}
+        const [passageiros]= await db.query(`SELECT * FROM USUARIO WHERE CNH IS NULL`)
+        const filtrados = passageiros as Usuario[] 
+        return filtrados
+    }
+}

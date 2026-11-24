@@ -1,74 +1,37 @@
-<<<<<<< HEAD
-import { Oferta } from "../entities/OfertaCarona.ts"
-import { Veiculo } from "../entities/Veiculo.ts"
-import { Motorista } from "../entities/Motorista.ts"
-
-export class OfertaService {
-    constructor(
-        private usuarioRepo: UsuarioRepository,
-        private ofertaRepo: OfertaRepository,
-        private veiculoRepo: VeiculoRepository
-    ) {}
-
-    public async cadastrarOferta(numVagas: number, origem: string, destino: string, motorista: Motorista, veiculo: Veiculo): Promise<void> {
-        await this.ofertaRepo.cadastrarOferta(numVagas, origem, destino, motorista, veiculo)
-    }
-    public async buscarPorId(idOferta: number): Promise<Oferta> {
-        return await this.ofertaRepo.buscarPorId(idOferta)
-    }
-    public async atualizarDados(idOferta: number, dados: object): Promise<void>{
-        await this.ofertaRepo.atualizarDados(idOferta, dados)
-    }
-    public async excluirOferta(idOferta: number): Promise<void> {
-        await this.ofertaRepo.excluirOferta(idOferta)
-    }
-    public async filtrarHorario(hora: string){
-        return await this.ofertaRepo.filtrarHorario(hora) // aqui vai usar 
-    }
-    public filtraRegiao(regiao: string){   
-        return await this.ofertaRepo.filtraRegiao(regiao) // aqui vai usar select * from oferta where regiao = ?
-    }
-    public filtraCarro(tipoCarro: string){
-        select blablab.execute('SELECT blabla WHERE ${filtro1.nome}=${filtro1.value} AND ${filtro2.nome}=',[])
-    }
-    public filtraDestino(destino: string){
-    }
-}
-=======
 import type { OfertaCarona } from "../entities/OfertaCarona.ts"
-import { OfertaRepository } from "../repository/OfertaRepository.ts"
-import { UsuarioRepository} from "../repository/UsuarioRepository.ts"
+import { OfertaCaronaRepository } from "../repositories/OfertaRepository.ts"
+import type { Motorista } from "../entities/Motorista.ts"
 
+interface FiltroOferta {
+    origem?: string;
+    destino?: string;
+}
 
 export class OfertaService{
-    private ofertaRepo: OfertaRepository
-    private usuarioRepo: UsuarioRepository
     constructor(
-        ofertaRepo: OfertaRepository, 
-        usuarioRepo: UsuarioRepository
-    ){
-        this.ofertaRepo = ofertaRepo
-        this.usuarioRepo = usuarioRepo
-    }
+        private ofertaRepo: OfertaCaronaRepository, 
+    ){ this.ofertaRepo = ofertaRepo}
+
     public async criarOferta(
+        idOferta: number,
         numeroVagas:number, 
-        origem:string, 
+        origem:string,
         destino: string, 
         horario: string, 
-        cpf: string, 
-        placa:string): Promise<void>{
+        motorista: Motorista): Promise<void>{
 
-        if(!numeroVagas || !origem || !destino || !horario || !cpf || !placa){
+        if(!idOferta || !numeroVagas || !origem || !destino || !horario || !motorista){
             throw new Error("Campos inválidos ou faltando")
         }
-        await this.usuarioRepo.criarOferta(numeroVagas, origem, destino, horario, cpf, placa)
+        await this.ofertaRepo.cadastrarOferta(idOferta, numeroVagas,horario, origem, destino,  motorista)
 
     }
-    public async buscarPorId(idOferta:number): Promise<OfertaCarona>{
+    public async buscarPorId(idOferta:number): Promise<OfertaCarona | null>{
         if(!idOferta){
             throw new Error("Nenhum identificador fornecido!")
         }
-        return await this.usuarioRepo.buscarPorId(idOferta)
+        const corrida = await this.ofertaRepo.buscarPorId(idOferta)
+        return corrida || null
 
     }
 
@@ -86,8 +49,7 @@ export class OfertaService{
         if(Object.keys(dadosValidos).length === 0){
             throw new Error("Sem nenhum dado válido!")
         }
-
-        await this.ofertaRepo.atualizarDados(idOferta, dadosValidos)
+        await this.ofertaRepo.atualizarDados(idOferta, dadosValidos as OfertaCarona)
     }
 
     public async excluirOferta(idOferta:number): Promise<void>{
@@ -95,11 +57,17 @@ export class OfertaService{
         await this.ofertaRepo.excluirOferta(idOferta)
     }
 
-    public async filtroOfertas(idOferta: number, filtro: object){
-        return await this.ofertaRepo.filtroOfertas(idOferta, filtro) 
+    public async filtroOfertas( filtro: FiltroOferta){
+        if (filtro.origem) {
+        return await this.ofertaRepo.filtrarPorRegiao(filtro.origem);
+        }
 
-    }
+        if (filtro.destino) {
+            return await this.ofertaRepo.filtrarPorDestino(filtro.destino);
+        }
+        throw new Error("Informe pelo menos um filtro válido (região de origem ou destino)!");
+    } 
 
-}
+    }   
 
->>>>>>> 4fc2e642ea647f27f4bcd29521c03d0f5ea0b283
+

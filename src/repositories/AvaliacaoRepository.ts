@@ -13,8 +13,8 @@ export class AvaliacaoRepository{
         const busca = `SELECT * FROM AVALIACAO WHERE id_avaliacao = ?`;
         const [resultado] = await db.execute(busca, [id_avaliacao]);
 
-        const avaliacao = resultado[0] as Avaliacao;
-        return avaliacao ?? null;
+        const linhas = resultado as Avaliacao[];
+        return linhas[0] || null;
     }
 
     async filtrarAvaliacaoUsuario(id_usuario: number): Promise<Avaliacao[]> {

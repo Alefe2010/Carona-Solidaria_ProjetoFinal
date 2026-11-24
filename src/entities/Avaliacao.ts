@@ -1,4 +1,4 @@
-class Avaliacao {
+export class Avaliacao {
     constructor(public comentario: string, public nota: number, public tipoAvaliador: string) {
         this.comentario = comentario;
         this.nota = nota;
@@ -11,5 +11,3 @@ class Avaliacao {
         return this.comentario
     }
 }
-
-export default Avaliacao;

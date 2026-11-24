@@ -10,7 +10,6 @@ export async function criarOferta(req, res){
 }
 
 export async function atualizarDados(req, res) {
-
     const {origem, destino, dataHora, qntdVagas} = req.body
     const idOferta = req.params.id
     const dadosOferta = {origem: origem, destino: destino, dataHora: dataHora, qntdVagas: qntdVagas}

@@ -1,7 +1,7 @@
-import { Solicitacao } from "../entities/SolicitacaoCarona.ts";
+import  Solicitacao  from "../entities/SolicitacaoCarona.ts";
 import  db  from "../database/db.js"
 
-class SolicitacaoRepository {
+export class SolicitacaoRepository {
     public async cadastrarSolicitacao(qtdVaga: number, horario: string, id_usuario: number): Promise<void> {
         const oi = `INSERT INTO SOLICITACAO (qtdVaga, horario, id_usuario) VALUES (?, ?, ?)`;
         const valores = [qtdVaga, horario, id_usuario];
@@ -12,9 +12,9 @@ class SolicitacaoRepository {
     public async buscarPorId(id_solicitacao: number): Promise<Solicitacao | null> {
         const busca = `SELECT * FROM SOLICITACAO WHERE id_solicitacao = ?`;
         const [resultado] = await db.execute(busca, [id_solicitacao]);
+        const linhas = resultado as Solicitacao[];
 
-        const solicitacao = resultado[0] as Solicitacao;
-        return solicitacao || null;
+        return linhas[0] || null;
     }
 
     public async atualizarDados(id_solicitacao: number, dados: Solicitacao): Promise<void> {
@@ -44,5 +44,3 @@ class SolicitacaoRepository {
         return resultado as Solicitacao[];
     }
 }
-
-export default SolicitacaoRepository;

@@ -32,4 +32,9 @@ uso de ia alefe dia 21/11/2026
 
 3. "como é o tipo float no mysql"
 - ferramenta: gemini
-- finalidade: "Esqueci que o tipo float no mysql era DECIMAL(i, j)
+- finalidade: Esqueci que o tipo float no mysql era DECIMAL(i, j)
+
+uso de ia alefe dia 22/11/2026
+1."todas as funções do controller são iguais as do service"
+- ferramenta: gemini
+- finalidade: Compreender melhor a relação entre os controllers e os services

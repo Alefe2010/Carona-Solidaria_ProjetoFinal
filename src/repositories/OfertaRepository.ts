@@ -1,37 +1,37 @@
 import { OfertaCarona } from "../entities/OfertaCarona.ts"; 
-import db  from "../database/db.js"
+import db from "../database/db.js"
+import type { Motorista } from "../entities/Motorista.ts";
 
 export class OfertaCaronaRepository {
-
-    async cadastrarOferta(numeroVaga: number, origem: string, destino: string, id_usuario: number): Promise<void> {
-        const a = 'INSERT INTO OfertaCarona (numeroVaga, origem, destino, id_usuario) VALUES (?, ?, ?, ?)';
-        const valores = [numeroVaga, origem, destino, id_usuario];
+    public async cadastrarOferta(idOferta: number, numeroVaga: number,  horario: string, origem: string, destino: string, motorista: Motorista): Promise<void> {
+        const a = 'INSERT INTO OfertaCarona (idOferta, numeroVaga, horario, origem, destino, motorista) VALUES (?, ?, ?, ?, ?, ?)';
+        const valores = [idOferta, numeroVaga, horario, origem, destino, motorista];
 
         await db.execute(a, valores);
     }
 
-    async buscarPorId(idOferta: number): Promise<OfertaCarona | null> {
+    public async buscarPorId(idOferta: number): Promise<OfertaCarona | null> {
         const busca = 'SELECT * FROM OfertaCarona WHERE id_oferta = ?';
         const [resultado] = await db.execute(busca, [idOferta]);
 
-        const oferta = resultado[0] as OfertaCarona;
+        const linhas = resultado as OfertaCarona[];
 
-        return oferta || null;
+        return linhas[0] || null;
     }
 
-    async atualizarDados(id_oferta: number, dados: OfertaCarona): Promise<void> {
+    public async atualizarDados(idOferta: number, dados: Partial< OfertaCarona>): Promise<void> {
         const busca = 'UPDATE OfertaCarona SET numeroVaga = ?, origem = ?, destino = ? WHERE id_oferta = ?';
-        const valores = [dados.numeroVagas, dados.origem, dados.destino, id_oferta];
+        const valores = [dados.numeroVagas, dados.origem, dados.destino, idOferta];
 
         await db.execute(busca, valores);
     }
 
-    async excluirOferta(id_oferta: number): Promise<void> {
-        const busca = 'DELETE FROM OfertaCarona WHERE id_oferta = ?';
-        await db.execute(busca, [id_oferta]);
+    public async excluirOferta(idOferta: number): Promise<void> {
+        const busca = 'DELETE FROM OfertaCarona WHERE idOferta = ?';
+        await db.execute(busca, [idOferta]);
     }
 
-    async filtrarPorRegiao(regiao: string): Promise<OfertaCarona[]> {
+    public async filtrarPorRegiao(regiao: string): Promise<OfertaCarona[]> {
         const busca = 'SELECT * FROM OfertaCarona WHERE origem LIKE ? OR destino LIKE ?';
         const a = [regiao, regiao]
     
@@ -40,16 +40,9 @@ export class OfertaCaronaRepository {
         return resultado as OfertaCarona[];
     }
 
-    async filtrarPorCarro(id_carro: number): Promise<OfertaCarona[]> {
-        const busca = 'SELECT * FROM OfertaCarona WHERE id_carro = ?';
-        const resultado = await db.execute(busca, [id_carro]);
-
-        return resultado as OfertaCarona[];
-    }
-
-    async filtrarPorDestino(destino: string): Promise<OfertaCarona[]> {
+    public async filtrarPorDestino(destino: string): Promise<OfertaCarona[]> {
         const busca = 'SELECT * FROM OfertaCarona WHERE destino LIKE ?';
-        const resultado = await db.execute(busca, [destino]);
+        const [resultado] = await db.execute(busca, [destino]);
 
         return resultado as OfertaCarona[];
     }

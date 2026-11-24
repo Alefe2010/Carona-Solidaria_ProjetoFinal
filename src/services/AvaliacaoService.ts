@@ -5,7 +5,6 @@ import type { Avaliacao } from "../entities/Avaliacao.ts"
 export class AvaliacaoService {
     constructor(
         private AvaliacaoRepo: AvaliacaoRepository,
-        private UsuarioRepo: UsuarioRepository,
     ) {}
     public async fazerAvaliacao(idUsuario: number, idCorrida: number, nota: number, 
     comentario: string, tipoAvaliador: string): Promise<void> {
@@ -18,13 +17,18 @@ export class AvaliacaoService {
     public async mediaAvaliacoes(idUsuario: number): Promise<Number> {
         const avaliacoes = await this.filtrarAvaliacoes(idUsuario);      
         let soma = 0
-        if (avaliacoes.length === 0) {
-            return 0
-        }
+        let quantidadeValida = 0
+
         for (let i = 0; i < avaliacoes.length; i++) {
-            soma += avaliacoes[i].nota;
+            const avaliacao = avaliacoes[i]?.nota
+            if (avaliacao !== undefined) {
+                soma += avaliacao
+                quantidadeValida++
+            }
         }
-        return soma / avaliacoes.length;
+
+        const media = quantidadeValida > 0 ? soma / quantidadeValida : 0
+        return media
     }
 }
 

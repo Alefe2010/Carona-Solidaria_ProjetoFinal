@@ -4,11 +4,11 @@ import UsuarioRepository from "../repositories/UsuarioRepository.ts"
 
 dotenv.config()
 
-const login = (req, res) => {
+/** const login = (req, res) => {
     const {email, senha, fone} = req.body
 
     console.log(`Email: ${email} | Senha: ${senha} | Telefone: ${fone}`)
-    if(email === 'alfagi@gmail.com' && senha === '123456' && fone === '40028922'){
+  if(email === 'alfagi@gmail.com' && senha === '123456' && fone === '40028922'){
         console.log('logado!')
         const token = jwt.sign(
             {
@@ -32,7 +32,7 @@ const login = (req, res) => {
         res.send("Ocorreu algum erro! Preencha todos os campos e tente novamente!")
     }
 }
-
+*/
 const logout = (req, res) => {
     res.clearCookie("token")
     res.status(200).json({message: "Logout realizado!"})
