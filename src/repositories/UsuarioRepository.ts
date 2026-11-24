@@ -1,52 +1,61 @@
+import type { promises } from "node:dns";
 import db  from "../database/db.js"
 import { Usuario } from "../entities/Usuario.ts";
+import type { RowDataPacket } from "mysql2";
 
 
 export class UsuarioRepository {
     constructor(){}
-    async cadastrarUsuario(usuario: Usuario): Promise<void> {
+    async cadastrarUsuario(CPF: string, nome: string, telefone: string, dataNasc: string, email: string): Promise<void> {
 
-        const oi = `INSERT INTO USUARIO(CPF, nome, telefone, dataNasc, email) VALUES (?, ?, ?, ?, ?)`;
+        const cadastroUsuarioQuery = `INSERT INTO USUARIO(CPF, nome, telefone, dataNasc, email) VALUES (?, ?, ?, ?, ?)`;
 
-        const valores = [ usuario.CPF, usuario.nome, usuario.telefone, usuario.dataNasc, usuario.email];
+        const valores = [CPF, nome, telefone, dataNasc, email];
 
-        await db.execute(oi, valores);
+        await db.execute(cadastroUsuarioQuery, valores);
     }
 
-    async buscarPorId(id_usuario: number): Promise<Usuario> {
+    async buscarPorCPF(cpf: string): Promise<Usuario | null> {
 
-        const oi = `SELECT * FROM USUARIO WHERE id = ?`;
+        const queryBuscaUsuario = `SELECT * FROM USUARIO WHERE CPF = ?`;
 
-        const usuario = await db.execute(oi, [id_usuario]);
+        const [row] = await db.execute(queryBuscaUsuario, [cpf]);
+        const usuarios = row as Usuario[]
+        
+        return usuarios[0] ?? null
 
-        const ola = usuario[0] as Usuario;
-        return ola ?? null
     }   
 
-    async atualizarDados(id_usuario: number, dados: Usuario): Promise<void> {
+    async atualizarDados(cpf: string, dados: Record<string, any>): Promise<void> {
 
-        const oi = `UPDATE USUARIO SET CPF = ?, nome = ?, telefone = ?, dataNasc = ?, email = ? WHERE id = ?`;
+        const queryAtualizaDadosUser = `UPDATE USUARIO SET nome = ?, telefone = ?, dataNasc = ?, email = ? WHERE CPF = ?`;
 
-        const valores = [dados.CPF, dados.nome, dados.telefone, dados.dataNasc, dados.email, id_usuario];
+        const valores = [dados.nome, dados.telefone, dados.dataNasc, dados.email, cpf];
 
-        await db.execute(oi, valores);
+        await db.execute(queryAtualizaDadosUser, valores);
     }
 
-    async excluiUsuario(id_usuario: number): Promise<void> {
+    async excluiUsuario(cpf: string): Promise<void> {
 
-        const oi = ` DELETE FROM USUARIO WHERE id = ? `;
+        const queryExcluirUsuario = ` DELETE FROM USUARIO WHERE id = ? `;
 
-    
-
-        await db.execute(oi, [id_usuario]);
+        await db.execute(queryExcluirUsuario, [cpf]);
     }
-
-
-    async filtrarMotoristas():Promise<Usuario>{
-
+    async filtrarMotoristas(): Promise<Usuario[]>{
+        const queryFiltrarMotorista = "SELECT * FROM USUARIO WHERE cnh IS NOT NULL"
+        const [row] = await db.execute(queryFiltrarMotorista)
+        return row as Usuario[]
     }
-
-    async filtrarPassageiros():Promise<Usuario>{
-
-
-    }}
+    async filtrarPassageiros(): Promise<Usuario[]>{
+        const queryFiltrarPassgeiros = "SELECT * FROM USUARIO WHERE cnh IS NULL"
+        const [row] = await db.execute(queryFiltrarPassgeiros)
+        return row as Usuario[]
+    }
+    async buscarPorEmail(email:string){
+        if(!email){throw new Error("Dado inválido! Forneça um emial")}
+        const queryFiltroEmail = "SELECT * FROM USUARIO WHERE email = ?"
+        const [row]= await db.execute(queryFiltroEmail, [email])
+        const usuarios = row as Usuario[]
+        return usuarios[0] ?? null
+    }
+}

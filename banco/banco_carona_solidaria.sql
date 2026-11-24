@@ -5,8 +5,9 @@ create table usuario(
 	CPF char(11) constraint primary key,
 	telefone char(13) constraint,
 	email varchar(100) constraint,
-	data_nasc date,
-	nome varchar(60),
+	data_nasc date not null,
+	nome varchar(60) not null,
+    cnh varchar(11) constraint null,
 );
 
 create table veiculo(

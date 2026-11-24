@@ -30,7 +30,7 @@ export class OfertaService{
         await this.ofertaRepo.cadastrarOferta(numeroVagas, origem, destino, dataHora, cpf)
 
     }
-    public async buscarPorId(idOferta:number): Promise<OfertaCarona>{
+    public async buscarPorId(idOferta:number): Promise<OfertaCarona | null>{
         if(!idOferta){
             throw new Error("Nenhum identificador fornecido!")
         }
@@ -61,8 +61,16 @@ export class OfertaService{
         await this.ofertaRepo.excluirOferta(idOferta)
     }
 
-    public async filtroOfertas(idOferta: number, filtro: object){
-        return await this.ofertaRepo.filtroOfertas(idOferta, filtro) 
+    public async filtroOfertas(filtro: Record<string, any>){
+        const camposPermitidos = ["origem", "destino", "numeroVagas"]
+        const filtroValido: Record<string, any> = {}
+
+        for (const campo of camposPermitidos) {
+            if (filtro[campo]) {
+                filtroValido[campo] = filtro[campo]
+            }
+        }
+        return await this.ofertaRepo.filtroOfertas(filtroValido) 
 
     }
 
