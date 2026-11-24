@@ -3,19 +3,26 @@ import { Usuario } from "../entities/Usuario.ts";
 
 
 export class UsuarioRepository {
-    async cadastrarUsuario(usuario: Usuario): Promise<void> {
+    async cadastrarUsuario(CPF: string, nome: string, telefone: string, dataNasc: string, email: string): Promise<void> {
         const oi = `INSERT INTO USUARIO(CPF, nome, telefone, dataNasc, email) VALUES (?, ?, ?, ?, ?, ?)`;
-        const valores = [usuario.CPF, usuario.nome, usuario.telefone, usuario.dataNasc, usuario.email];
+        const valores = [CPF, nome, telefone, dataNasc, email];
 
         await db.execute(oi, valores);
     }
 
-    async buscarPorId(CPF: string): Promise<Usuario | null> {
+    async buscarPorCPF(CPF: string): Promise<Usuario | null> {
         const oi = `SELECT * FROM USUARIO WHERE CPF = ?`;
         const [usuario] = await db.execute(oi, [CPF]);
         const ola = usuario as Usuario[];
 
         return ola[0] || null
+    }   
+    async buscarPorEmail(email: string): Promise<Usuario | null> {
+    const oi = `SELECT * FROM USUARIO WHERE email = ?`;
+    const [usuario] = await db.execute(oi, [email]);
+    const ola = usuario as Usuario[];
+
+    return ola[0] || null
     }   
 
     async atualizarDados(CPF: string, dados: Usuario): Promise<void> {

@@ -2,19 +2,20 @@ import {Usuario} from "../entities/Usuario.ts"
 import type { UsuarioRepository } from "../repositories/UsuarioRepository.ts"
 
 type TipoUsuario = "motorista" | "passageiro"
+
 export class UsuarioService {
     constructor(
         private usuarioRepo: UsuarioRepository
     ){ this.usuarioRepo = usuarioRepo}
 
-    public async cadastrarUsuario(usuario: Usuario): Promise<void> {
-        await this.usuarioRepo.cadastrarUsuario(usuario)
+    public async cadastrarUsuario(CPF: string, nome: string, telefone: string, dataNasc: string, email: string): Promise<void> {
+        await this.usuarioRepo.cadastrarUsuario(CPF, nome, telefone, dataNasc, email)
     }
     public async buscarPorCPF(CPF: string): Promise<Usuario | null> {
         if(!CPF){
             throw new Error("Nenhum CPF foi fornecido")
         } 
-        const usuario = await this.usuarioRepo.buscarPorId(CPF)
+        const usuario = await this.usuarioRepo.buscarPorCPF(CPF)
         return usuario || null
     }
     public async atualizarDados(CPF: string, dados: object): Promise<void> {
@@ -35,6 +36,13 @@ export class UsuarioService {
     }
     public async excluirUsuario(CPF: string): Promise<void> {
         await this.usuarioRepo.excluiUsuario(CPF)
+    }
+    public async buscarPorEmail(email: string): Promise<Usuario | null> {
+        if(!email){
+            throw new Error("Nenhum CPF foi fornecido")
+        }
+        const usuario = await this.usuarioRepo.buscarPorEmail(email)
+        return usuario || null
     }
     public async filtrarPorTipo(tipo: TipoUsuario) {
         if (tipo === "motorista") {
