@@ -55,7 +55,7 @@ create table pontoEncontro(
 
 create table avaliacao(
     idAvaliacao int auto_increment primary key,
-    comentário varchar(60) null,
+    comentario varchar(60) null,
     nota decimal(3, 2) not null,
     tipoAvaliador varchar(10) check(tipoAvaliador in ("PASSAGEIRO", "MOTORISTA"))
 );
@@ -137,4 +137,14 @@ INSERT INTO pontoEncontro(idPonto_encontro, bairro, rua, ponto_referencia) VALUE
 (10, "Planalto", "Rua Direta","Escola");
 
 
-
+INSERT INTO avaliacao(idAvaliacao, comentario, nota, tipoAvaliador) VALUES
+(1, null, 1, "PASSAGEIRO"),
+(2, null, 3, "PASSAGEIRO"),
+(3, null, 1, "PASSAGEIRO"),
+(4, null, 4, "PASSAGEIRO"),
+(5, null, 3, "PASSAGEIRO"),
+(6, null, 2, "MOTORISTA"),
+(7, null, 5, "MOTORISTA"),
+(8, null, 5, "MOTORISTA"),
+(9, null, 4, "MOTORISTA"),
+(10, null, 1, "MOTORISTA");
