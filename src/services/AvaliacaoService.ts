@@ -1,12 +1,13 @@
 import { AvaliacaoRepository } from "../repositories/AvaliacaoRepository.ts";
-import { UsuarioRepository } from "../repositories/UsuarioRepository.ts";
-import type { Avaliacao } from "../entities/Avaliacao.ts"
+import { Avaliacao } from "../entities/Avaliacao.ts"
 
 export class AvaliacaoService {
+    private AvaliacaoRepo: AvaliacaoRepository
     constructor(
-        private AvaliacaoRepo: AvaliacaoRepository,
-        private UsuarioRepo: UsuarioRepository
-    ) {}
+        AvaliacaoRepo: AvaliacaoRepository,
+    ) {
+        this.AvaliacaoRepo = AvaliacaoRepo 
+    }
     public async fazerAvaliacao(idCorrida: number, nota: number, 
     comentario: string, tipoAvaliador: string, idUsuario: number): Promise<void> {
         await this.AvaliacaoRepo.criarAvaliacao(idCorrida, nota, comentario, tipoAvaliador, idUsuario)

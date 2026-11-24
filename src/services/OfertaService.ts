@@ -22,7 +22,7 @@ export class OfertaService{
         numeroVagas:number, 
         origem:string,
         destino: string, 
-        dataHora: Date, 
+        dataHora: string, 
         cpf: string, 
         placa:string): Promise<void>{
 

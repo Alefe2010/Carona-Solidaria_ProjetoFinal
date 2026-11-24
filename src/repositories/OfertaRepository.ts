@@ -6,7 +6,7 @@ import type { promises } from "node:dns";
 export class OfertaCaronaRepository {
     constructor(){}
 
-    async cadastrarOferta(numeroVaga: number, origem: string, destino: string, dataHora: Date , cpf: string): Promise<void> {
+    async cadastrarOferta(numeroVaga: number, origem: string, destino: string, dataHora: string , cpf: string): Promise<void> {
         const queryCadOferta = 'INSERT INTO OfertaCarona (numeroVaga, origem, destino, cpf) VALUES (?, ?, ?, ?, ?)';
         const valores = [numeroVaga, origem, destino, dataHora,cpf];
 

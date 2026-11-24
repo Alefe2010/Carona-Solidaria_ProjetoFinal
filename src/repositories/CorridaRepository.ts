@@ -2,9 +2,9 @@ import  db  from "../database/db.js";
 import type { Corrida } from "../entities/Corrida.ts"
 
 export class CorridaRepository {
-    public async cadastrarCorrida( idOferta: number, data_hora_final: string, situacao: string): Promise<void> {
-        const busca = `INSERT INTO CORRIDA (idOferta, data_hora_final, situacao) values (?, ?, ?)`
-        const valores = [idOferta, data_hora_final, situacao]
+    public async cadastrarCorrida( idOferta: number): Promise<void> {
+        const busca = `INSERT INTO CORRIDA (idOferta) values (?)`
+        const valores = [idOferta]
 
         await db.execute(busca, valores)
     }

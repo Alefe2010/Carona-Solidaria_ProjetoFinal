@@ -4,8 +4,9 @@ import type { UsuarioRepository } from "../repositories/UsuarioRepository.ts"
 type TipoUsuario = "motorista" | "passageiro"
 
 export class UsuarioService {
+    private usuarioRepo: UsuarioRepository
     constructor(
-        private usuarioRepo: UsuarioRepository
+        usuarioRepo: UsuarioRepository
     ){ this.usuarioRepo = usuarioRepo}
 
     public async cadastrarUsuario(CPF: string, nome: string, telefone: string, dataNasc: string, email: string): Promise<void> {
@@ -32,16 +33,9 @@ export class UsuarioService {
         if(Object.keys(dadosValidos).length === 0){
             throw new Error("Sem nenhum dado válido!")
         }
-<<<<<<< HEAD
-        await this.usuarioRepo.atualizarDados(CPF, dadosValidos)
+        await this.usuarioRepo.atualizarDados(CPF, dadosValidos as Usuario[])
     }
     public async excluirUsuario(CPF: string): Promise<void> {
-        if(!CPF){throw new Error("Campo inválido! Adicione um cpf")}
-=======
-        await this.usuarioRepo.atualizarDados(CPF, dadosValidos as Usuario)
-    }
-    public async excluirUsuario(CPF: string): Promise<void> {
->>>>>>> origin/main
         await this.usuarioRepo.excluiUsuario(CPF)
     }
     public async buscarPorEmail(email: string): Promise<Usuario | null> {
@@ -62,8 +56,4 @@ export class UsuarioService {
 
         throw new Error("Tipo inválido! Informe 'motorista' ou 'passageiro'.");
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/main
 }
