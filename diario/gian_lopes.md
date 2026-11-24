@@ -1,12 +1,15 @@
-dia 10/11 
-fiz o modelo logico hoje foi muito legal tive algumas dificuldades no entendimento de algumas coisas mas com a ajuda dos meus amigos eu consegui resolver tudo e estamos concluindo a primeira entrega 
+10/11
 
-dia 12\11
-fiz a tela do usuario e do motorista (aquela que vem depois que voce faz o login). 
+Desenvolvi o modelo lógico do banco de dados. foi uma experiência bastante produtiva e legal ;>.
 
-dia 16/11
-fiz o commit do modelo logico  em pdf
+12/11
 
-17/11 
-fiz as tabelas "ponto de encontro" e "veiculo" no codigo sql na pasta banco.
-fiz tambem os respositories.
+Desenvolvi as telas de usuário e motorista, exibidas aapos a realização do login.
+
+16/11
+
+Realizei o commit do modelo lógico do banco em pdf
+
+17/11
+
+Implementei as tabelas Ponto de Encontro e Veículo utilizando SQL, organizando o código na pasta banco. Também desenvolvi os respectivos repositories, responsáveis pela comunicação e manipulação dos dados no banco de dados.
