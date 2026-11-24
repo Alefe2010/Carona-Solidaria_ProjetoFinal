@@ -3,6 +3,7 @@ use caronaSolidaria;
 
 create table usuario(
 	CPF char(14)  primary key,
+    senha char(8) not null,
 	telefone char(13) not null,
 	email varchar(100) not null,
 	data_nasc date not null,
@@ -60,17 +61,17 @@ create table avaliacao(
 );
 
 
-INSERT INTO usuario (CPF, telefone, email, data_nasc, nome, CNH) VALUES
-('123.456.789-01', '82 99123-4567', 'lucas.silva@email.com', '1992-05-14', 'Lucas da Silva Gomes', '01234567890'),
-('234.567.890-12', '82 98876-5432', 'mariana.costa@email.com', '1954-11-13', 'Maria Gomes Souza', '98765432109'),
-('345.678.901-23', '82 99654-3210', 'pedro.santos@email.com', '2001-02-09', 'Alefe Matheus Souza ', NULL),
-('456.789.012-34', '82 98112-3344', 'camila.almeida@email.com', '1995-08-30', 'Camila Ferreira Almeida', '45612378901'),
-('567.890.123-45', '82 99334-5566', 'rafael.souza@email.com', '1979-12-17', 'Rafael Augusto de Souza', '78945612302'),
-('124.466.129-45', '82 99123-4567', 'gian.silva@email.com', '1991-12-14', 'Gian Silva', '01234567890'),
-('155.717.910-64', '82 98876-5432', 'fabio.junio@email.com', '1988-11-23', 'Fabio Junio', '98765432109'),
-('122.958.901-23', '82 91211-2210', 'davi.protasio@email.com', '2001-02-09', 'Davi protasio', NULL),
-('164.654.634-34', '82 98123-3364', 'alefe.almeida@email.com', '1967-08-20', 'Alefe Almeida', '1123542301'),
-('764.453.145-45', '82 99465-5566', 'luiz.davi.bixo@email.com', '2001-09-11', 'Luiz Davi', '56425612302');
+INSERT INTO usuario (CPF, senha, telefone, email, data_nasc, nome, CNH) VALUES
+('123.456.789-01', '12345678', '82 99123-4567', 'lucas.silva@gmail.com', '1992-05-14', 'Lucas da Silva Gomes', '01234567890'),
+('234.567.890-12', '12345678','82 98876-5432', 'mariana.costa@gmail.com', '1954-11-13', 'Maria Gomes Souza', '98765432109'),
+('345.678.901-23', '12345678','82 99654-3210', 'pedro.santos@gmail.com', '2001-02-09', 'Alefe Matheus Souza ', NULL),
+('456.789.012-34', '12345678','82 98112-3344', 'camila.almeida@gmail.com', '1995-08-30', 'Camila Ferreira Almeida', '45612378901'),
+('567.890.123-45', '12345678', '82 99334-5566', 'rafael.souza@gmail.com', '1979-12-17', 'Rafael Augusto de Souza', '78945612302'),
+('124.466.129-45', '12345678', '82 99123-4567', 'gian.silva@gmail.com', '1991-12-14', 'Gian Silva', '01234567890'),
+('155.717.910-64', '12345678','82 98876-5432', 'fabio.junio@gmail.com', '1988-11-23', 'Fabio Junio', '98765432109'),
+('122.958.901-23', '12345678','82 91211-2210', 'davi.protasio@gmail.com', '2001-02-09', 'Davi protasio', NULL),
+('164.654.634-34', '12345678','82 98123-3364', 'alefe.almeida@gmail.com', '1967-08-20', 'Alefe Almeida', '1123542301'),
+('764.453.145-45', '12345678','82 99465-5566', 'luiz.davi.bixo@gmail.com', '2001-09-11', 'Luiz Davi', '56425612302');
 
 
 
