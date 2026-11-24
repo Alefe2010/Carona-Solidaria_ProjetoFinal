@@ -12,4 +12,8 @@ Realizei o commit do modelo lógico do banco em pdf
 
 17/11
 
-Implementei as tabelas Ponto de Encontro e Veículo utilizando SQL, organizando o código na pasta banco. Também desenvolvi os respectivos repositories, responsáveis pela comunicação e manipulação dos dados no banco de dados.
+Implementei as tabelas Ponto de Encontro e Veículo no banco, organizando na pasta. tambem ddesenvolvi os repositories, responsavel pela manipulacao dos dados no banco.
+
+24/11
+
+Inseri 10 dados em cada entidade do banco e finalizei o modelo logico ;>
