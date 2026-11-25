@@ -14,12 +14,9 @@ router.get("/",  (req, res) => {
 router.get("/login", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "views", "login.html"))
 })
-router.post("/login", authController)
+router.post("/login", (req, res) => authController.login(req, res) )
 
-router.get("/logout", (req, res) => {
-    res.clearCookie("token");
-    res.redirect("/auth");
-});
+router.get("/logout", (req, res) => authController.logout(req, res));
 
 
 export default router;
