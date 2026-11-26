@@ -1,0 +1,345 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>passageiro</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f6fa;
+            color: #222;
+            display: flex;
+        }
+
+        .lateral {
+            width: 240px;
+            height: 100vh;
+            background-color: #223574;
+            padding: 30px 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .logo {
+            color: white;
+            font-size: 27px;
+            font-weight: bold;
+            margin-bottom: 45px;
+            text-align: center;
+            font-family: "Anton", sans-serif;
+        }
+
+        .logo p {
+            margin: 0;
+        }
+
+        .logo span {
+            color: #ff8c00;
+        }
+
+        .menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #cccccc;
+            text-decoration: none;
+            padding: 14px 12px;
+            margin-bottom: 8px;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .menu a i {
+            font-size: 18px;
+        }
+
+        .menu a:hover {
+            background-color: #1a2b60;
+            color: white;
+        }
+
+        .menu .ativo {
+            background-color: #1a2b60;
+            color: white;
+        }
+
+        .sair {
+            position: absolute;
+            bottom: 25px;
+            left: 20px;
+            right: 20px;
+        }
+
+        .sair a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px;
+            background-color: #1a2b60;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .sair a:hover {
+            background-color: #172653;
+        }
+
+        .conteudo {
+            margin-left: 240px;
+            padding: 35px;
+            width: calc(100% - 240px);
+        }
+
+        .topo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+            color: #352a2a;
+        }
+
+        .topo h1 {
+            font-size: 25px;
+            margin: 0;
+        }
+
+        .topo p {
+            color: #777;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .destaque {
+            background-color: #162556;
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .destaque h2 {
+            font-size: 23px;
+            margin-top: 0;
+        }
+
+        .destaque p {
+            color: #cccccc;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .destaque a {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            background-color: #ff8c00;
+            color: white;
+            padding: 13px 22px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .destaque a:hover {
+            background-color: #e17100;
+        }
+
+        .titulo {
+            font-size: 19px;
+            margin-bottom: 18px;
+        }
+
+        .cartoes {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .cartao {
+            flex: 1;
+            background-color: white;
+            padding: 22px;
+            border-radius: 10px;
+            border: 1px solid #eeeeee;
+        }
+
+        .cartao p {
+            color: #777;
+            font-size: 13px;
+            margin-top: 0;
+        }
+
+        .cartao h2 {
+            font-size: 25px;
+            margin: 10px 0 0;
+        }
+
+        .cartao i {
+            color: #223574;
+            font-size: 22px;
+        }
+
+        .cartao-topo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .informacoes {
+            background-color: white;
+            padding: 23px;
+            border-radius: 10px;
+            border: 1px solid #eeeeee;
+        }
+
+        .informacoes h3 {
+            margin-top: 0;
+            font-size: 17px;
+        }
+
+        .informacoes p {
+            color: #777;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="lateral">
+
+        <div class="logo">
+            <p>Vai<span>Junto!</span></p>
+        </div>
+
+        <div class="menu">
+
+            <a href="menu_passageiro.html" class="ativo">
+                <i class="bi bi-house-door"></i>
+                <span>inicio</span>
+            </a>
+
+            <a href="ofertas.html">
+                <i class="bi bi-search"></i>
+                <span>procurar ofertas</span>
+            </a>
+
+            <a href="pontos_encontro.html">
+                <i class="bi bi-geo-alt"></i>
+                <span>pontos de encontro</span>
+            </a>
+
+            <a href="solicitacoes.html">
+                <i class="bi bi-inbox"></i>
+                <span>minhas solicitacoes</span>
+            </a>
+
+            <a href="corridas.html">
+                <i class="bi bi-car-front"></i>
+                <span>minhas corridas</span>
+            </a>
+
+            <a href="avaliar.html">
+                <i class="bi bi-star"></i>
+                <span>avaliar motorista</span>
+            </a>
+
+            <a href="usuario.html">
+                <i class="bi bi-person-circle"></i>
+                <span>meu perfil</span>
+            </a>
+
+        </div>
+
+        <div class="sair">
+            <a href="/auth/logout">
+                <i class="bi bi-box-arrow-left"></i>
+                <span>sair da conta</span>
+            </a>
+        </div>
+
+    </div>
+
+    <div class="conteudo">
+
+        <div class="topo">
+            <div>
+                <h1>ola, nome passageiro</h1>
+                <p>bem vindo ao seu painel principal</p>
+            </div>
+        </div>
+
+        <div class="destaque">
+            <h2>qual seu destino?</h2>
+
+            <p>Encontre caronas e compartilhe seu caminho!</p>
+
+            <a href="/offers/my-offers">
+                <i class="bi bi-search"></i>
+                procurar ofertas
+            </a>
+        </div>
+
+        <h2 class="titulo">resumo da sua atividade</h2>
+
+        <div class="cartoes">
+
+            <div class="cartao">
+                <div class="cartao-topo">
+                    <p>solicitacoes realizadas</p>
+                    <i class="bi bi-send"></i>
+                </div>
+                <h2>00</h2>
+            </div>
+
+            <div class="cartao">
+                <div class="cartao-topo">
+                    <p>corridas realizadas</p>
+                    <i class="bi bi-car-front"></i>
+                </div>
+                <h2>00</h2>
+            </div>
+
+            <div class="cartao">
+                <div class="cartao-topo">
+                    <p>avaliacoes realizadas</p>
+                    <i class="bi bi-star"></i>
+                </div>
+                <h2>00</h2>
+            </div>
+
+        </div>
+
+        <div class="informacoes">
+            <h3>
+                <i class="bi bi-info-circle"></i>
+                dicas
+            </h3>
+
+            <p>Mantenha seus destinos atualizados!</p>
+        </div>
+
+    </div>
+
+</body>
+</html>
