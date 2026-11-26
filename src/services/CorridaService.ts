@@ -13,14 +13,14 @@ export class CorridaService {
         this.corridaRepo = corridaRepo
         this.solicitacaoRepo = solicitacaoRepo
     }
-    public async criarCorrida(situacao: string): Promise<void> {
-        await this.corridaRepo.cadastrarCorrida(situacao)
+    public async criarCorrida(idOferta: number): Promise<void> {
+        await this.corridaRepo.cadastrarCorrida(idOferta)
     }
 
-    public async buscarPorId(idCorrida: number): Promise<Corrida> {
+    public async buscarPorId(idCorrida: number): Promise<Corrida | null> {
         if(!idCorrida){throw new Error("Sem id não é possível encontrar a corrida")}
         const corrida = await this.corridaRepo.buscarPorId(idCorrida)
-        return corrida
+        return corrida || null
     }
     public async ListarParticipantesCorrida(idCorrida:number): Promise<Usuario[]>{
         let corrida: Corrida | null = await this.corridaRepo.buscarPorId(idCorrida)

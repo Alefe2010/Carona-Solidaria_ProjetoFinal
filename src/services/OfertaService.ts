@@ -20,16 +20,16 @@ export class OfertaService{
         origem:string,
         destino: string, 
         dataHora: string, 
-        idUsuario: number, 
+        cpf: string, 
         placa:string): Promise<void>{
 
-        if(!numeroVagas || !origem || !destino || !dataHora || !idUsuario || !placa){
+        if(!numeroVagas || !origem || !destino || !dataHora || !cpf || !placa){
             throw new Error("Campos inválidos ou faltando")
         }
         if(numeroVagas <= 0){throw new Error("Quantidade de vaga mínima é de uma vaga!")}
 
     
-        await this.ofertaRepo.cadastrarOferta(numeroVagas, origem, destino, dataHora, idUsuario, placa)    
+        await this.ofertaRepo.cadastrarOferta(numeroVagas, origem, destino, dataHora, cpf, placa)    
     }
 
     public async buscarOfertas(): Promise<OfertaCarona[] | null>{

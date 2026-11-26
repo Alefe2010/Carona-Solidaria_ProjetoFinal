@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Início</title>
+    <title>Início - VaiJunto</title>
     <style>
-        *{
+        * {
             box-sizing: border-box;
             padding: 0;
             margin: 0;
@@ -16,100 +16,186 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 1rem; 
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
-        .container{
+        .container {
             display: flex;
-            height: 70vh;
-            border-radius: 2%;
-        width: 80%;    /* limita a largura máxima para não esticar demais */
-            margin: 0 auto; ;
-            justify-content: center;
-            align-items: center;
-            box-shadow:0 2px 10px rgba(0,0.2,0,0.25);
-            position: relative;
-
+            width: 100%;
+            max-width: 60%; 
+            min-height: 600px; 
+            border-radius: 16px;
+            overflow: hidden; /* Garante que os filhos respeitem o arredondamento */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
+        /* LOGIN */
         .goLogin {
-            padding: 1rem;
+            flex: 0.7;
+            padding: 2rem 1.5rem;
             background: oklch(25.7% 0.09 281.288);
-            height: 100%;
             color: #fff;
-            flex: 1;
-            text-align: center;
-            border-radius: 10px 0 0 10px;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        }
-        .goSignin {
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-            padding: 1rem;
-            background: #fff;
-            height: 100%;
-            color: oklch(25.7% 0.09 281.288);
-            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
             text-align: center;
         }
         .header {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0.5rem;
-            gap: 8px;
-            margin-bottom: 4rem;          
+            gap: 10px;
+            width: 100%;
         }
-        #subtitle {
-            font-size: 14px;
-            margin-bottom: 2rem;
+        .header img {
+            border-radius: 10px;
+            width: 75px;
+            height: 65px;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
         }
-        img {
-            border-radius: 10%;
-            width: 80px;
-            height: 60px;
-            box-shadow:0 0 10px rgba(0,0.2,0,0.25)
+        .header h1 {
+            font-size: 2rem;
+        }
+        #slogan {
+            font-size: 0.9rem;
+            font-style: italic;
+            opacity: 0.85;
+            margin-top: 0.4rem;
+            line-height: 1.4;
+            max-width: 240px; 
+            margin-top: 1.2rem;
+            margin-bottom: 0;
         }
         .text-login {
-            margin-bottom: 6rem;
-            font-size: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 4.5rem; 
+            margin-bottom: auto; 
+            gap: 0.5rem;
         }
-        a{
-            width:40%;
-            border:none;
-            cursor:pointer;
-            margin-top: 1rem;
-            text-decoration: none;
+        .text-login h2 {
+            font-size: 1.75rem;
+            line-height: 1.2;
         }
-        #logar {
+        #subtitle {
+            font-size: 0.95rem;
+            opacity: 0.85;
+        }
+        #logar{
+            display: inline-block;
+            margin-top: 2.5rem;
+            padding: 0.75rem 2rem;
             background: transparent;
             color: #fff;
-            padding:8px;
-            box-shadow:0 0 10px rgba(0,0.1,0,0.25);
             font-weight: 700;
-            border-radius:5px;
-            font-size: 15px;
-            transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1) 150ms;
-            border: #fff 2px solid;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border: 2px solid #fff;
+            border-radius: 8px;
+            transition: all 250ms ease;
         }
+        #logar:hover {
+            background: #fff;
+            color: oklch(25.7% 0.09 281.288);
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column; 
+                min-height: auto;
+                max-width: 450px;
+            }
+
+            .goLogin, .goSignin {
+                flex: none; /* Remove a proporção 1:2 para cada um ter sua altura natural */
+                width: 100%;
+                padding: 2rem 1.5rem;
+            }
+            .text-login {
+                margin-top: 2rem;
+            }
+        }
+        /* CADASTRO */
+        .goSignin {
+            flex: 1;
+            padding: 2.5rem 2rem;
+            background: #fff;
+            color: oklch(25.7% 0.09 281.288);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 0.8rem;
+        }
+
+        .goSignin h1 {
+            font-size: 2.5rem;
+            color: oklch(25.7% 0.09 281.288);
+            margin-top: 4rem;
+        }
+
+        .subtitle-signin {
+            color: #666;
+            font-size: 1rem;
+            max-width: 340px;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        /* Botão principal de cadastro (preenchido para contrastar com o botão vazado do login) */
+        #cadastrar {
+            display: inline-block;
+            padding: 0.85rem 2.5rem;
+            background: #e17100;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            border: 2px solid #e17100;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 250ms ease;
+        }
+
+        #cadastrar:hover {
+            background: oklch(60.573% 0.1977 37.656);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .has-account {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #777;
+}
     </style>
 </head>
 <body>
     <div class="container">
         <div class="goLogin">
-            <div class="header">
-                <img src="/assets/imagem_logo.png" alt="">
-                <h1>VaiJunto</h1>
+            <div class="brand-top">
+                <div class="header">
+                    <img src="/assets/imagem_logo.png" alt="Logo VaiJunto">
+                    <h1>VaiJunto</h1>
+                </div>
+                <p id="slogan">Uma corrida. Uma economia. <br> Um novo assunto.</p>
             </div>
             <div class="text-login">
-                <h2>Bem-vindo </h2>
-                <h2>de volta!</h2>
+                <h2>Bem-vindo<br>de volta!</h2>
                 <p id="subtitle">Acesse sua conta agora mesmo</p>
-            </div>
-            <div class="log">
                 <a id="logar" href="/auth/login">Fazer Login</a>
             </div>
         </div>
 
         <div class="goSignin">
-            <h1>Crie sua conta</h1>
-            <p>Preencha seus dados</p>
+            <h1>Cadastro</h1>
+            <p class="subtitle-signin">Ainda não faz parte da comunidade? Crie sua conta gratuitamente e comece a compartilhar trajetos.</p>
+            
+            <a id="cadastrar" href="/auth/signin">Criar Conta</a>
+
         </div>
     </div>
 </body>

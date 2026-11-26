@@ -1,30 +1,40 @@
-import type { promises } from "node:dns";
 import db  from "../database/db.js"
 import { Usuario } from "../entities/Usuario.ts";
-import type { RowDataPacket } from "mysql2";
 
 
 export class UsuarioRepository {
     constructor(){}
-    async cadastrarUsuario(CPF: string, nome: string, telefone: string, dataNasc: string, email: string): Promise<void> {
-
-        const cadastroUsuarioQuery = `INSERT INTO USUARIO(CPF, nome, telefone, dataNasc, email) VALUES (?, ?, ?, ?, ?)`;
-
-        const valores = [CPF, nome, telefone, dataNasc, email];
+    async cadastrarUsuario(
+        CPF: string, 
+        nome: string, 
+        telefone: string, 
+        dataNasc: string, 
+        email: string, 
+        senha: string, 
+        cnh: string | null = null
+    ): Promise<void> {
+        const cadastroUsuarioQuery = `INSERT INTO USUARIO(CPF, nome, telefone, data_nasc, email, senha, cnh) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+        const valores = [CPF, nome, telefone, dataNasc, email, senha, cnh];
 
         await db.execute(cadastroUsuarioQuery, valores);
     }
 
     async buscarPorCPF(cpf: string): Promise<Usuario | null> {
-
         const queryBuscaUsuario = `SELECT * FROM USUARIO WHERE CPF = ?`;
 
         const [row] = await db.execute(queryBuscaUsuario, [cpf]);
         const usuarios = row as Usuario[]
         
-        return usuarios[0] ?? null
+        return usuarios[0] || null
 
-    }   
+    }  
+    async buscarPorEmail(email: string): Promise<Usuario | null> {
+        const queryBuscaUsuario = `SELECT * FROM USUARIO WHERE email = ?`
+        const [row] = await db.execute(queryBuscaUsuario, [email])
+        const usuarios = row as Usuario[]
+        
+        return usuarios[0] || null
+    }
 
     async atualizarDados(cpf: string, dados: Record<string, any>): Promise<void> {
 

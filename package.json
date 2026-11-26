@@ -29,6 +29,7 @@
         "typescript": "^7.0.2"
     },
     "dependencies": {
+        "bootstrap-icons": "^1.13.2",
         "cookie-parser": "^1.4.7",
         "dotenv-safe": "^9.1.0",
         "jsonwebtoken": "^9.0.3",

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            background-color: aliceblue;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 60%; 
+            color: oklch(25.7% 0.09 281.288); 
+            text-align: center;
+            height: 80vh; 
+            max-height: 600px;
+            border-radius: 16px;
+            overflow: hidden;
+            flex-direction: column;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            padding: 1rem;
+        }
+        #signin {
+            display: inline-block;
+            margin-top: 2.5rem;
+            padding: 0.75rem 2rem;
+            background: transparent;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border: 2px solid #fff;
+            border-radius: 8px;
+            transition: all 250ms ease;
+        }
+        .form-signin {
+            width: 100%;
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 4rem;
+            justify-content: flex-start;
+            align-items: center;
+            padding-bottom: 1.5rem;
+            overflow-y: auto;      /* Cria a barrinha de rolagem vertical só quando precisar */
+        }
+        .form-signin::-webkit-scrollbar {
+            width: 6px; /* Largura bem fina */
+        }
+
+        .form-signin::-webkit-scrollbar-track {
+            background: transparent; /* Fundo invisível */
+        }
+
+        .form-signin::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.2); /* Cor discreta da barrinha */
+            border-radius: 10px;
+        }
+
+        .form-signin::-webkit-scrollbar-thumb:hover {
+            background-color: oklch(25.7% 0.09 281.288); /* Fica roxa ao passar o mouse */
+        }
+        .signin-input {
+            display: flex;
+            width: 70%;
+            align-items: center;
+            flex-shrink: 0;
+            background-color: #ffffff;
+            height: 3rem;
+            padding: 0 1.2rem;
+            border-radius: 4px;
+            gap: 1rem;
+        }
+        .signin-input input {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #333;
+            font-size: 0.95rem;
+            text-align: start;
+        }
+        .signin-input input::placeholder {
+            color: #9c9c9c;
+        }
+        .cad {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        #signin {
+            background: #e17100;
+            width: 40%;
+            transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1) 150ms;
+        }
+        #signin:hover {
+            transform: translateY(-0.25rem) scale(1.02);
+            background: oklch(60.573% 0.1977 37.656);
+        } 
+        .choose {
+            display: flex;
+            gap: 1rem
+        }
+       .role-selector {
+            display: flex;
+            width: 40%;
+            background-color: #f3eff1; /* Mesmo fundo suave dos seus inputs */
+            padding: 4px;
+            border-radius: 6px;
+            gap: 6px;
+        }
+
+        .role-option {
+            flex: 1; 
+            cursor: pointer;
+            position: relative;
+        }
+
+        .role-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .role-option span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.7rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #777;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+        .role-option input[type="radio"]:checked + span {
+            background-color: oklch(25.7% 0.09 281.288);
+            color: #fff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+        .oculto {
+            display: none !important;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Crie sua conta</h1>
+        <p>Preencha seus dados</p>
+        <form class="form-signin" id="form-cadastro">
+            <div class="signin-input">
+                <input type="text" name="nome" placeholder="Nome completo" required>
+            </div>
+
+            <div class="signin-input">
+                <input type="text" name="cpf" placeholder="CPF" maxlength="14" required>
+            </div>
+
+            <div class="signin-input">
+                <input type="email" name="email" placeholder="Email" required>
+            </div>
+
+            <div class="signin-input">
+                <input type="tel" name="telefone" placeholder="Telefone" required>
+            </div>
+
+            <div class="signin-input">
+                <input type="date" name="data_nasc" required>
+            </div>
+
+            <div class="signin-input">
+                <input type="password" name="senha" placeholder="Senha" required>
+            </div>
+
+            <div class="role-selector">
+                <label class="role-option">
+                    <input type="radio" name="tipo_usuario" value="passageiro" checked>
+                    <span>Passageiro</span>
+                </label>
+
+                <label class="role-option">
+                    <input type="radio" name="tipo_usuario" value="motorista">
+                    <span>Motorista</span>
+                </label>
+            </div>
+
+            <div class="signin-input oculto" id="campo-motorista">
+                <input type="text" name="cnh" id="input-cnh" placeholder="Número da CNH">
+            </div>
+
+            <div class="cad">
+                <button type="submit" id="signin">Cadastrar</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        const radios = document.querySelectorAll('input[name="tipo_usuario"]');
+        const campoMotorista = document.getElementById('campo-motorista');
+        const inputCnh = document.getElementById('input-cnh');
+
+        radios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (radio.value === 'motorista' && radio.checked) {
+                    campoMotorista.classList.remove('oculto');
+                    inputCnh.required = true; // Torna obrigatório apenas se for motorista
+                } else {
+                    campoMotorista.classList.add('oculto');
+                    inputCnh.required = false; // Remove a obrigatoriedade para passageiro
+                    inputCnh.value = ''; // Limpa o texto se o usuário mudar de ideia
+                }
+            });
+        });
+
+        const form = document.getElementById('form-cadastro');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const dados = Object.fromEntries(formData.entries());
+            delete dados.tipo_usuario; // Remove o radio auxiliar antes de enviar
+
+            try {
+                const response = await fetch('/auth/signin', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dados)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert(result.message);
+                    window.location.href = '/menu'; // Redireciona após salvar o cookie
+                } else {
+                    alert(result.message || 'Erro ao cadastrar');
+                }
+            } catch (err) {
+                alert('Erro de conexão com o servidor.');
+            }
+    });
+    </script>
+</body>
+</html>

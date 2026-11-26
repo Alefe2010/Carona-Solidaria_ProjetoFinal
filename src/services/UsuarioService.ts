@@ -4,12 +4,21 @@ import type { UsuarioRepository } from "../repositories/UsuarioRepository.ts"
 type TipoUsuario = "motorista" | "passageiro"
 
 export class UsuarioService {
+    private usuarioRepo: UsuarioRepository
     constructor(
-        private usuarioRepo: UsuarioRepository
+        usuarioRepo: UsuarioRepository
     ){ this.usuarioRepo = usuarioRepo}
 
-    public async cadastrarUsuario(CPF: string, nome: string, telefone: string, dataNasc: string, email: string): Promise<void> {
-        await this.usuarioRepo.cadastrarUsuario(CPF, nome, telefone, dataNasc, email)
+    public async cadastrarUsuario(
+        CPF: string,
+        nome: string, 
+        telefone: string, 
+        dataNasc: string, 
+        email: string, 
+        senha: string, 
+        cnh: string | null = null
+    ): Promise<void> {
+        await this.usuarioRepo.cadastrarUsuario(CPF, nome, telefone, dataNasc, email, senha, cnh || null)
     }
     public async buscarPorCPF(CPF: string): Promise<Usuario | null> {
         if(!CPF){

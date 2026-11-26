@@ -6,9 +6,9 @@ import type { Usuario } from "../entities/Usuario.ts";
 export class OfertaCaronaRepository {
     constructor(){}
 
-    async cadastrarOferta(numeroVaga: number, origem: string, destino: string, dataHora: string , idUsuario: number, placa:string): Promise<void> {
-        const queryCadOferta = 'INSERT INTO ofertaCarona (numeroVaga, origem, destino, cpf) VALUES (?, ?, ?, ?, ?, ?)';
-        const valores = [numeroVaga, origem, destino, dataHora, idUsuario, placa];
+    async cadastrarOferta(numeroVaga: number, origem: string, destino: string, dataHora: string ,  CPF: string, placa:string): Promise<void> {
+        const queryCadOferta = 'INSERT INTO ofertaCarona (numeroVaga, origem, destino, dataHorario, CPF, placa) VALUES (?, ?, ?, ?, ?, ?)';
+        const valores = [numeroVaga, origem, destino, dataHora, CPF, placa];
 
         await db.execute(queryCadOferta, valores);
     }
