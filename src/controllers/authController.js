@@ -56,12 +56,21 @@ function logout(req, res) {
 }
 
 async function signUp(req, res) {
-  const {cpf, nome, senha, telefone, email, data_nasc} = req.body;
-
+console.log(">>> CHEGOU NO NOVO SIGNUP! Body recebido:", req.body);
   try {
-    await UsuarioRepository.cadastrarUsuario(cpf,nome, senha, telefone, data_nasc, email,);
-    
-    const payload = { id: cpf, email: email };
+    const {cpf, nome, telefone, data_nasc, email, senha, cnh} = req.body;
+    const usuarioRepo = new UsuarioRepository();
+    const usuarioService = new UsuarioService(usuarioRepo);
+    await usuarioService.cadastrarUsuario(
+        cpf,
+        nome,
+        telefone, 
+        data_nasc, 
+        email, 
+        senha, 
+        cnh || null
+    );
+    const payload = { cpf: cpf, email: email };
     const token = jwt.sign(payload, process.env.jwt_secret, { expiresIn: "1d" });
     res.cookie("token", token, {
       httpOnly: true,
@@ -70,7 +79,12 @@ async function signUp(req, res) {
     });
     return res.status(201).json({ message: "Cadastro concluído" });
     } catch (error) {
-        return res.status(500).json({ message: "Problema interno do servidor" });
+       /* console.error("Erro no signUp:", error);
+        const status = error.statusCode || 500;
+        const message = error.statusCode ? error.message : "Problema interno do servidor";
+        return res.status(status).json({ message }); */
+        console.error("DETALHE DO ERRO 500:", error);
+        return res.status(500).json({ message: error.message });
     }
      
 }

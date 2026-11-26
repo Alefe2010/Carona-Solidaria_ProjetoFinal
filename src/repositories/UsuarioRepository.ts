@@ -4,11 +4,17 @@ import { Usuario } from "../entities/Usuario.ts";
 
 export class UsuarioRepository {
     constructor(){}
-    async cadastrarUsuario(CPF: string, nome: string, telefone: string, dataNasc: string, email: string): Promise<void> {
-
-        const cadastroUsuarioQuery = `INSERT INTO USUARIO(CPF, nome, telefone, data_nasc, email) VALUES (?, ?, ?, ?, ?)`;
-
-        const valores = [CPF, nome, telefone, dataNasc, email];
+    async cadastrarUsuario(
+        CPF: string, 
+        nome: string, 
+        telefone: string, 
+        dataNasc: string, 
+        email: string, 
+        senha: string, 
+        cnh: string | null = null
+    ): Promise<void> {
+        const cadastroUsuarioQuery = `INSERT INTO USUARIO(CPF, nome, telefone, data_nasc, email, senha, cnh) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+        const valores = [CPF, nome, telefone, dataNasc, email, senha, cnh];
 
         await db.execute(cadastroUsuarioQuery, valores);
     }
