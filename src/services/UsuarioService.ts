@@ -41,9 +41,10 @@ export class UsuarioService {
         if(Object.keys(dadosValidos).length === 0){
             throw new Error("Sem nenhum dado válido!")
         }
-        await this.usuarioRepo.atualizarDados(CPF, dadosValidos as Usuario[])
+        await this.usuarioRepo.atualizarDados(CPF, dadosValidos)
     }
     public async excluirUsuario(CPF: string): Promise<void> {
+        if(!CPF){throw new Error("Campo inválido! Adicione um cpf")}
         await this.usuarioRepo.excluiUsuario(CPF)
     }
     public async buscarPorEmail(email: string): Promise<Usuario | null> {

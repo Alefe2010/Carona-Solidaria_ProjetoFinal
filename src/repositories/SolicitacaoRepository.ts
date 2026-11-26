@@ -37,4 +37,5 @@ export class SolicitacaoRepository {
         const resultado = rows as SolicitacaoCarona[]
         return resultado;
     }
+    public async 
 }

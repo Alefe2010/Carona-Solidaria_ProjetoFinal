@@ -252,6 +252,10 @@
                 <label for="vagas">Quantidade de vagas:</label>
                 <input type="number" name="vagas" id="vagas" min="1" required>
             </div>
+            <div class="coluna-div">
+                <label for="carro">Carro:</label>
+                <select id="placa-carro"></select>
+            </div>
 
             <div class="linha-div">
                 <button type="submit" class="btn-criar" id="criar">Criar Oferta</button>
@@ -262,15 +266,17 @@
     </section>
     <script>
         const formCriacao = document.getElementById("criacao")
+        const selectVeic = document.getElementById("placa-carro")
         formCriacao.addEventListener("submit", async (event)=>{
             event.preventDefault()
             const dados = {
                 origem: document.getElementById("endereco_origem").value,
                 destino: document.getElementById("endereco_destino").value,
                 dataHora: document.getElementById("data_hora").value,
-                qntdVagas: Number(document.getElementById("vagas").value)
+                numeroVagas: Number(document.getElementById("vagas").value),
+                placa: document.getElementById("placa-carro").value
             }
-            const response = await fetch("/ofertas", {
+            const response = await fetch("/api/ofertas/criar", {
                 headers: {
                     "Content-Type":"application/json"
                 },
@@ -283,8 +289,38 @@
 
             }
             alert("Criação feita!")
-        })   
-        
+        })
+
+        async function buscarMeusVeiculos() {
+            try {
+                const response = await fetch("/api/veiculos/meus-veiculos")
+                if (!response.ok) {
+                    console.error("Erro ao buscar veículos:", response.status)
+                    return
+                }
+                const data = await response.json()
+                if(!Array.isArray(data || !data)){
+                    const veiculos = data.veiculos
+                }
+                const veiculos = data
+                renderizarVeic(veiculos)
+            } catch (err) {
+                console.error("Erro de conexão:", err)
+                return
+            }
+        }
+
+        function renderizarVeic(veiculos){
+            if(veiculos.length === 0){
+                selectVeic.innerHTML = "<option>'Sem veículo. Cadastre algum veiculo</option>"
+                return
+            }
+            selectVeic.innerHTML = veiculos.map(veiculo => `
+                <option value=${veiculo.placa}>${veiculo.modelo}</option>
+            `).join("")
+        }
+
+        buscarMeusVeiculos()
     </script>
 </body>
 </html>

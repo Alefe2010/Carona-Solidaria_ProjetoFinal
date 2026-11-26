@@ -6,7 +6,7 @@ export class OfertaCarona{
     private _horario: string;
     private _origem: string;
     private _destino: string;
-    private _idMotorista: number;
+    private _idUsuario: number;
 
     constructor(idOferta: number, numeroVagas: number, origem: string, destino: string, horario: string, idMotorista: number){
         this._idOferta = idOferta;
@@ -14,13 +14,13 @@ export class OfertaCarona{
         this._horario = horario
         this._origem = origem;
         this._destino = destino;
-        this._idMotorista = idMotorista
+        this._idUsuario = idMotorista
     }
     public get idOferta(){return this._idOferta}
     public get numeroVagas(){return this._numeroVagas}
     public get horario(){return this._horario}
     public get origem(){return this._origem}
     public get destino(){return this._destino}
-    public get idMotorista(){return this._idMotorista}
+    public get idUsuario(){return this._idUsuario}
 
 }
