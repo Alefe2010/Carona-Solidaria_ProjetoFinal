@@ -7,13 +7,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
     
 ofertaRouter.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "views", "oferta_corrida.html"))
+    res.sendFile(path.join(__dirname, "..", "views", "ofertas_corrida.html"))
 })
-ofertaRouter.get("/criar", (req, res) => {
+ofertaRouter.get("/create", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "views", "criacao_oferta.html"))
 })
-ofertaRouter.get("/minhas-ofertas", (req, res) => {
+ofertaRouter.get("/my-offers", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "views", "minhas_ofertas.html"))
 })
+
 
 export default ofertaRouter;

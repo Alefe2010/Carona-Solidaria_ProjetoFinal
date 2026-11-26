@@ -167,6 +167,7 @@
         <p>Preencha seus dados</p>
         <form class="form-signin" id="form-cadastro">
             <div class="signin-input">
+                <i class="bi bi-alphabet-uppercase"></i>
                 <input type="text" name="nome" placeholder="Nome completo" required>
             </div>
 
@@ -175,6 +176,7 @@
             </div>
 
             <div class="signin-input">
+                <i class="bi bi-person-circle"></i>
                 <input type="email" name="email" placeholder="Email" required>
             </div>
 
@@ -187,6 +189,7 @@
             </div>
 
             <div class="signin-input">
+                <i class="bi bi-lock-fill"></i>
                 <input type="password" name="senha" placeholder="Senha" required>
             </div>
 
@@ -248,7 +251,7 @@
 
                 if (response.ok) {
                     alert(result.message);
-                    window.location.href = '/menu'; // Redireciona após salvar o cookie
+                    window.location.href = '/offer'; // Redireciona após salvar o cookie
                 } else {
                     alert(result.message || 'Erro ao cadastrar');
                 }

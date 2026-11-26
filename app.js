@@ -24,12 +24,10 @@ app.use(express.urlencoded({extended: true}))
 
 
 app.use("/auth", authRouter)
-app.use("/ofertas", verifyJWT, ofertaRoutes )
+app.use("/offer", verifyJWT, ofertaRoutes )
 app.use("/api/ofertas", verifyJWT, ofertaApiRoutes )
-app.use("/veiculos", verifyJWT, veiculoRoutes )
+app.use("/vehicles", verifyJWT, veiculoRoutes )
 app.use("/api/veiculos", verifyJWT, veiculoApiRoutes)
-
-
 
 
 

@@ -38,7 +38,7 @@ async function login(req, res){
             maxAge: 15 * 60 * 1000 
         });
         console.log("Logado!");
-        return res.status(200).redirect("/menu")
+        return res.status(200).redirect("/offer")
     } catch(error){
         console.error("Erro no login:", error);
         return res.status(500).json({ erro: "Erro interno ao tentar fazer login." });

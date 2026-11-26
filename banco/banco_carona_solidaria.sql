@@ -8,7 +8,7 @@ create table usuario(
     email varchar(100) not null,
     data_nasc date not null,
     nome varchar(60) not null,
-    CNH char(11) null
+    cnh char(11) null
 );
 
 create table veiculo(
@@ -65,17 +65,17 @@ create table avaliacao(
 );
 
 
-INSERT INTO usuario (CPF, senha, telefone, email, data_nasc, nome, CNH) VALUES
-('123.456.789-01', '12345678', '82 99123-4567', 'lucas.silva@gmail.com', '1992-05-14', 'Lucas da Silva Gomes', '01234567890'),
-('234.567.890-12', '12345678', '82 98876-5432', 'mariana.costa@gmail.com', '1954-11-13', 'Maria Gomes Souza', '98765432109'),
-('345.678.901-23', '12345678', '82 99654-3210', 'pedro.santos@gmail.com', '2001-02-09', 'Alefe Matheus Souza', NULL),
-('456.789.012-34', '12345678', '82 98112-3344', 'camila.almeida@gmail.com', '1995-08-30', 'Camila Ferreira Almeida', '45612378901'),
-('567.890.123-45', '12345678', '82 99334-5566', 'rafael.souza@gmail.com', '1979-12-17', 'Rafael Augusto de Souza', '78945612302'),
-('124.466.129-45', '12345678', '82 99123-4567', 'gian.silva@gmail.com', '1991-12-14', 'Gian Silva', '11223344556'),
-('155.717.910-64', '12345678', '82 98876-5432', 'fabio.junio@gmail.com', '1988-11-23', 'Fabio Junio', '22334455667'),
-('122.958.901-23', '12345678', '82 91211-2210', 'davi.protasio@gmail.com', '2001-02-09', 'Davi protasio', NULL),
-('164.654.634-34', '12345678', '82 98123-3364', 'alefe.almeida@gmail.com', '1967-08-20', 'Alefe Almeida', '01123542301'),
-('764.453.145-45', '12345678', '82 99465-5566', 'luiz.davi.bixo@gmail.com', '2001-09-11', 'Luiz Davi', '56425612302');
+INSERT INTO usuario (CPF, nome, telefone, data_nasc, email, senha, cnh) VALUES
+('123.456.789-01', 'Lucas da Silva Gomes', '82 99123-4567', '1992-05-14', 'lucas.silva@gmail.com', '12345678', '01234567890'),
+('234.567.890-12', 'Maria Gomes Souza', '82 98876-5432', '1954-11-13', 'mariana.costa@gmail.com', '12345678', '98765432109'),
+('345.678.901-23', 'Alefe Matheus Souza', '82 99654-3210', '2001-02-09', 'pedro.santos@gmail.com', '12345678', NULL),
+('456.789.012-34', 'Camila Ferreira Almeida', '82 98112-3344', '1995-08-30', 'camila.almeida@gmail.com', '12345678', '45612378901'),
+('567.890.123-45', 'Rafael Augusto de Souza', '82 99334-5566', '1979-12-17', 'rafael.souza@gmail.com', '12345678', '78945612302'),
+('124.466.129-45', 'Gian Silva', '82 99123-4567', '1991-12-14', 'gian.silva@gmail.com', '12345678', '11223344556'),
+('155.717.910-64', 'Fabio Junio', '82 98876-5432', '1988-11-23', 'fabio.junio@gmail.com', '12345678', '22334455667'),
+('122.958.901-23', 'Davi protasio', '82 91211-2210', '2001-02-09', 'davi.protasio@gmail.com', '12345678', NULL),
+('164.654.634-34', 'Alefe Almeida', '82 98123-3364', '1967-08-20', 'alefe.almeida@gmail.com', '12345678', '01123542301'),
+('764.453.145-45', 'Luiz Davi', '82 99465-5566', '2001-09-11', 'luiz.davi.bixo@gmail.com', '12345678', '56425612302');
 
 
 INSERT INTO veiculo (placa, qtd_acentos, cor, modelo, CPF) VALUES
