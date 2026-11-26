@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas solicitações</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            padding-left: 240px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #1f2937;
+            line-height: 1.5;
+            padding-bottom: 60px;
+        }
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #162556;
+            margin-bottom: 16px;
+        }
+
+        .box-cinza {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            margin-top: 32px;
+        }
+
+        .cabecalho-solicitacoes {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .cabecalho-solicitacoes h1 {
+            margin-bottom: 0;
+        }
+        .btn-novo {
+            padding: 10px 20px;
+            background-color: #e17100;
+            color: #162556;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-novo:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(225, 113, 0, 0.3);
+        }
+
+        .tabela-rolagem {
+            overflow-x: auto;
+        }
+        .tabela-solicitacoes {
+            width: 100%;
+            min-width: 480px;
+            border-collapse: collapse;
+        }
+        .tabela-solicitacoes th {
+            text-align: left;
+            padding: 12px;
+            background-color: #f9fafb;
+            border-bottom: 2px solid #e5e7eb;
+            font-size: 13px;
+            font-weight: 700;
+            color: #6b7280;
+        }
+        .tabela-solicitacoes td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 14px;
+        }
+        .tabela-solicitacoes tbody tr:hover td {
+            background-color: #f9fafb;
+        }
+        .coluna-acoes {
+            white-space: nowrap;
+        }
+        .mensagem-tabela {
+            padding: 16px 12px;
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .selo {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .selo-pendente {
+            background-color: #fdf0e0;
+            color: #9a4f00;
+        }
+        .selo-aceita {
+            background-color: #162556;
+            color: #ffffff;
+        }
+        .selo-negada {
+            background-color: #e5e7eb;
+            color: #6b7280;
+        }
+
+        .btn-editar,
+        .btn-excluir {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .btn-editar {
+            background-color: #162556;
+            border: 1.5px solid #162556;
+            color: #ffffff;
+        }
+        .btn-editar:hover {
+            background-color: #223574;
+            border-color: #223574;
+        }
+        .btn-editar:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+        .btn-editar:disabled:hover {
+            background-color: #162556;
+            border-color: #162556;
+        }
+        .btn-excluir {
+            margin-left: 8px;
+            background-color: #ffffff;
+            border: 1.5px solid #e17100;
+            color: #b85c00;
+        }
+        .btn-excluir:hover {
+            background-color: #e17100;
+            color: #162556;
+        }
+
+        .dialog-solicitacao {
+            width: calc(100% - 32px);
+            max-width: 480px;
+            padding: 0;
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(22, 37, 86, 0.25);
+            color: #1f2937;
+        }
+        .dialog-solicitacao::backdrop {
+            background-color: rgba(22, 37, 86, 0.55);
+        }
+        .form-dialog {
+            padding: 28px;
+        }
+        .titulo-dialog {
+            font-size: 24px;
+            font-weight: 700;
+            color: #162556;
+            margin-bottom: 6px;
+        }
+        .texto-dialog {
+            font-size: 15px;
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+        .campo-dialog {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 16px;
+        }
+        .rotulo-dialog {
+            font-size: 14px;
+            font-weight: 600;
+            color: #162556;
+            margin-bottom: 6px;
+        }
+        .entrada-dialog {
+            padding: 12px;
+            border-radius: 10px;
+            border: 1.5px solid #d1d5db;
+            background-color: #f9fafb;
+            font-family: inherit;
+            font-size: 15px;
+            transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+        }
+        .entrada-dialog:focus {
+            outline: none;
+            background-color: #ffffff;
+            border-color: #e17100;
+            box-shadow: 0 0 0 3px rgba(225, 113, 0, 0.18);
+        }
+        .mensagem-dialog {
+            font-size: 14px;
+            color: #b85c00;
+        }
+        .botoes-dialog {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        .btn-salvar,
+        .btn-confirmar,
+        .btn-cancelar {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-salvar {
+            background-color: #162556;
+            color: #ffffff;
+        }
+        .btn-salvar:hover {
+            background-color: #223574;
+        }
+        .btn-confirmar {
+            background-color: #e17100;
+            color: #162556;
+        }
+        .btn-confirmar:hover {
+            background-color: #c96600;
+        }
+        .btn-cancelar {
+            background-color: #e5e7eb;
+            color: #162556;
+        }
+        .btn-cancelar:hover {
+            background-color: #d1d5db;
+        }
+
+        .lateral {
+            width: 240px;
+            height: 100vh;
+            background-color: #162556;
+            padding: 30px 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            margin-bottom: 45px;
+            font-family: "Anton", sans-serif;
+            text-align: center;
+        }
+
+        .menu h2 {
+            color: white;
+            font-size: 17px;
+            margin: 0 0 15px;
+        }
+
+        .menu a {
+            display: block;
+            color: #cccccc;
+            text-decoration: none;
+            padding: 15px 12px;
+            margin-bottom: 8px;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .menu a:hover { background-color: #223574; color: white; }
+
+        .menu a.ativo {
+            background-color: #223574;
+            color: white;
+            box-shadow: inset 3px 0 0 #e17100;
+        }
+
+        .sair {
+            position: absolute;
+            bottom: 25px;
+            left: 20px;
+            right: 20px;
+        }
+
+        .sair a {
+            display: block;
+            padding: 14px;
+            text-align: center;
+            background-color: #223574;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 760px) {
+            body { padding-left: 0; }
+            .lateral { position: static; width: 100%; height: auto; padding: 20px; }
+            .logo { margin-bottom: 20px; }
+            .sair { position: static; margin-top: 12px; }
+            main { padding: 0 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="lateral">
+
+        <div class="logo">VaiJunto!</div>
+
+        <nav class="menu">
+            <h2>menu</h2>
+
+            <a href="ofertas_corrida.html">ofertas</a>
+            <a href="criacao_oferta.html">publicar oferta</a>
+            <a href="veiculos.html">veículos</a>
+            <a href="pontos_encontro.html">pontos de encontro</a>
+            <a href="solicitacoes_recebidas.html">solicitações recebidas</a>
+            <a href="minhas_solicitacoes.html" class="ativo" aria-current="page">minhas solicitações</a>
+            <a href="historico.html">minhas corridas</a>
+            <a href="minhas_ofertas.html">minhas ofertas</a>
+            <a href="avaliacoes.html">avaliações</a>
+            <a href="detalhe_usuario.html">meu perfil</a>
+        </nav>
+
+        <div class="sair">
+            <a href="login.html">sair da conta</a>
+        </div>
+
+    </div>
+
+    <main>
+        <div class="box-cinza">
+            <div class="cabecalho-solicitacoes">
+                <h1>Minhas solicitações</h1>
+                <a href="ofertas_corrida.html" class="btn-novo">Buscar ofertas</a>
+            </div>
+
+            <div class="tabela-rolagem" id="tabela-rolagem">
+                <table class="tabela-solicitacoes">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Oferta</th>
+                            <th>Situação</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="solicitacoes">
+                    </tbody>
+                </table>
+                <p class="mensagem-tabela" id="mensagem-tabela"></p>
+            </div>
+        </div>
+    </main>
+
+    <dialog id="dialog-editar" class="dialog-solicitacao">
+        <form id="form-editar" class="form-dialog">
+            <h2 class="titulo-dialog">Editar solicitação</h2>
+            <p class="texto-dialog">Altere os dados da sua solicitação.</p>
+
+            <div class="campo-dialog">
+                <label for="editar-oferta" class="rotulo-dialog">Oferta (ID):</label>
+                <input type="number" name="idOferta" id="editar-oferta" class="entrada-dialog" min="1" required>
+            </div>
+            <div class="campo-dialog">
+                <label for="editar-situacao" class="rotulo-dialog">Situação:</label>
+                <select name="situacao" id="editar-situacao" class="entrada-dialog" required>
+                    <option value="PENDENTE">Pendente</option>
+                    <option value="ACEITA">Aceita</option>
+                    <option value="NEGADA">Negada</option>
+                </select>
+            </div>
+
+            <p id="mensagem-editar" class="mensagem-dialog"></p>
+
+            <div class="botoes-dialog">
+                <button type="submit" class="btn-salvar">Salvar alterações</button>
+                <button type="button" class="btn-cancelar" data-fechar>Cancelar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog id="dialog-excluir" class="dialog-solicitacao">
+        <form id="form-excluir" class="form-dialog">
+            <h2 class="titulo-dialog">Excluir solicitação</h2>
+            <p class="texto-dialog">Tem certeza que deseja excluir a solicitação nº <strong id="excluir-numero"></strong>? Essa ação não pode ser desfeita.</p>
+
+            <p id="mensagem-excluir" class="mensagem-dialog"></p>
+
+            <div class="botoes-dialog">
+                <button type="submit" class="btn-confirmar">Excluir</button>
+                <button type="button" class="btn-cancelar" data-fechar>Cancelar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script>
+        const tabelaSolicitacoes = document.getElementById("solicitacoes")
+        const mensagemTabela = document.getElementById("mensagem-tabela")
+        const dialogEditar = document.getElementById("dialog-editar")
+        const formEditar = document.getElementById("form-editar")
+        const mensagemEditar = document.getElementById("mensagem-editar")
+        const dialogExcluir = document.getElementById("dialog-excluir")
+        const formExcluir = document.getElementById("form-excluir")
+        const mensagemExcluir = document.getElementById("mensagem-excluir")
+        let idSelecionado = null
+
+        async function buscarMinhasSolicitacoes(){
+            try{
+                const response = await fetch("/api/solicitacoes/minhas-solicitacoes")
+                if(!response.ok){
+                    tabelaSolicitacoes.innerHTML = ""
+                    mostrarMensagem("Não foi possível carregar as solicitações.")
+                    return
+                }
+                const data = await response.json()
+                const solicitacoes = Array.isArray(data) ? data : (data.solicitacoes ?? [])
+                renderizar(solicitacoes)
+            }catch(err){
+                tabelaSolicitacoes.innerHTML = ""
+                mostrarMensagem("Erro interno no servidor. Recarregue a página")
+            }
+        }
+
+        function renderizar(solicitacoes){
+            if(solicitacoes.length === 0){
+                tabelaSolicitacoes.innerHTML = ""
+                mostrarMensagem("Você não possui nenhuma solicitação.")
+                return
+            }
+            mostrarMensagem("")
+            tabelaSolicitacoes.innerHTML = solicitacoes.map(solicitacao => `
+                <tr>
+                    <td>${solicitacao.idSolicitacao}</td>
+                    <td>${solicitacao.idOferta}</td>
+                    <td><span class="selo selo-${solicitacao.situacao.toLowerCase()}">${solicitacao.situacao}</span></td>
+                    <td class="coluna-acoes">
+                        <button type="button" class="btn-editar"
+                            data-id="${solicitacao.idSolicitacao}"
+                            data-oferta="${solicitacao.idOferta}"
+                            data-situacao="${solicitacao.situacao}"
+                            ${solicitacao.situacao !== "PENDENTE" ? 'disabled title="Só é possível editar solicitações pendentes"' : ""}>Editar</button>
+                        <button type="button" class="btn-excluir" data-id="${solicitacao.idSolicitacao}">Excluir</button>
+                    </td>
+                </tr>
+            `).join("")
+        }
+
+        function mostrarMensagem(texto){
+            mensagemTabela.textContent = texto
+        }
+
+        tabelaSolicitacoes.addEventListener("click", (evento) => {
+            const botaoEditar = evento.target.closest(".btn-editar")
+            const botaoExcluir = evento.target.closest(".btn-excluir")
+
+            if(botaoEditar && !botaoEditar.disabled){
+                idSelecionado = botaoEditar.dataset.id
+                document.getElementById("editar-oferta").value = botaoEditar.dataset.oferta
+                document.getElementById("editar-situacao").value = botaoEditar.dataset.situacao
+                mensagemEditar.textContent = ""
+                dialogEditar.showModal()
+            }
+
+            if(botaoExcluir){
+                idSelecionado = botaoExcluir.dataset.id
+                document.getElementById("excluir-numero").textContent = idSelecionado
+                mensagemExcluir.textContent = ""
+                dialogExcluir.showModal()
+            }
+        })
+
+        formEditar.addEventListener("submit", async (event) => {
+            event.preventDefault()
+            const dados = {
+                idOferta: Number(document.getElementById("editar-oferta").value),
+                situacao: document.getElementById("editar-situacao").value
+            }
+            try{
+                const response = await fetch(`/api/solicitacoes/${idSelecionado}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(dados)
+                })
+                if(!response.ok){
+                    mensagemEditar.textContent = "Não foi possível salvar as alterações."
+                    return
+                }
+                dialogEditar.close()
+                buscarMinhasSolicitacoes()
+            }catch(err){
+                mensagemEditar.textContent = "Erro de conexão. Tente novamente."
+            }
+        })
+
+        formExcluir.addEventListener("submit", async (event) => {
+            event.preventDefault()
+            try{
+                const response = await fetch(`/api/solicitacoes/${idSelecionado}`, {
+                    method: "DELETE"
+                })
+                if(!response.ok){
+                    mensagemExcluir.textContent = "Não foi possível excluir a solicitação."
+                    return
+                }
+                dialogExcluir.close()
+                buscarMinhasSolicitacoes()
+            }catch(err){
+                mensagemExcluir.textContent = "Erro de conexão. Tente novamente."
+            }
+        })
+
+        document.addEventListener("click", (evento) => {
+            const botaoFechar = evento.target.closest("[data-fechar]")
+            if(botaoFechar){
+                botaoFechar.closest("dialog").close()
+            }
+        })
+
+        buscarMinhasSolicitacoes()
+    </script>
+</body>
+</html>

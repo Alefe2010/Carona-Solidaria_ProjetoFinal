@@ -7,15 +7,18 @@ export class SolicitacaoCarona{
     private _horario: string;
     private readonly _idOferta: number;
     private _idPontoEncontro: number
+    private readonly _idUsuario: number
     
-    constructor(idSolicitacao: number, situacao:string = "PENDENTE", horario: string, idOferta: number, idPontoEncontro: number){
+    constructor(idSolicitacao: number, situacao:string = "PENDENTE", horario: string, idOferta: number, idPontoEncontro: number, idPassageiro: number){
         this._idSolicitacao = idSolicitacao
         this._situacao = situacao
         this._horario = horario
         this._idOferta = idOferta
         this._idPontoEncontro = idPontoEncontro
+        this._idUsuario = idPassageiro
     }
     
+    public get idUsuario(){return this._idUsuario}
     public get idSolicitacao(){return this._idSolicitacao}
     public get situacao(){return this._situacao}
     public get horario(){return this._horario}

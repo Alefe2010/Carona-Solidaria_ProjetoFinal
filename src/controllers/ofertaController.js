@@ -1,15 +1,40 @@
-import OfertaService from "../services/OfertaService"
+import {OfertaService} from "../services/OfertaService.ts"
+import { OfertaCaronaRepository } from "../repositories/OfertaRepository.ts"
+import { UsuarioRepository} from "../repositories/UsuarioRepository.ts"
+import { UsuarioService } from "../services/UsuarioService.ts"
+import jwt from "jsonwebtoken"
+import cookieParser from 'cookie-parser';
 
-export async function criarOferta(req, res){
-    const {numeroVagas, destino, origem, horario, cpf, placa} = req.body
-    if(!numeroVagas|| !destino || !origem || !horario || !cnh || !placa){
-        res.status()
+const ofertaRepository = new OfertaCaronaRepository()
+const usuarioRepository = new UsuarioRepository()
+const usuarioService = new UsuarioService(usuarioRepository)
+const ofertaService = new OfertaService(ofertaRepository)
+
+
+export const buscarOfertas = async(req, res)=>{
+    try{
+        const ofertas = await ofertaService.buscarOfertas()
+        res.status(200).json({ofertas: ofertas})
+    }catch(err){
+        res.status(500).json({message: "erro: " + err})
     }
-    await OfertaService.cadastrarOferta(numeroVagas, origem, destino, horario, cpf, placa)
+}
+export const criarOferta = async (req, res)=> {
+    const {numeroVagas, destino, origem, dataHora, placa} = req.body
+    const token = req.cookie.token
+    const emailUser = jwt.verify(token, process.env.jwt_secret).email
+    const idUser = usuarioService.buscarPorEmail(emailUser).idUsuario 
+
+
+    if(!numeroVagas|| !destino || !origem || !dataHora || !placa){
+        res.status(400).json({message: "Dados inválidos!"})
+    }
+
+    await OfertaService.cadastrarOferta(numeroVagas, origem, destino, dataHora, idUser, placa)
     res.status(200).json({message: "Cadastro de Oferta completo!"})
 }
 
-export async function atualizarDados(req, res) {
+export const atualizarDados = async(req, res) => {
     const {origem, destino, dataHora, qntdVagas} = req.body
     const idOferta = req.params.id
     const dadosOferta = {origem: origem, destino: destino, dataHora: dataHora, qntdVagas: qntdVagas}
@@ -19,20 +44,37 @@ export async function atualizarDados(req, res) {
     return res.status(200).json({message: "Atualizado!"})
 }
 
-export async function buscarPorId(req, res){
+export const buscarPorId = async(req, res) => {
     const oferta = await OfertaService.buscarPorId(req.params.id)
     return res.status(200).json({oferta: oferta, message: "Busca concluída"})
 
 }
 
-export async function filtrarOfertas(req, res) {
+export const filtrarOfertas = async(req, res) => {
     const filtros = req.body
     const ofertasFiltradas = await OfertaService.filtrarOfertas(filtros)
     return res.status(200).json({ofertasFiltradas: ofertasFiltradas})
 }
 
-export async function excluirOferta(req, res){
+export const excluirOferta = async(req, res)=>{
     await OfertaService.excluirOferta(req.params.id)
     return res.status(200).json({message: "Deletado com sucesso!"})
 }
 
+export const buscarOfertasDeUsuario = async (req, res) =>{
+    try{
+        const token = req.cookies?.token
+        const payload = jwt.verify(token, process.env.jwt_secret)
+        const idUser = payload.CPF
+        const ofertas =  await ofertaService.buscarOfertasDeUsuario(idUser)
+        if(!ofertas){return res.status(404).json({message: "Não encontrado"})}
+        return res.status(200).json({ofertas: ofertas})
+    }
+    catch(err){
+        return res.status(500).json({message: "Erro interno do servidor"})
+    }
+}
+
+export const qntdOfertasUsuario = async(req, res)=>{
+    
+}

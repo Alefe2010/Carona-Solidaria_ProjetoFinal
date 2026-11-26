@@ -1,11 +1,553 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minhas ofertas</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            padding-left: 240px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #1f2937;
+            line-height: 1.5;
+            padding-bottom: 60px;
+        }
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #162556;
+            margin-bottom: 16px;
+        }
+        .mensagem-erro{
+            color: #dc3545;
+        }
+
+        .box-cinza {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            margin-top: 32px;
+        }
+
+        .cabecalho-ofertas {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .cabecalho-ofertas h1 {
+            margin-bottom: 0;
+        }
+        .btn-novo {
+            background-color: #e17100;
+            color: #162556;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-novo:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(225, 113, 0, 0.3);
+        }
+
+        .barra-busca {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .campo-busca {
+            flex: 1;
+            min-width: 0;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1.5px solid #d1d5db;
+            background-color: #f9fafb;
+            font-family: inherit;
+            font-size: 15px;
+            transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+        }
+        .campo-busca:focus {
+            outline: none;
+            background-color: #ffffff;
+            border-color: #e17100;
+            box-shadow: 0 0 0 3px rgba(225, 113, 0, 0.18);
+        }
+        .btn-pesquisar {
+            padding: 12px 24px;
+            background-color: #162556;
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-pesquisar:hover {
+            background-color: #223574;
+        }
+
+        .tabela-rolagem {
+            overflow-x: auto;
+        }
+        .tabela-ofertas {
+            width: 100%;
+            min-width: 720px;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+        }
+        .tabela-ofertas th {
+            text-align: left;
+            padding: 12px;
+            background-color: #f9fafb;
+            border-bottom: 2px solid #e5e7eb;
+            font-size: 13px;
+            font-weight: 700;
+            color: #6b7280;
+        }
+        .tabela-ofertas td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 14px;
+        }
+        .tabela-ofertas tbody tr:hover td {
+            background-color: #f9fafb;
+        }
+        .coluna-acoes {
+            white-space: nowrap;
+        }
+
+        .btn-editar,
+        .btn-excluir {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .btn-editar {
+            background-color: #162556;
+            border: 1.5px solid #162556;
+            color: #ffffff;
+        }
+        .btn-editar:hover {
+            background-color: #223574;
+            border-color: #223574;
+        }
+        .btn-excluir {
+            margin-left: 8px;
+            background-color: #ffffff;
+            border: 1.5px solid #e17100;
+            color: #b85c00;
+        }
+        .btn-excluir:hover {
+            background-color: #e17100;
+            color: #162556;
+        }
+
+        .paginacao {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #6b7280;
+        }
+        .paginacao a {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #162556;
+            text-decoration: none;
+        }
+        .paginacao a:hover {
+            border-color: #e17100;
+        }
+        .paginacao .pagina-ativa {
+            background-color: #162556;
+            border-color: #162556;
+            color: #ffffff;
+        }
+
+        .lateral {
+            width: 240px;
+            height: 100vh;
+            background-color: #162556;
+            padding: 30px 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            margin-bottom: 45px;
+            font-family: "Anton", sans-serif;
+            text-align: center;
+        }
+
+        .menu h2 {
+            color: white;
+            font-size: 17px;
+            margin: 0 0 15px;
+        }
+
+        .menu a {
+            display: block;
+            color: #cccccc;
+            text-decoration: none;
+            padding: 15px 12px;
+            margin-bottom: 8px;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .menu a:hover { background-color: #223574; color: white; }
+
+        .menu a.ativo {
+            background-color: #223574;
+            color: white;
+            box-shadow: inset 3px 0 0 #e17100;
+        }
+
+        .sair {
+            position: absolute;
+            bottom: 25px;
+            left: 20px;
+            right: 20px;
+        }
+
+        .sair a {
+            display: block;
+            padding: 14px;
+            text-align: center;
+            background-color: #223574;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+        .dialog-editar {
+            width: calc(100% - 32px);
+            max-width: 480px;
+            padding: 0;
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(22, 37, 86, 0.25);
+            color: #1f2937;
+        }
+        .dialog-editar::backdrop {
+            background-color: rgba(22, 37, 86, 0.55);
+        }
+        .form-editar {
+            padding: 28px;
+        }
+        .titulo-dialog {
+            font-size: 24px;
+            font-weight: 700;
+            color: #162556;
+            margin-bottom: 6px;
+        }
+        .texto-dialog {
+            font-size: 15px;
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+        .campo-dialog {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 16px;
+        }
+        .rotulo-dialog {
+            font-size: 14px;
+            font-weight: 600;
+            color: #162556;
+            margin-bottom: 6px;
+        }
+        .entrada-dialog {
+            padding: 12px;
+            border-radius: 10px;
+            border: 1.5px solid #d1d5db;
+            background-color: #f9fafb;
+            font-family: inherit;
+            font-size: 15px;
+            transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+        }
+        .entrada-dialog:focus {
+            outline: none;
+            background-color: #ffffff;
+            border-color: #e17100;
+            box-shadow: 0 0 0 3px rgba(225, 113, 0, 0.18);
+        }
+        .mensagem-dialog {
+            font-size: 14px;
+            color: #b85c00;
+        }
+        .botoes-dialog {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        .btn-salvar,
+        .btn-cancelar {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-salvar {
+            background-color: #162556;
+            color: #ffffff;
+        }
+        .btn-salvar:hover {
+            background-color: #223574;
+        }
+        .btn-cancelar {
+            background-color: #e5e7eb;
+            color: #162556;
+        }
+        .btn-cancelar:hover {
+            background-color: #d1d5db;
+        }
+
+        @media (max-width: 760px) {
+            body { padding-left: 0; }
+            .lateral { position: static; width: 100%; height: auto; padding: 20px; }
+            .logo { margin-bottom: 20px; }
+            .sair { position: static; margin-top: 12px; }
+            main { padding: 0 16px; }
+        }
+    </style>
 </head>
 <body>
+    <div class="lateral">
+
+        <div class="logo">VaiJunto!</div>
+
+        <nav class="menu">
+            <h2>menu</h2>
+
+            <a href="ofertas_corrida.html">ofertas</a>
+            <a href="criacao_oferta.html">publicar oferta</a>
+            <a href="veiculos.html">veículos</a>
+            <a href="pontos_encontro.html">pontos de encontro</a>
+            <a href="solicitacoes_recebidas.html">solicitações recebidas</a>
+            <a href="historico.html">minhas corridas</a>
+            <a href="minhas_ofertas.html" class="ativo" aria-current="page">minhas ofertas</a>
+            <a href="avaliacoes.html">avaliações</a>
+            <a href="detalhe_usuario.html">meu perfil</a>
+        </nav>
+
+        <div class="sair">
+            <a href="login.html">sair da conta</a>
+        </div>
+
+    </div>
+    <dialog id="dialog-editar" class="dialog-editar">
+        <form id="form-editar" class="form-editar">
+            <h2 class="titulo-dialog">Editar oferta</h2>
+            <p class="texto-dialog">Altere as informações da sua corrida.</p>
+
+            <input type="hidden" name="idOferta" id="editar-id">
+
+            <div class="campo-dialog">
+                <label for="editar-origem" class="rotulo-dialog">Local de partida:</label>
+                <input type="text" name="origem" id="editar-origem" class="entrada-dialog" required>
+            </div>
+            <div class="campo-dialog">
+                <label for="editar-destino" class="rotulo-dialog">Local de destino:</label>
+                <input type="text" name="destino" id="editar-destino" class="entrada-dialog" required>
+            </div>
+            <div class="campo-dialog">
+                <label for="editar-data" class="rotulo-dialog">Data e hora:</label>
+                <input type="datetime-local" name="dataHorario" id="editar-data" class="entrada-dialog" required>
+            </div>
+            <div class="campo-dialog">
+                <label for="editar-vagas" class="rotulo-dialog">Quantidade de vagas:</label>
+                <input type="number" name="numeroVagas" id="editar-vagas" class="entrada-dialog" min="1" required>
+            </div>
+
+            <p id="mensagem-editar" class="mensagem-dialog"></p>
+
+            <div class="botoes-dialog">
+                <button type="submit" class="btn-salvar">Salvar alterações</button>
+                <button type="submit" class="btn-cancelar" formmethod="dialog" formnovalidate>Cancelar</button>
+            </div>
+        </form>
+    </dialog>
+    <main>
+        <div class="box-cinza">
+            <div class="cabecalho-ofertas">
+                <h1>Minhas ofertas</h1>
+                
+                <a href="/ofertas/criar"class="btn-novo" id="criar-oferta">Nova oferta</a>
+            </div>
+
+            <form action="" method="get" class="barra-busca">
+                <input type="text" name="busca" class="campo-busca" placeholder="Pesquisar por origem, destino ou placa..." aria-label="Pesquisar ofertas">
+                <button type="submit" class="btn-pesquisar">Pesquisar</button>
+            </form>
+
+            <div class="tabela-rolagem" id="tabela-rolagem">
+                <table class="tabela-ofertas">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Origem</th>
+                            <th>Destino</th>
+                            <th>Vagas</th>
+                            <th>Data e horário</th>
+                            <th>Placa do carro</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ofertas">
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        const tabelaOfertas = document.getElementById("ofertas")
+        const divTabela = document.getElementById("tabela-rolagem")
+        const botoesEditar = document.getElementsByClassName("btn-editar")
+        const dialogEditar = document.getElementById("dialog-editar")
+
     
+        
+
+        async function buscarMinhasOfertas(){
+            try{
+
+                const response = await fetch("/api/ofertas/minhas-ofertas")
+                if(!response.ok){return adicionarParagrafo("Erro interno no servidor. Recarregue a página")}
+                const data = await response.json()
+                
+                if(!Array.isArray(data)){
+                    const ofertas = data.ofertas
+                    renderizar(ofertas)
+                    return
+                }
+                const ofertas = data
+                renderizar(ofertas)
+            }catch(err){
+                adicionarParagrafo(divTabela,"Erro interno no servidor. Recarregue a página")
+                
+            }
+        }
+        function renderizar(ofertas){
+            if(ofertas.length === 0){
+                adicionarParagrafo(divTabela, "Não possui nenhuma oferta.")
+                return
+            }
+            tabelaOfertas.innerHTML = ofertas.map(oferta => `
+                 <tr>
+                    <td>${oferta.idOferta}</td>
+                    <td>${oferta.origem}</td>
+                    <td>${oferta.destino}</td>
+                    <td>${oferta.numeroVagas}</td>
+                    <td>${formatarDataHora(oferta.dataHorario)}</td>
+                    <td>${oferta.placa}</td>
+                    <td class="coluna-acoes">
+                        <a href="editar_oferta.html" class="btn-editar" data-id="${oferta.idOferta}" data-origem="${oferta.origem}" data-destino="${oferta.destino}" data-vagas="${oferta.numeroVagas}" data-data="${oferta.dataHorario}">Editar</a>
+                        <a href="#" class="btn-excluir" data-id="${oferta.idOferta}">Excluir</a>
+                    </td>
+                </tr>
+            `).join("")
+
+        }
+        function formatarDataHora(dataHora){
+            const dt = new Date(dataHora);
+            const data = dt.toLocaleDateString("pt-BR");
+            const hora = dt.toLocaleTimeString("pt-BR");
+            return `${data} às ${hora}`
+            
+        }
+
+        function adicionarParagrafo(objDom,texto){
+            const paragrafo = document.createElement("p")
+            paragrafo.textContent = texto
+            paragrafo.setAttribute("class", "mensagem-erro")
+            objDom.appendChild(paragrafo)
+        }
+        tabelaOfertas.addEventListener("click", async function(e){
+            const botao = e.target
+
+            if(botao.classList.contains("btn-editar")){
+                e.preventDefault()
+                document.getElementById("editar-id").value = botao.dataset.id
+                document.getElementById("editar-origem").value = botao.dataset.origem
+                document.getElementById("editar-destino").value = botao.dataset.destino
+                document.getElementById("editar-vagas").value = botao.dataset.vagas
+                document.getElementById("editar-data").value = botao.dataset.data.slice(0, 16)
+                document.getElementById("mensagem-editar").textContent = ""
+                dialogEditar.showModal()
+            }
+
+            if(botao.classList.contains("btn-excluir")){
+                e.preventDefault()
+                if(!confirm("Deseja excluir esta oferta?")){return}
+                const response = await fetch("/api/ofertas/" + botao.dataset.id, {method: "DELETE"})
+                if(response.ok){
+                    botao.closest("tr").remove()
+                }else{
+                    alert("Erro ao excluir a oferta")
+                }
+            }
+        })
+
+        document.getElementById("form-editar").addEventListener("submit", async function(e){
+            if(e.submitter.classList.contains("btn-cancelar")){return}
+            e.preventDefault()
+            const dados = Object.fromEntries(new FormData(this))
+            const response = await fetch("/api/ofertas/" + dados.idOferta, {
+                method: "PUT",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(dados)
+            })
+            if(response.ok){
+                dialogEditar.close()
+                buscarMinhasOfertas()
+            }else{
+                document.getElementById("mensagem-editar").textContent = "Erro ao salvar a oferta"
+            }
+        })
+
+        buscarMinhasOfertas()
+
+    </script>
 </body>
 </html>

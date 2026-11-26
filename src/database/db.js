@@ -1,18 +1,5 @@
 import mysql from 'mysql2/promise';
 
-<<<<<<< HEAD
-const db = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'caronaSolidaria',
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
-});
-
-export default db;
-=======
 const pool = mysql.createPool({
     host: "localhost",
     user: "root",
@@ -29,4 +16,3 @@ pool.connect((err) => {
 });
 
 export default pool;
->>>>>>> origin/main

@@ -35,27 +35,6 @@ async function login(req, res){
             maxAge: 15 * 60 * 1000 
         });
 
-<<<<<<< HEAD
-function logout(req, res) {
-  res.clearCookie("token", {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-  });
-  console.log("Logout realizado com sucesso")
-  return res.redirect("/")
-  
-}
-
-async function signUp(req, res) {
-  const { nome, telefone, email, data_nasc, cpf } = req.body;
-
-  try {
-    await UsuarioRepository.cadastrarUsuario(nome, telefone, email, data_nasc, cpf);
-
-    const payload = { id: cpf, email: email };
-    const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: "1d" });
-=======
         return res.status(200).json({ mensagem: "Login realizado com sucesso!" });
 
     } catch (error) {
@@ -76,21 +55,8 @@ async function signUp (req, res){
     }catch(error){
         return res.status(500).send("Problema interno do servidor")
     }
->>>>>>> origin/main
 
     res.cookie("token", token, {
-<<<<<<< HEAD
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-    });
-
-    return res.status(201).json({ message: "Cadastro concluído" });
-  } catch (error) {
-    return res.status(500).json({ message: "Problema interno do servidor" });
-  }
-}
-=======
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
@@ -99,4 +65,3 @@ async function signUp (req, res){
 }
 
 export default {login, logout, signUp};
->>>>>>> origin/main

@@ -2,6 +2,7 @@ import type { Corrida } from "../entities/Corrida.ts";
 import type { Usuario } from "../entities/Usuario.ts";
 import type { SolicitacaoRepository } from "../repositories/SolicitacaoRepository.ts"
 import type { CorridaRepository } from "../repositories/CorridaRepository.ts"
+import { error } from "node:console";
 
 
 export class CorridaService {
@@ -12,10 +13,6 @@ export class CorridaService {
         this.corridaRepo = corridaRepo
         this.solicitacaoRepo = solicitacaoRepo
     }
-<<<<<<< HEAD
-    
-=======
->>>>>>> origin/main
     public async criarCorrida(situacao: string): Promise<void> {
         await this.corridaRepo.cadastrarCorrida(situacao)
     }
@@ -26,7 +23,9 @@ export class CorridaService {
         return corrida
     }
     public async ListarParticipantesCorrida(idCorrida:number): Promise<Usuario[]>{
-        let corrida: Corrida = await this.corridaRepo.buscarPorId(idCorrida)
+        let corrida: Corrida | null = await this.corridaRepo.buscarPorId(idCorrida)
+        if(!corrida){throw new Error("Não existe corrida com este ID")}
+        
         let participantes: Usuario[] = await this.solicitacaoRepo.filtrarSolicAceitas(corrida.idOferta)
         return participantes
     }
@@ -34,9 +33,5 @@ export class CorridaService {
     public async finalizarCorrida(idCorrida: number): Promise<void> { 
         await this.corridaRepo.finalizarCorrida(idCorrida)
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/main
 
 }

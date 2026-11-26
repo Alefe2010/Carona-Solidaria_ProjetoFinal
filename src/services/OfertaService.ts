@@ -10,31 +10,32 @@ interface FiltroOferta {
 
 export class OfertaService{
     private ofertaRepo: OfertaCaronaRepository
-    private usuarioRepo: UsuarioRepository
     constructor(
         ofertaRepo: OfertaCaronaRepository, 
-        usuarioRepo: UsuarioRepository
     ){
         this.ofertaRepo = ofertaRepo
-        this.usuarioRepo = usuarioRepo
     }
     public async criarOferta(
         numeroVagas:number, 
         origem:string,
         destino: string, 
-        dataHora: Date, 
-        cpf: string, 
+        dataHora: string, 
+        idUsuario: number, 
         placa:string): Promise<void>{
 
-        if(!numeroVagas || !origem || !destino || !dataHora || !cpf || !placa){
+        if(!numeroVagas || !origem || !destino || !dataHora || !idUsuario || !placa){
             throw new Error("Campos inválidos ou faltando")
         }
         if(numeroVagas <= 0){throw new Error("Quantidade de vaga mínima é de uma vaga!")}
 
     
-        await this.ofertaRepo.cadastrarOferta(numeroVagas, origem, destino, dataHora, cpf)
-
+        await this.ofertaRepo.cadastrarOferta(numeroVagas, origem, destino, dataHora, idUsuario, placa)    
     }
+
+    public async buscarOfertas(): Promise<OfertaCarona[] | null>{
+        return await this.ofertaRepo.buscarOfertas()
+    }
+
     public async buscarPorId(idOferta:number): Promise<OfertaCarona | null>{
         if(!idOferta){
             throw new Error("Nenhum identificador fornecido!")
@@ -76,5 +77,10 @@ export class OfertaService{
         }
         return await this.ofertaRepo.filtroOfertas(filtroValido) 
 
+    }
+
+    public async buscarOfertasDeUsuario(idUsuario:number): Promise<OfertaCarona[] | null>{
+        if(!idUsuario){throw new Error("ID do usuário é obrigatório.")}
+        return await this.ofertaRepo.buscarOfertasDeUsuario(idUsuario)
     } 
 }

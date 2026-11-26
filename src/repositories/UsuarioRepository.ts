@@ -51,4 +51,11 @@ export class UsuarioRepository {
         const filtrados = passageiros as Usuario[] 
         return filtrados
     }
+
+    async buscarPorEmail(email:string): Promise<Usuario | null>{
+        const queryEmail = "SELECT * FROM usuario WHERE email = ?"
+        const [rows] = await db.execute(queryEmail, [email])
+        const usuarios = rows as Usuario[]
+        return usuarios[0] || null
+    }
 }

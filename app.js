@@ -5,6 +5,10 @@ import cookieParser from "cookie-parser"
 import verifyJWT from "./src/middleware/auth.js"
 import dotenv from "dotenv-safe";
 import authRouter from "./src/routes/authRoutes.js"
+import ofertaRoutes from "./src/routes/ofertasRoutes.js"
+import ofertaApiRoutes from "./src/routes/ofertasApiRoutes.js"
+import veiculoRoutes from "./src/routes/veiculoRoutes.js"
+import veiculoApiRoutes from "./src/routes/veiculoApiRoutes.js"
 import { fileURLToPath } from "url";
 import path from "path"
 
@@ -18,15 +22,22 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({extended: true}))
 
+
 app.use("/auth", authRouter)
+app.use("/ofertas", verifyJWT, ofertaRoutes )
+app.use("/api/ofertas", verifyJWT, ofertaApiRoutes )
+app.use("/veiculos", verifyJWT, veiculoRoutes )
+app.use("/api/veiculos", verifyJWT, veiculoApiRoutes)
+
+
+
+
+
 
 app.get("/", verifyJWT, (req, res) => {
     res.sendFile(path.join(__dirname, "src", "views", "tela_motorista.html"))
 });
 
-app.get("/oferta", verifyJWT, (req, res) => {
-    res.sendFile(path.join(__dirname, "src", "views", "new_oferta.html"));
-});
 
 app.listen(PORT, () => {
     console.log(`Ta rodando em http://localhost:${PORT}`)
