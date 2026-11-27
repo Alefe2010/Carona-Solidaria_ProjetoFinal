@@ -23,7 +23,7 @@ export class OfertaCaronaRepository {
         const busca = 'SELECT * FROM ofertaCarona WHERE idOferta = ?';
         const [rows] = await db.execute(busca, [idOferta]);
         const ofertas = rows as OfertaCarona[]
-        return ofertas[0] ?? null;
+        return ofertas[0] || null;
     }
 
     async atualizarDados(id_oferta: number, dados: Record<string, any>): Promise<void> {

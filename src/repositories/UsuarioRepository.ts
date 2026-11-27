@@ -28,13 +28,6 @@ export class UsuarioRepository {
         return usuarios[0] || null
 
     }  
-    async buscarPorEmail(email: string): Promise<Usuario | null> {
-        const queryBuscaUsuario = `SELECT * FROM USUARIO WHERE email = ?`
-        const [row] = await db.execute(queryBuscaUsuario, [email])
-        const usuarios = row as Usuario[]
-        
-        return usuarios[0] || null
-    }
 
     async atualizarDados(cpf: string, dados: Record<string, any>): Promise<void> {
 

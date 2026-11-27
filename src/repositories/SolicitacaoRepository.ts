@@ -15,7 +15,7 @@ export class SolicitacaoRepository {
         const [resultado] = await db.execute(queryBusca, [id_solicitacao]);
 
         const solicitacao = resultado as SolicitacaoCarona[];
-        return solicitacao[0] ?? null;
+        return solicitacao[0] || null;
     }
 
     public async atualizarDados(id_solicitacao: number, dados: Record<string, any>): Promise<void> {
@@ -30,6 +30,16 @@ export class SolicitacaoRepository {
         
         await db.execute(oi, [id_solicitacao]);
     }
+    public async buscarSolicitacoesAceitas(idOferta: number): Promise<SolicitacaoCarona[]>{
+        const querySolAceitas = 'SELECT * FROM solicitaca WHERE idOferta = ? AND situacao = "ACEITA"'
+        const [rows] = await db.execute(querySolAceitas, [idOferta])
+        const solicitacoes = rows as SolicitacaoCarona[]
+        return solicitacoes || null
+    }
+    public async mudarSituacaoAceito(idSolicitacao: number): Promise<void>{
+        const queryMudarSitAceito = 'UPDATE solicitacao SET situacao = "ACEITA" WHERE idSolicitacao = ?'
+        await db.execute(queryMudarSitAceito, [idSolicitacao])
+    }
 
     public async filtrarPorHorario(horario: string): Promise<SolicitacaoCarona[]> {
         const busca = `SELECT * FROM SOLICITACAO WHERE horario = ?`;
@@ -37,5 +47,4 @@ export class SolicitacaoRepository {
         const resultado = rows as SolicitacaoCarona[]
         return resultado;
     }
-    public async 
 }

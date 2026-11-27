@@ -17,7 +17,7 @@ const usuarioRepository = new UsuarioRepository()
 const corridaRepository = new CorridaRepository()
 
 const usuarioService = new UsuarioService(usuarioRepository)
-const ofertaService = new OfertaService(ofertaCaronaRepository, usuarioRepository)
+const ofertaService = new OfertaService(ofertaCaronaRepository)
 const solicitacaoService = new SolicitacaoService(solicitacaoRepository)
 const corridaService = new CorridaService(corridaRepository, solicitacaoRepository)
 //const avaliacaoService = new AvaliacaoService(avaliacaoRepository)
@@ -39,14 +39,14 @@ const cpfMotoristaC = "777.777.777-77"
 
 // cadastro de usuarios
 try {
-    await usuarioService.cadastrarUsuario(cpfPassageiroA, "Passageiro A", "82900000001", "2000-01-10", "passageiroa@email.com")
-    await usuarioService.cadastrarUsuario(cpfPassageiroB, "Passageiro B", "82900000002", "2001-02-11", "passageirob@email.com")
-    await usuarioService.cadastrarUsuario(cpfPassageiroC, "Passageiro C", "82900000003", "2002-03-12", "passageiroc@email.com")
-    await usuarioService.cadastrarUsuario(cpfPassageiroD, "Passageiro D", "82900000004", "2003-04-13", "passageirod@email.com")
+    await usuarioService.cadastrarUsuario(cpfPassageiroA, "Passageiro A", "82 900000001", "2000-01-10", "12345678", "passageiroa@email.com")
+    await usuarioService.cadastrarUsuario(cpfPassageiroB, "Passageiro B", "82 900000002", "2001-02-11", "12345678", "passageirob@email.com")
+    await usuarioService.cadastrarUsuario(cpfPassageiroC, "Passageiro C", "82 900000003", "2002-03-12", "12345678", "passageiroc@email.com")
+    await usuarioService.cadastrarUsuario(cpfPassageiroD, "Passageiro D", "82 900000004", "2003-04-13", "12345678", "passageirod@email.com")
     
-    await usuarioService.cadastrarUsuario(cpfMotoristaA, "Motorista A", "82911111111", "1990-05-14", "motoristaa@email.com")
-    await usuarioService.cadastrarUsuario(cpfMotoristaB, "Motorista B", "82922222222", "1988-06-15", "motoristab@email.com")
-    await usuarioService.cadastrarUsuario(cpfMotoristaC, "Motorista C", "82933333333", "1985-07-16", "motoristac@email.com")
+    await usuarioService.cadastrarUsuario(cpfMotoristaA, "Motorista A", "82 911111111", "1990-05-14", "12345678", "motoristaa@email.com")
+    await usuarioService.cadastrarUsuario(cpfMotoristaB, "Motorista B", "82 922222222", "1988-06-15", "12345678", "motoristab@email.com")
+    await usuarioService.cadastrarUsuario(cpfMotoristaC, "Motorista C", "82 933333333", "1985-07-16", "12345678", "motoristac@email.com")
     
 } catch (error) {
     throw new Error(`Ocorreu um erro: ${error}`)
@@ -92,7 +92,7 @@ try {
 
 // Usuários: exclusão
 try {
-    await usuarioService.cadastrarUsuario("999.999.999-99", "Temporário", "82900000000", "1999-09-09", "temp@email.com")
+    await usuarioService.cadastrarUsuario("999.999.999-99", "Temporário", "82900000000", "1999-09-09", "12345678", "temp@email.com")
     await usuarioService.excluirUsuario("999.999.999-99")
     console.log(await usuarioService.buscarPorCPF("999.999.999-99")) // retornará null
 } catch (error) {
